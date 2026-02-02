@@ -10,74 +10,57 @@
         :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; --red: #ff0000; }
         body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; overflow-x: hidden; }
         
+        /* تعديل اللوجو ليكون Trend أولاً ثم Adv */
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
-        
-        /* التعديل الجوهري لضبط الترتيب Trend ثم Adv */
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 15px; 
-            flex-direction: row-reverse; /* هذا السطر يضمن ظهور Trend على اليسار و Adv على اليمين برغم الـ RTL */
+        .logo { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .trend-part { 
+            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            font-size: 4.5rem; font-weight: 900; animation: shine 3s linear infinite;
+        }
+        .adv-part { font-size: 4.5rem; font-weight: 800; color: var(--red); filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
+
+        @keyframes shine { 
+            0% { filter: drop-shadow(0 0 5px var(--cyan)); }
+            50% { filter: drop-shadow(0 0 15px var(--purple)); }
+            100% { filter: drop-shadow(0 0 5px var(--cyan)); }
         }
 
-        .trend-colored { 
-            background: linear-gradient(90deg, var(--cyan), var(--purple), #ff00ff, var(--cyan)); 
-            background-size: 200% auto;
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            font-size: 4.5rem; 
-            font-weight: 900; 
-            animation: flowText 3s linear infinite;
-        }
-
-        .adv-red { 
-            font-size: 4.5rem; 
-            font-weight: 800; 
-            color: var(--red); 
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
-        }
-
-        @keyframes flowText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
+        /* السيرة الاحترافية تحت اللوجو مباشرة */
+        .bio-text { font-size: 1.2rem; color: #aaa; margin-top: 10px; display: block; width: 100%; }
 
         .promo-banner {
             background: linear-gradient(45deg, #9d50bb, #00d2ff);
             overflow: hidden; white-space: nowrap; padding: 12px 0;
             box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
         }
-
-        .scrolling-text {
-            display: inline-block; animation: marquee 25s linear infinite;
-            font-weight: bold; color: white; font-size: 1.2rem;
-        }
-
+        .scrolling-text { display: inline-block; animation: marquee 25s linear infinite; font-weight: bold; color: white; font-size: 1.2rem; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .social-sidebar { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
-        .social-sidebar a { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 18px; box-shadow: 0 4px 10px #000; }
+        /* زراير السوشيال ميديا (ثابتة في مكانها) */
+        .social-sidebar { position: fixed; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 15px; }
+        .social-sidebar a { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px #000; transition: 0.3s; }
         .wa { background: #25D366; } .fb { background: #1877F2; } .li { background: #0077b5; }
+        .social-sidebar a:hover { transform: scale(1.1); }
         
         .intro-box { background: #111; margin: 15px; padding: 25px; border-radius: 15px; border-right: 5px solid var(--cyan); }
         .main-controls { display: flex; justify-content: center; gap: 15px; padding: 10px; flex-wrap: wrap; }
-        .btn-action { background: var(--cyan); color: #000; border: none; padding: 16px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-agency { background: transparent; border: 2px solid var(--purple); color: var(--purple); }
+        .btn-action { background: var(--cyan); color: #000; border: none; padding: 18px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
+        .btn-agency { background: transparent; border: 2px solid var(--red); color: var(--red); }
+        .btn-agency:hover { background: var(--red); color: #fff; }
         
+        /* بوابة الوكالات (المخفي للعملاء) */
         .admin-panel { background: #1a1a1a; margin: 15px; padding: 25px; border-radius: 15px; border: 1px dashed var(--cyan); display: none; }
-        .admin-panel input, .admin-panel select { 
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; 
-            border: 1px solid #333; background: #222; color: white; box-sizing: border-box; 
-        }
+        .admin-panel input, .admin-panel select { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
         
         #map { height: 400px; width: 92%; margin: 20px auto; border-radius: 20px; border: 2px solid var(--cyan); display: none; }
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
         .ad-card { background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid #222; position: relative; }
-        .duration-tag { position: absolute; top: 10px; left: 10px; background: var(--purple); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        /* المدة تظهر كتاج فوق الصورة */
+        .duration-tag { position: absolute; top: 15px; left: 15px; background: var(--red); color: white; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; z-index: 10; }
         .ad-card img { width: 100%; height: 250px; object-fit: cover; }
         .card-body { padding: 20px; text-align: center; }
-        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -90,10 +73,10 @@
 
 <header>
     <div class="logo">
-        <span class="adv-red">Adv</span>
-        <span class="trend-colored">Trend</span>
+        <span class="trend-part">Trend</span>
+        <span class="adv-part">Adv</span>
+        <span class="bio-text">أول منصة لخريطة الإعلانات في مصر والوطن العربي</span>
     </div>
-    <div style="color: #888; margin-top: 10px; font-size: 1.1rem;">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
 </header>
 
 <div class="promo-banner">
@@ -108,22 +91,24 @@
 </section>
 
 <div class="main-controls">
-    <button class="btn-action" onclick="showMap()">📍 الخريطة</button>
+    <button class="btn-action" onclick="showMap()">📍 عرض الخريطة</button>
     <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 بوابة الوكالات (اختر اشتراكك)</button>
 </div>
 
 <div class="admin-panel" id="adminPanel">
     <h3>تسجيل لوحة جديدة</h3>
-    <input type="text" id="siteName" placeholder="اسم الوكالة">
-    <input type="text" id="siteImg" placeholder="رابط صورة اللوحة المباشر">
-    <input type="text" id="siteGeo" placeholder="إحداثيات GPS">
+    <input type="text" id="siteName" placeholder="اسم الوكالة (العمود B)">
+    <input type="text" id="siteImg" placeholder="رابط صورة اللوحة (العمود C)">
+    <input type="text" id="siteGeo" placeholder="إحداثيات GPS (العمود D)">
     
-    <label style="font-size: 0.9rem; color: var(--cyan);">اختر مدة العرض:</label>
+    <label style="font-size: 0.9rem; color: var(--cyan);">اختر مدة العرض (العمود E):</label>
     <select id="siteDuration">
         <option value="3 شهور مجاناً">3 شهور مجاناً (عرض الوكالات الجديد)</option>
         <option value="6 شهور">6 شهور (اشتراك أساسي)</option>
         <option value="سنة كاملة">سنة كاملة (اشتراك بريميوم)</option>
     </select>
+    
+    <input type="text" id="siteNote" placeholder="ملاحظة الإدارة (العمود F)">
     
     <button class="book-btn" id="sendBtn" onclick="submitToSheet()">تأكيد وتسجيل اللوحة</button>
 </div>
@@ -135,19 +120,6 @@
 <script>
     const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzzg0j1idvFOUjbfUspAS9u2tRVVYDMT8QMonF0XM3eg_-q06eul6MjJuRviacAe9r4/exec";
 
-    const allImages = [
-        "https://i.ibb.co/qMJvnDNC/1000133864.png", "https://i.ibb.co/Kc8kwrtP/1000133863.png",
-        "https://i.ibb.co/84L1KGxk/1000133862.png", "https://i.ibb.co/5g51xgQj/1000133861.png",
-        "https://i.ibb.co/9HMpZwwq/1000133860.png", "https://i.ibb.co/fVtrRz2K/1000133859.png",
-        "https://i.ibb.co/R4s051YR/1000133858.png", "https://i.ibb.co/4whPdcyk/1000133857.png",
-        "https://i.ibb.co/Kp0bqwqw/1000133856.png", "https://i.ibb.co/XfvcHC0h/1000133855.png",
-        "https://i.ibb.co/ZRVxdpY3/1000133854.png", "https://i.ibb.co/LHhb2J4/1000133853.png",
-        "https://i.ibb.co/9k64jkV0/1000133852.png", "https://i.ibb.co/mCJfJGD4/1000133851.png",
-        "https://i.ibb.co/nMtMK9C4/1000133850.png", "https://i.ibb.co/k2M5vp4K/1000133849.png",
-        "https://i.ibb.co/Hp7mtrR0/1000133848.png", "https://i.ibb.co/f6bTxfY/1000133847.png",
-        "https://i.ibb.co/fz9RN4ff/1000133846.png"
-    ];
-
     async function loadAds() {
         const gal = document.getElementById('adsGallery');
         try {
@@ -155,22 +127,20 @@
             const data = await res.json();
             gal.innerHTML = "";
             if(data && data.length > 0) {
-                data.forEach(ad => renderCard(ad.title, ad.img, ad.coords, ad.duration || '3 شهور مجاناً'));
+                data.forEach(ad => renderCard(ad.title, ad.img, ad.coords, ad.duration || '3 شهور مجاناً', ad.adminNote));
             }
-            allImages.forEach((url, i) => renderCard(`لوحة ترند #${i+1}`, url, "موقع استراتيجي", "عرض خاص"));
-        } catch (e) {
-            allImages.forEach((url, i) => renderCard(`لوحة ترند #${i+1}`, url, "موقع استراتيجي", "عرض خاص"));
-        }
+        } catch (e) { console.log("خطأ في جلب البيانات"); }
     }
 
-    function renderCard(title, img, coords, duration) {
+    function renderCard(title, img, coords, duration, note) {
         document.getElementById('adsGallery').innerHTML += `
             <div class="ad-card">
                 <div class="duration-tag">${duration}</div>
                 <img src="${img}" onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv'">
                 <div class="card-body">
-                    <b style="color:var(--cyan);">${title}</b>
+                    <b style="color:var(--cyan); font-size:1.2rem;">${title}</b>
                     <p style="font-size:11px; color:#888; margin: 10px 0;">${coords}</p>
+                    <p style="font-size:12px; color:var(--red); font-weight:bold;">${note || ''}</p>
                     <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
                 </div>
             </div>`;
@@ -182,18 +152,26 @@
             title: document.getElementById('siteName').value,
             img: document.getElementById('siteImg').value,
             coords: document.getElementById('siteGeo').value,
-            duration: document.getElementById('siteDuration').value
+            duration: document.getElementById('siteDuration').value,
+            adminNote: document.getElementById('siteNote').value
         };
         if(!payload.title || !payload.img) return alert("برجاء إكمال البيانات");
         btn.innerText = "جاري الحفظ...";
         await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-        alert("تم تسجيل اللوحة بنجاح مع اختيار مدة: " + payload.duration);
+        alert("تم تسجيل اللوحة بنجاح!");
         location.reload();
     }
 
     function toggleAdmin() { const p = document.getElementById('adminPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
-    function showMap() { document.getElementById('map').style.display = 'block'; var map = L.map('map').setView([30.04, 31.23], 11); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); setTimeout(() => map.invalidateSize(), 200); }
-
+    function showMap() { 
+        const m = document.getElementById('map');
+        m.style.display = m.style.display === 'block' ? 'none' : 'block';
+        if(m.style.display === 'block') {
+            var map = L.map('map').setView([30.04, 31.23], 11);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            setTimeout(() => map.invalidateSize(), 200);
+        }
+    }
     window.onload = loadAds;
 </script>
 </body>
