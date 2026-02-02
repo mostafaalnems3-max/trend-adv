@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -7,94 +7,95 @@
     <style>
         body { background-color: #ffffff; color: #000; text-align: center; font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
         
-        /* حاوية اللوجو المتكاملة */
-        .trend-logo-box { position: relative; display: inline-block; margin-top: 60px; padding: 20px; }
+        /* حاوية اللوجو الاحترافية */
+        .logo-wrapper { position: relative; display: inline-block; margin-top: 50px; padding: 20px; }
         
-        /* تنسيق كلمة Trend */
-        .trend-letters { display: flex; align-items: flex-end; justify-content: center; gap: 5px; }
+        /* ترتيب الحروف d r e T */
+        .trend-text { display: flex; align-items: flex-end; justify-content: center; gap: 2px; }
         
-        /* حرف T الأحمر العملاق */
-        .char-t { font-size: 150px; font-weight: 900; color: #ff0000; line-height: 0.8; font-family: 'Arial Black'; }
-        
-        /* الحروف r, e بتدرج لوني */
+        .char-d { font-size: 100px; font-weight: 900; color: #444; line-height: 0.8; }
         .char-re { 
-            font-size: 100px; font-weight: 900; line-height: 0.8;
-            background: linear-gradient(to bottom, #00d4ff, #ff00ea);
+            font-size: 110px; font-weight: 900; line-height: 0.8;
+            background: linear-gradient(to bottom, #3366ff, #cc33ff);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .char-t-red { font-size: 160px; font-weight: 900; color: #ff0000; line-height: 0.7; font-family: 'Arial Black'; }
 
-        /* حرف D الجديد اللي السهم هيوصل عنده */
-        .char-d { font-size: 80px; font-weight: bold; color: #333; margin-left: 10px; }
-
-        /* السهم العريض المتدرج من أحمر لأخضر */
-        .master-arrow {
+        /* السهم العريض جداً المتدرج */
+        .bold-arrow {
             position: absolute;
-            bottom: 10%; left: 5%;
-            width: 280px; /* طولناه عشان يوصل لحرف D */
-            z-index: 5;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+            bottom: 15%; right: 0;
+            width: 320px; /* يمتد من d إلى T */
+            z-index: 10;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
         }
 
-        .promo-red { color: #ff0000; font-size: 50px; font-weight: 900; margin: 20px 0; }
-        .portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
-        .card img { width: 100%; height: 220px; object-fit: cover; }
-        .card p { padding: 10px; font-weight: bold; }
+        .agency-title { font-size: 22px; font-weight: bold; margin-top: 10px; }
+        .promo-banner { color: #ff0000; font-size: 60px; font-weight: 900; margin: 20px 0; }
 
-        .btns { margin: 30px 0; display: flex; justify-content: center; gap: 15px; padding-bottom: 40px; }
-        .btn-link { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; }
-        .cyan { background: #00adef; color: #fff; }
-        .outline { border: 2px solid #00adef; color: #00adef; }
+        /* معرض الصور الـ 20 */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
+        .work-box { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .work-box img { width: 100%; height: 230px; object-fit: cover; }
+        .work-box p { padding: 15px; font-weight: bold; margin: 0; }
+
+        /* الزراير المطلوبة فقط */
+        .action-area { margin-bottom: 50px; display: flex; justify-content: center; gap: 20px; }
+        .btn-style { padding: 12px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; transition: 0.3s; }
+        .btn-wa { background: #00adef; color: #fff; }
+        .btn-fb { border: 2px solid #00adef; color: #00adef; }
     </style>
 </head>
 <body>
 
-    <div class="trend-logo-box">
-        <div class="trend-letters">
-            <span class="char-t">T</span>
-            <span class="char-re">re</span>
+    <div class="logo-wrapper">
+        <div class="trend-text">
             <span class="char-d">d</span>
+            <span class="char-re">re</span>
+            <span class="char-t-red">T</span>
         </div>
         
-        <svg class="master-arrow" viewBox="0 0 300 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 110C60 110 120 80 160 50C200 20 240 10 290 5" stroke="url(#trendGrad)" stroke-width="20" stroke-linecap="round"/>
-            <path d="M290 5L260 5M290 5L275 30" stroke="url(#trendGrad)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="bold-arrow" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 100C70 100 150 70 200 40C250 10 280 5 310 5" 
+                  stroke="url(#finalGrad)" stroke-width="25" stroke-linecap="round"/>
+            <path d="M310 5L280 5M310 5L295 25" 
+                  stroke="url(#finalGrad)" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
             <defs>
-                <linearGradient id="trendGrad" x1="10" y1="110" x2="290" y2="5" gradientUnits="userSpaceOnUse">
+                <linearGradient id="finalGrad" x1="10" y1="100" x2="310" y2="5" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#ff0000"/> <stop offset="1" stop-color="#00ff00"/> </linearGradient>
             </defs>
         </svg>
     </div>
 
-    <div style="font-weight: bold; font-size: 20px;">Trend Advertising Agency</div>
-    <div class="promo-red">للاعلان هنا</div>
+    <div class="agency-title">Trend Advertising Agency</div>
+    <div class="promo-banner">للاعلان هنا</div>
 
-    <div class="btns">
-        <a href="https://wa.me/201027676344" class="btn-link cyan">إرسال واتساب</a>
-        <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-link outline">Facebook</a>
+    <div class="action-area">
+        <a href="https://wa.me/201027676344" class="btn-style btn-wa">إرسال واتساب</a>
+        <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-style btn-fb">Facebook</a>
     </div>
 
-    <div class="portfolio">
-        <div class="card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
-        <div class="card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
-        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
-        <div class="card"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
-        <div class="card"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
-        <div class="card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
-        <div class="card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
-        <div class="card"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
-        <div class="card"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
-        <div class="card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
-        <div class="card"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
-        <div class="card"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
-        <div class="card"><img src="https://i.ibb.co/whd9cXcv/12.jpg" alt="13"><p>مونتاج فيديو</p></div>
-        <div class="card"><img src="https://i.ibb.co/RTn9n56C/13.jpg" alt="14"><p>موشن جرافيك</p></div>
-        <div class="card"><img src="https://i.ibb.co/k2sBTN81/14.jpg" alt="15"><p>إعلانات طرق</p></div>
-        <div class="card"><img src="https://i.ibb.co/SwWnCf4k/15.jpg" alt="16"><p>تنظيم فعاليات</p></div>
-        <div class="card"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
-        <div class="card"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
-        <div class="card"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
-        <div class="card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Adv Agency</p></div>
+    <div class="gallery-grid">
+        <div class="work-box"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/whd9cXcv/12.jpg" alt="13"><p>مونتاج فيديو</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/RTn9n56C/13.jpg" alt="14"><p>موشن جرافيك</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/k2sBTN81/14.jpg" alt="15"><p>إعلانات طرق</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/SwWnCf4k/15.jpg" alt="16"><p>تنظيم فعاليات</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
+        <div class="work-box"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Adv Agency</p></div>
     </div>
 
 </body>
