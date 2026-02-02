@@ -11,13 +11,23 @@
         body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; overflow-x: hidden; }
         
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
-        .logo { display: flex; align-items: center; justify-content: center; gap: 5px; }
+        
+        /* التعديل النهائي لضبط حرف الـ T على الشمال */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 2px; 
+            direction: ltr !important; /* إجبار الترتيب من اليسار لليمين */
+        }
+        
         .t-brand { 
             background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
             font-size: 4.5rem; font-weight: 900; animation: shine 3s linear infinite;
+            line-height: 1;
         }
-        .brand-name { font-size: 2.8rem; font-weight: 700; color: white; }
+        .brand-name { font-size: 2.8rem; font-weight: 700; color: white; line-height: 1; }
 
         @keyframes shine { 
             0% { filter: drop-shadow(0 0 5px var(--cyan)); }
@@ -71,7 +81,10 @@
 </div>
 
 <header>
-    <div class="logo"><span class="t-brand">T</span><span class="brand-name">rend Adv</span></div>
+    <div class="logo">
+        <span class="t-brand">T</span><span class="brand-name">rend Adv</span>
+    </div>
+    <div style="color: #888; margin-top: 10px; font-size: 1.1rem;">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
 </header>
 
 <div class="promo-banner">
@@ -108,10 +121,8 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // الرابط الجديد الذي زودتني به
     const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-O4PT3qyH5Ci0K6EsW/exec";
 
-    // الصور الـ 19 الأساسية للعرض
     const backupImages = [
         "https://i.ibb.co/qMJvnDNC/1000133864.png", "https://i.ibb.co/Kc8kwrtP/1000133863.png",
         "https://i.ibb.co/84L1KGxk/1000133862.png", "https://i.ibb.co/5g51xgQj/1000133861.png",
@@ -131,17 +142,11 @@
             const res = await fetch(GOOGLE_URL);
             const data = await res.json();
             gal.innerHTML = "";
-            
-            // عرض البيانات من الجدول أولاً
             if(data && data.length > 0) {
                 data.forEach(ad => renderCard(ad.title, ad.img, ad.coords, ad.duration));
             }
-            
-            // ثم عرض صور الـ Backup لملء الموقع
             backupImages.forEach((url, i) => renderCard(`موقع Trend #${i+1}`, url, "موقع استراتيجي", "3 شهور مجاناً"));
-            
         } catch (e) { 
-            // في حالة الخطأ، اعرض الـ Backup فقط
             gal.innerHTML = "";
             backupImages.forEach((url, i) => renderCard(`موقع Trend #${i+1}`, url, "موقع استراتيجي", "3 شهور مجاناً"));
         }
