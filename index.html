@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | المنصة الذكية</title>
+    <title>Trend Adv | مصطفى النمس</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        :root { --accent: #00d2ff; --dark: #0f0f0f; --text: #e0e0e0; }
-        body { background-color: var(--dark); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 140px; }
+        :root { --accent: #00d2ff; --dark: #0f0f0f; --white: #ffffff; }
+        body { background-color: var(--dark); color: var(--white); font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 160px; }
         
-        /* تأثير حرف T الملون */
-        header { text-align: center; padding: 40px 10px; background: #000; }
-        .logo { font-size: 3.2rem; font-weight: bold; letter-spacing: 2px; }
+        /* اللوجو وحرف T الملون */
+        header { text-align: center; padding: 30px 10px; background: #000; }
+        .logo { font-size: 3rem; font-weight: bold; }
         .logo span { 
             background: linear-gradient(90deg, #00d2ff, #3a7bd5, #00d2ff);
             background-size: 200% auto;
@@ -21,27 +22,27 @@
         }
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* الأزرار باللون اللبني */
-        .btn-cyan { 
-            display: block; width: 85%; max-width: 400px; margin: 20px auto; 
-            background: var(--accent); color: #000; border: none; 
-            padding: 16px; border-radius: 12px; font-weight: bold; 
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
-        }
+        /* أزرار السوشيال ميديا الجانبية */
+        .social-bar { position: fixed; left: 15px; top: 50%; transform: translateY(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 15px; }
+        .social-bar a { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.3s; }
+        .wa-biz { background: #25D366; } 
+        .fb { background: #1877F2; }     
+        .li { background: #0077b5; }     
+        .social-bar a:hover { transform: scale(1.1) rotate(5deg); border: 2px solid white; }
 
-        #map { height: 380px; width: 95%; margin: 20px auto; border-radius: 20px; border: 2px solid var(--accent); display: none; }
+        .cv-box { background: #1a1a1a; margin: 20px; padding: 20px; border-radius: 15px; border-right: 5px solid var(--accent); }
+        .cv-box h3 { color: var(--accent); margin-bottom: 10px; }
 
-        /* قسم السيرة الذاتية والاحترافية */
-        .cv-section { background: #1a1a1a; margin: 20px; padding: 25px; border-radius: 15px; border-right: 5px solid var(--accent); }
-        .cv-section h3 { color: var(--accent); margin-top: 0; }
+        .btn-main { display: block; width: 90%; max-width: 450px; margin: 20px auto; background: var(--accent); color: #000; border: none; padding: 18px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,210,255,0.4); }
+        #map { height: 350px; width: 95%; margin: 15px auto; border-radius: 20px; border: 2px solid var(--accent); display: none; }
 
-        /* معرض الصور الـ 23 */
+        /* معرض الـ 23 صورة */
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .ad-card { background: #222; border-radius: 15px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
-        .ad-card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .ad-card { background: #222; border-radius: 15px; overflow: hidden; border: 1px solid #333; transition: 0.3s; position: relative; }
+        .ad-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .ad-card img { width: 100%; height: 220px; object-fit: cover; }
+        .stats { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: var(--accent); padding: 5px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; }
 
-        /* الإعلانات الثابتة */
         .sticky-ads { position: fixed; bottom: 0; width: 100%; z-index: 1000; }
         .banner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(0,0,0,0.95); border-top: 2px solid var(--accent); }
         .banner img { height: 30px; background: white; border-radius: 4px; padding: 2px; }
@@ -50,53 +51,59 @@
 </head>
 <body>
 
+<div class="social-bar">
+    <a href="https://wa.me/201027676344" class="wa-biz" title="واتساب بيزنس"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/share/1A8tTYNpdP/" class="fb" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.linkedin.com/in/mostafa-alnems-02b569330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="li" title="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+</div>
+
 <header><div class="logo"><span>T</span>rend Adv</div></header>
 
-<section class="cv-section">
-    <h3>لماذا تختار Trend Adv؟ 🚀</h3>
-    <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
-        <li>🔹 <b>تكنولوجيا GPS:</b> أول خريطة تفاعلية لربط مواقعك بالعملاء جغرافياً.</li>
-        <li>🔹 <b>تحليلات حقيقية:</b> نظام ذكي لحساب عدد المشاهدات والوصول لكل لوحة.</li>
-        <li>🔹 <b>دعم فني 24/7:</b> تواصل مباشر عبر واتساب لخدمة عملائك فوراً.</li>
-        <li>🔹 <b>فترة سماح:</b> انضم الآن مجاناً لمدة 3 شهور قبل تطبيق الرسوم.</li>
-    </ul>
+<section class="cv-box">
+    <h3>Trend Adv | ابتكار مصطفى النمس 🚀</h3>
+    <p>منصتكم الرائدة لربط المواقع الإعلانية بتقنيات الـ GPS. استفد من فترة السماح لـ 3 شهور مجاناً وابدأ عرض لوحاتك الآن.</p>
 </section>
 
-<button class="btn-cyan" onclick="openMap()">📍 استكشف المواقع القريبة منك</button>
+<button class="btn-main" onclick="startMap()">📍 استكشف المواقع القريبة منك (GPS)</button>
 <div id="map"></div>
 
-<div class="gallery">
-    <div class="ad-card">
-        <img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="Ad">
-        <div style="padding:15px;"><b>موقع طريق السويس</b><br><small>👁️ 1,450 مشاهدة</small></div>
-    </div>
-    </div>
+<div class="gallery" id="adsGallery"></div>
 
 <div class="sticky-ads">
     <div class="banner">
         <img src="https://logowik.com/content/uploads/images/almarai-company8003.jpg">
-        <a href="https://wa.me/201027676344?text=مهتم_بإعلان_المراعي">المراعي: شراكة القوة. متاح للحجز 🔗</a>
+        <a href="https://wa.me/201027676344?text=استفسار_عن_المراعي">المراعي: متاح للحجز 🔗</a>
     </div>
     <div class="banner">
         <img src="https://logowik.com/content/uploads/images/huawei-new-20205801.jpg">
-        <a href="https://wa.me/201027676344?text=مهتم_بإعلان_هواوي">هواوي: نصنع المستقبل. متاح للعرض 🚀</a>
+        <a href="https://wa.me/201027676344?text=استفسار_عن_هواوي">هواوي: متاح للعرض 🚀</a>
     </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    function openMap() {
+    const gallery = document.getElementById('adsGallery');
+    for (let i = 1; i <= 23; i++) {
+        gallery.innerHTML += `
+            <div class="ad-card">
+                <div class="stats">👁️ ${1650 + (i * 25)} مشاهدة</div>
+                <img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="Trend Adv Ad">
+                <div style="padding:15px;">
+                    <b style="color:var(--accent);">موقع استراتيجي #${i}</b><br>
+                    <small>منطقة حيوية - متاح للحجز</small>
+                </div>
+            </div>`;
+    }
+
+    function startMap() {
         document.getElementById('map').style.display = 'block';
         let map = L.map('map').setView([30.0444, 31.2357], 11);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
-                const myLoc = [p.coords.latitude, p.coords.longitude];
-                map.setView(myLoc, 13);
-                L.marker(myLoc).addTo(map).bindPopup("أنت هنا").openPopup();
-                // نقطة محاكاة لإعلان قريب
-                L.marker([p.coords.latitude+0.01, p.coords.longitude+0.01]).addTo(map).bindPopup("إعلان متاح بالقرب منك!");
+                const userLoc = [p.coords.latitude, p.coords.longitude];
+                map.setView(userLoc, 13);
+                L.marker(userLoc).addTo(map).bindPopup("موقعك الحالي").openPopup();
             });
         }
     }
