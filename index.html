@@ -1,141 +1,99 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | Official Site</title>
+    <title>Trend Adv | الشراكة الإعلانية</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body { background-color: #0b0b0b; color: #ffffff; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        :root { --primary: #ffcc00; --dark: #111; --white: #ffffff; }
+        body { background-color: var(--dark); color: var(--white); font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; padding-bottom: 150px; }
         
-        /* تأثير الألوان المشتعلة لحرف T */
-        @keyframes colorShift {
-            0% { color: #ff0000; }
-            33% { color: #00adef; }
-            66% { color: #00ffcc; }
-            100% { color: #ff0000; }
-        }
+        /* اللوجو وحرف T اللي بيلمع */
+        header { text-align: center; padding: 25px; background: #000; border-bottom: 1px solid #333; }
+        .logo { font-size: 2.8rem; font-weight: bold; }
+        .logo span { color: var(--primary); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .header-section { padding: 50px 20px 20px; }
-        
-        /* الحل النهائي لمشكلة حرف T: إجبار اتجاه الكتابة من اليسار لليمين للوجو فقط */
-        .brand-logo { 
-            font-size: 60px; 
-            font-weight: bold; 
-            display: flex; 
-            justify-content: center; 
-            align-items: baseline; 
-            direction: ltr !important; /* لضمان بقاء T على اليسار */
-            margin-bottom: 5px;
+        /* قسم الشراكة الاحترافية الجديد */
+        .partnership-section {
+            background: linear-gradient(45deg, #1a1a1a, #000);
+            margin: 20px; padding: 20px; border-radius: 15px;
+            border: 1px solid var(--primary); text-align: center;
         }
-        .moving-t { animation: colorShift 3s infinite linear; display: inline-block; }
-        .cyan-text { color: #00adef; }
+        .partnership-tag { background: var(--primary); color: #000; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
 
-        .tagline { font-size: 22px; color: #ffffff; margin-top: 5px; font-weight: 300; }
-        .blue-divider { width: 250px; height: 3px; background: #00adef; margin: 20px auto; }
+        /* الأزرار والإعلانات الثابتة */
+        .ads-container { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 9999; }
+        .ad-banner { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: rgba(0,0,0,0.9); border-top: 1px solid var(--primary); }
+        .ad-banner img { height: 35px; }
+        .ad-banner a { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem; }
 
-        .dev-button { 
-            display: inline-block; border: 2px solid #00adef; color: #00adef; 
-            padding: 12px 35px; border-radius: 50px; text-decoration: none; 
-            font-weight: bold; font-size: 18px; margin: 20px 0; transition: 0.3s;
-        }
-        .dev-button:hover { background: #00adef; color: #fff; }
+        .geo-btn { display: block; width: 90%; max-width: 400px; margin: 20px auto; background: var(--primary); color: #000; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+        #map { height: 300px; width: 95%; margin: 15px auto; border-radius: 15px; display: none; border: 2px solid #444; }
 
-        .section-title { color: #00adef; font-size: 32px; margin: 40px 0 30px; font-weight: bold; text-shadow: 0 0 10px rgba(0,173,239,0.3); }
-
-        /* شبكة الصور الاحترافية */
-        .portfolio-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 25px; 
-            padding: 20px 40px; 
-            max-width: 1400px; 
-            margin: 0 auto;
-        }
-        .card { 
-            background: #1a1a1a; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid #333; 
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .card:hover { transform: translateY(-10px); border-color: #00adef; }
-        .card img { width: 100%; height: 250px; object-fit: cover; filter: brightness(0.9); transition: 0.3s; }
-        .card:hover img { filter: brightness(1.1); }
-        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #1f1f1f; font-size: 18px; }
-
-        /* أزرار التواصل في النهاية */
-        .footer-btns { margin: 60px 0 100px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .cta-btn { 
-            background: #00adef; color: #fff; padding: 20px 60px; border-radius: 50px; 
-            font-size: 24px; font-weight: bold; text-decoration: none; width: 90%; max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0, 173, 239, 0.4); transition: 0.3s;
-        }
-        .cta-btn:hover { transform: scale(1.05); background: #0099d1; }
-        
-        .social-links { display: flex; gap: 20px; width: 90%; max-width: 500px; }
-        .social-links a { 
-            flex: 1; padding: 15px; border-radius: 50px; text-decoration: none; 
-            font-weight: bold; color: #fff; text-align: center; font-size: 18px; transition: 0.3s;
-        }
-        .wa-bg { background: #25d366; }
-        .fb-bg { background: #1877f2; }
-        .social-links a:hover { opacity: 0.8; transform: translateY(-3px); }
-
-        @media (max-width: 600px) {
-            .brand-logo { font-size: 45px; }
-            .tagline { font-size: 18px; }
-            .portfolio-grid { padding: 10px; }
-        }
+        /* معرض الصور الـ 23 */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
+        .ad-card { background: #222; border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
+        .ad-card img { width: 100%; height: 220px; object-fit: cover; }
+        .views-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; color: var(--primary); }
     </style>
 </head>
 <body>
 
-    <div class="header-section">
-        <div class="brand-logo">
-            <span class="moving-t">T</span><span class="cyan-text">rend Adv</span>
-        </div>
-        
-        <div class="tagline">للخدمات الإعلانية والتقنية المتكاملة</div>
-        <div class="blue-divider"></div>
-        
-        <a href="https://wa.me/201027676344" class="dev-button">🌐 طلب برمجة موقع أو تطبيق</a>
-        <div class="section-title">سابقة أعمالنا الاحترافية</div>
+<header>
+    <div class="logo"><span>T</span>rend Adv</div>
+</header>
+
+<section class="partnership-section">
+    <span class="partnership-tag">عرض انضمام الوكالات</span>
+    <h2 style="color: var(--primary);">أعلن معنا مجاناً لمدة 3 شهور!</h2>
+    <p>بوابتك التكنولوجية لعرض مواقعك الإعلانية بنظام GPS. انضم الآن واستفد من فترة السماح المجانية قبل بدء رسوم الخدمة الدورية.</p>
+    <a href="https://wa.me/201027676344?text=أريد_تسجيل_وكالتي_في_فترة_السماح" style="color: white; text-decoration: underline;">سجل وكالتك الآن مجاناً 🤝</a>
+</section>
+
+<button class="geo-btn" onclick="startMap()">📍 ابحث عن أقرب موقع إعلاني متاح</button>
+<div id="map"></div>
+
+<div class="gallery">
+    <div class="ad-card">
+        <div class="views-tag">👁️ 1,450 مشاهدة</div>
+        <img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="Trend Adv">
+        <div style="padding: 10px;"><b>موقع: طريق السويس</b></div>
+    </div>
     </div>
 
-    <div class="portfolio-grid">
-        <div class="card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
-        <div class="card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
-        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
-        <div class="card"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
-        <div class="card"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
-        <div class="card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
-        <div class="card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
-        <div class="card"><img src="https://i.ibb.co/8DckY7Jc/8.jpg" alt="8"><p>هويات بصرية</p></div>
-        <div class="card"><img src="https://i.ibb.co/bMs0Bnk5/9.jpg" alt="9"><p>أعمال دعائية</p></div>
-        <div class="card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
-        <div class="card"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
-        <div class="card"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
-        <div class="card"><img src="https://i.ibb.co/whd9cXcv/12.jpg" alt="13"><p>مونتاج فيديو</p></div>
-        <div class="card"><img src="https://i.ibb.co/RTn9n56C/13.jpg" alt="14"><p>موشن جرافيك</p></div>
-        <div class="card"><img src="https://i.ibb.co/k2sBTN81/14.jpg" alt="15"><p>إعلانات طرق</p></div>
-        <div class="card"><img src="https://i.ibb.co/SwWnCf4k/15.jpg" alt="16"><p>تنظيم فعاليات</p></div>
-        <div class="card"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
-        <div class="card"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
-        <div class="card"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
-        <div class="card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Agency</p></div>
-        <div class="card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="21"><p>هوية بصرية</p></div>
-        <div class="card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="22"><p>مشاريع الطرق</p></div>
-        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="23"><p>واجهات إبداعية</p></div>
+<div class="ads-container">
+    <div class="ad-banner">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3e/Almarai_Logo.svg/1200px-Almarai_Logo.svg.png" alt="Almarai">
+        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_المراعي">المراعي: شراكة استراتيجية. متاح للحجز 🔗</a>
     </div>
+    <div class="ad-banner" style="background: #000;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Huawei_logo.svg/1200px-Huawei_logo.svg.png" alt="Huawei">
+        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_هواوي">هواوي: التكنولوجيا في خدمتك. متاح للعرض 🚀</a>
+    </div>
+</div>
 
-    <div class="footer-btns">
-        <a href="https://wa.me/201027676344" class="cta-btn">انقر هنا لبدء حملتك الإعلانية</a>
-        <div class="social-links">
-            <a href="https://wa.me/201027676344" class="wa-bg">واتساب</a>
-            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="fb-bg">فيسبوك</a>
-        </div>
-    </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    function startMap() {
+        const mapDiv = document.getElementById('map');
+        mapDiv.style.display = 'block';
+        let map = L.map('map').setView([30.0444, 31.2357], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                const lat = p.coords.latitude;
+                const lng = p.coords.longitude;
+                map.setView([lat, lng], 13);
+                L.marker([lat, lng]).addTo(map).bindPopup("أنت هنا").openPopup();
+                // إضافة نقاط افتراضية للوكالات
+                L.marker([lat+0.01, lng+0.01]).addTo(map).bindPopup("موقع إعلاني متاح (فترة سماح)");
+            });
+        }
+    }
+</script>
 
 </body>
 </html>
