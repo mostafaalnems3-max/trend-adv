@@ -12,13 +12,9 @@
         
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
         
-        /* التعديل النهائي لضبط حرف الـ T على الشمال */
         .logo { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 2px; 
-            direction: ltr !important; /* إجبار الترتيب من اليسار لليمين */
+            display: flex; align-items: center; justify-content: center; gap: 2px; 
+            direction: ltr !important; /* لضمان حرف T على الشمال */
         }
         
         .t-brand { 
@@ -47,6 +43,20 @@
         }
 
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* قسم المميزات الجديد */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px; padding: 0 15px; margin-bottom: 20px;
+        }
+        .feature-item {
+            background: #1a1a1a; padding: 15px; border-radius: 12px;
+            text-align: center; border: 1px solid #333; transition: 0.3s;
+        }
+        .feature-item:hover { border-color: var(--cyan); transform: translateY(-5px); }
+        .feature-item i { font-size: 1.8rem; color: var(--cyan); margin-bottom: 10px; }
+        .feature-item h4 { margin: 5px 0; font-size: 0.95rem; }
+        .feature-item p { font-size: 0.75rem; color: #aaa; margin: 0; }
 
         .social-sidebar { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
         .social-sidebar a { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 18px; box-shadow: 0 4px 10px #000; }
@@ -95,12 +105,35 @@
 
 <section class="intro-box">
     <h2 style="color:var(--cyan)">إدارة الوكالات الإعلانية 🏢</h2>
-    <p>سجل لوحتك الآن واختر عرض الـ 3 شهور المجانية لتبدأ في عرض مواقعك على خريطتنا التفاعلية.</p>
+    <p>سجل لوحتك الآن وانضم لأكبر تجمع إعلاني تفاعلي. نحن نسهل على المعلن الوصول إليك في ثوانٍ.</p>
 </section>
 
+<div class="features-grid">
+    <div class="feature-item">
+        <i class="fas fa-map-marked-alt"></i>
+        <h4>خريطة ذكية</h4>
+        <p>عرض تفاعلي لمواقع لوحاتك بدقة متناهية.</p>
+    </div>
+    <div class="feature-item">
+        <i class="fas fa-chart-line"></i>
+        <h4>انتشار أوسع</h4>
+        <p>لوحتك ستكون أمام آلاف المعلنين يومياً.</p>
+    </div>
+    <div class="feature-item">
+        <i class="fas fa-bolt"></i>
+        <h4>حجز مباشر</h4>
+        <p>تواصل فوري وسريع عبر واتساب للحجز.</p>
+    </div>
+    <div class="feature-item">
+        <i class="fas fa-gift"></i>
+        <h4>عروض حصرية</h4>
+        <p>اشتراكات مجانية تبدأ من 3 شهور للوكالات.</p>
+    </div>
+</div>
+
 <div class="main-controls">
-    <button class="btn-action" onclick="showMap()">📍 الخريطة</button>
-    <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 بوابة الوكالات (3 شهور مجاناً)</button>
+    <button class="btn-action" onclick="showMap()">📍 استعرض الخريطة</button>
+    <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 بوابة الوكالات (سجل الآن)</button>
 </div>
 
 <div class="admin-panel" id="adminPanel">
