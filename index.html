@@ -1,94 +1,78 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Advertising Agency</title>
+    <title>Trend Adv | Professional</title>
     <style>
-        body { background-color: #ffffff; color: #000; text-align: center; font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
+        body { background-color: #ffffff; color: #333; text-align: center; font-family: sans-serif; margin: 0; padding: 0; }
         
-        /* اللوجو والسهم الأفقي */
-        .header-brand { position: relative; display: inline-block; margin-top: 60px; padding: 20px; }
+        /* تصميم اللوجو طبق الأصل من الصورة */
+        .logo-container { position: relative; display: inline-block; margin-top: 50px; padding: 20px; }
         
-        .dimension-arrow {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 120px; display: flex; flex-direction: column; align-items: center;
-        }
-        .dim-number { font-weight: bold; font-size: 16px; margin-bottom: 2px; }
+        /* حرف T الأسود الضخم */
+        .main-t { font-size: 180px; font-weight: 900; color: #000; line-height: 0.8; margin: 0; }
 
-        .trend-title { display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
-        .t-red { font-size: 150px; font-weight: 900; color: #ff0000; line-height: 0.8; font-family: 'Arial Black'; }
-        .re-grad { 
-            font-size: 100px; font-weight: 900; line-height: 0.8;
-            background: linear-gradient(to bottom, #3366ff, #cc33ff);
+        /* حروف re المتدرجة تحت الـ T */
+        .re-letters { 
+            font-size: 120px; font-weight: 900; position: absolute; left: -40px; bottom: 10px;
+            background: linear-gradient(to right, #ff0000, #ff00ff, #00ccff);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .d-char { font-size: 90px; font-weight: 900; color: #333; line-height: 0.8; }
-
-        /* السهم الأخضر الرشيق */
-        .main-trend-arrow {
-            position: absolute; bottom: 20%; left: -5%; width: 300px; z-index: 5;
+            z-index: 2;
         }
 
-        .promo-text-red { color: #ff0000; font-size: 55px; font-weight: 900; margin: 25px 0; }
+        /* السهم الأخضر المنحني كما في الصورة */
+        .green-curve-arrow {
+            position: absolute; bottom: 20px; left: -20px; width: 300px; z-index: 3;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
 
-        /* الألبوم (المعرض) */
-        .gallery-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .album-card { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
-        .album-card img { width: 100%; height: 230px; object-fit: cover; }
-        .album-card p { padding: 15px; font-weight: bold; margin: 0; }
+        .brand-sub { font-size: 24px; font-weight: bold; border-bottom: 2px solid #333; display: inline-block; padding-bottom: 5px; margin-top: 20px; }
+        
+        /* زرار الأكشن الملون */
+        .tech-btn { 
+            background: #00adef; color: #fff; border: none; padding: 10px 30px; 
+            border-radius: 25px; font-size: 18px; font-weight: bold; margin: 20px 0; cursor: pointer;
+        }
 
-        /* الزراير في أسفل الصفحة */
-        .footer-buttons { margin: 40px 0; padding-bottom: 60px; display: flex; justify-content: center; gap: 20px; }
-        .btn-custom { padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; transition: 0.3s; }
-        .btn-wa { background: #00adef; color: #fff; }
-        .btn-fb { border: 2px solid #00adef; color: #00adef; }
+        /* قسم المعرض (الصور الـ 20) */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
+        .portfolio-item { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .portfolio-item img { width: 100%; height: 220px; object-fit: cover; }
+        .portfolio-item p { padding: 15px; font-weight: bold; background: #f8f8f8; margin: 0; }
+
+        /* الزراير تحت خالص بناءً على طلبك */
+        .bottom-actions { margin: 50px 0; display: flex; justify-content: center; gap: 20px; padding-bottom: 50px; }
+        .btn-link { padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; }
+        .btn-blue { background: #00adef; color: #fff; }
+        .btn-outline { border: 2px solid #00adef; color: #00adef; }
     </style>
 </head>
 <body>
 
-    <div class="header-brand">
-        <div class="dimension-arrow">
-            <span class="dim-number">9</span>
-            <svg width="120" height="15" viewBox="0 0 120 15">
-                <path d="M5 7.5 L115 7.5" stroke="black" stroke-width="2"/>
-                <path d="M5 7.5 L15 3 M5 7.5 L15 12" stroke="black" stroke-width="2"/>
-                <path d="M115 7.5 L105 3 M115 7.5 L105 12" stroke="black" stroke-width="2"/>
-            </svg>
-        </div>
-
-        <div class="trend-title">
-            <span class="t-red">T</span>
-            <span class="re-grad">re</span>
-            <span class="d-char">d</span>
-        </div>
-        
-        <svg class="main-trend-arrow" viewBox="0 0 300 120" fill="none">
-            <path d="M10 100C70 100 150 70 200 40C250 10 280 5 295 5" stroke="#00ff00" stroke-width="20" stroke-linecap="round"/>
-            <path d="M295 5L265 5 M295 5 L280 25" stroke="#00ff00" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <div class="logo-container">
+        <h1 class="main-t">T</h1>
+        <span class="re-letters">re</span>
+        <svg class="green-curve-arrow" viewBox="0 0 300 150" fill="none">
+            <path d="M10 130C60 130 140 100 200 60C260 20 280 10 295 5" stroke="#00ff00" stroke-width="22" stroke-linecap="round"/>
+            <path d="M295 5L260 5 M295 5 L280 30" stroke="#00ff00" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </div>
 
-    <div style="font-weight: bold; font-size: 22px; margin-top: 10px;">Trend Advertising Agency</div>
-    <div class="promo-text-red">للاعلان هنا</div>
+    <br>
+    <div class="brand-sub">Trend Adv | Professional لا تسويق العكان</div>
+    <br>
+    <button class="tech-btn">انقر هنا لبدء مشروعك</button>
 
-    <div class="gallery-section">
-        <div class="album-card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
-        <div class="album-card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
+    <div class="portfolio-grid">
+        <div class="portfolio-item"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
+        <div class="portfolio-item"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
+        <div class="portfolio-item"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
         </div>
 
-    <div class="footer-buttons">
-        <a href="https://wa.me/201027676344" class="btn-custom btn-wa">إرسال واتساب</a>
-        <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-custom btn-fb">Facebook</a>
+    <div class="bottom-actions">
+        <a href="https://wa.me/201027676344" class="btn-link btn-blue">إرسال واتساب</a>
+        <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-link btn-outline">Facebook</a>
     </div>
 
 </body>
