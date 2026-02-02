@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | Professional Design</title>
+    <title>Trend Adv | Official</title>
     <style>
         body { background-color: #0b0b0b; color: #ffffff; text-align: center; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         
-        /* تأثير تغيير الألوان المتحرك لحرف T فقط */
+        /* تأثير الألوان المتحرك لحرف T */
         @keyframes colorShift {
             0% { color: #ff0000; }
             33% { color: #00adef; }
@@ -17,15 +18,14 @@
 
         .header-section { padding: 50px 20px; }
         
-        /* تصميم الاسم كامل زي الصورة مع تحريك الـ T */
-        .brand-logo { font-size: 60px; font-weight: bold; margin: 0; display: inline-block; }
+        /* التصميم المطلوب: T ملونة وباقي الحروف لبني */
+        .brand-logo { font-size: 60px; font-weight: bold; margin: 0; }
         .moving-t { animation: colorShift 3s infinite linear; display: inline-block; }
-        .static-text { color: #00adef; } /* بقية الحروف ثابتة باللون اللبني */
+        .rest-of-text { color: #00adef; }
 
-        .tagline { font-size: 20px; color: #ffffff; margin-top: 15px; font-weight: normal; }
-        .blue-line { width: 200px; height: 3px; background: #00adef; margin: 15px auto; }
+        .tagline { font-size: 20px; color: #ffffff; margin-top: 15px; }
+        .blue-line { width: 220px; height: 3px; background: #00adef; margin: 15px auto; border-radius: 2px; }
 
-        /* زر البرمجة */
         .dev-btn { 
             display: inline-block; border: 2px solid #00adef; color: #00adef; 
             padding: 12px 35px; border-radius: 50px; text-decoration: none; 
@@ -36,29 +36,27 @@
 
         /* الألبوم الكامل (23 صورة) */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333; }
+        .card { background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
         .card img { width: 100%; height: 240px; object-fit: cover; background: #222; }
-        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #1f1f1f; }
+        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; }
 
-        /* منطقة التواصل والزراير تحت خالص */
-        .footer-actions { margin: 60px 0; padding-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        
-        .main-cta { 
+        /* منطقة الأكشن والزراير */
+        .footer-action { margin: 60px 0; padding-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .campaign-btn { 
             background: #00adef; color: #fff; padding: 18px 50px; border-radius: 50px; 
-            font-size: 22px; font-weight: bold; text-decoration: none; width: 80%; max-width: 400px;
+            font-size: 22px; font-weight: bold; text-decoration: none; width: 85%; max-width: 450px;
             box-shadow: 0 5px 20px rgba(0, 173, 239, 0.4);
         }
-
-        .social-box { display: flex; justify-content: center; gap: 15px; width: 100%; }
-        .social-btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; flex: 1; max-width: 180px; }
-        .wa-btn { background: #25d366; color: #fff; }
-        .fb-btn { background: #1877f2; color: #fff; }
+        .social-group { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        .btn-social { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; flex: 1; max-width: 180px; }
+        .wa { background: #25d366; color: #fff; }
+        .fb { background: #1877f2; color: #fff; }
     </style>
 </head>
 <body>
 
     <div class="header-section">
-        <h1 class="brand-logo"><span class="moving-t">T</span><span class="static-text">rend Adv</span></h1>
+        <h1 class="brand-logo"><span class="moving-t">T</span><span class="rest-of-text">rend Adv</span></h1>
         
         <div class="tagline">للخدمات الإعلانية والتقنية المتكاملة</div>
         <div class="blue-line"></div>
@@ -93,11 +91,11 @@
         <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="23"><p>تنفيذ واجهات</p></div>
     </div>
 
-    <div class="footer-actions">
-        <a href="https://wa.me/201027676344" class="main-cta">انقر هنا لبدء حملتك الاعلانية</a>
-        <div class="social-box">
-            <a href="https://wa.me/201027676344" class="social-btn wa-btn">إرسال واتساب</a>
-            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="social-btn fb-btn">Facebook</a>
+    <div class="footer-action">
+        <a href="https://wa.me/201027676344" class="campaign-btn">انقر هنا لبدء حملتك الاعلانية</a>
+        <div class="social-group">
+            <a href="https://wa.me/201027676344" class="btn-social wa">واتساب</a>
+            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-social fb">فيسبوك</a>
         </div>
     </div>
 
