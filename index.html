@@ -7,7 +7,7 @@
     <style>
         body { background-color: #0b0b0b; color: #ffffff; text-align: center; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         
-        /* تأثير تغيير الألوان لحرف T فقط */
+        /* تأثير الألوان لحرف T فقط */
         @keyframes colorShift {
             0% { color: #ff0000; }
             33% { color: #00adef; }
@@ -17,48 +17,52 @@
 
         .header-section { padding: 40px 20px; }
         
-        /* جعل الكلمة قطعة واحدة وحرف T هو اللي بيلون */
-        .brand-logo { font-size: 55px; font-weight: bold; margin: 0; display: inline-block; }
-        .moving-t { animation: colorShift 3s infinite linear; display: inline-block; }
-        .rest-text { color: #00adef; }
+        /* تجميع الكلمة في سطر واحد عشان الحرف ميهربش أبداً */
+        .brand-logo { font-size: 55px; font-weight: bold; display: flex; justify-content: center; align-items: baseline; gap: 0; margin-bottom: 5px; }
+        .moving-t { animation: colorShift 3s infinite linear; }
+        .cyan-text { color: #00adef; }
 
-        .tagline { font-size: 19px; color: #ffffff; margin: 15px 0; }
-        .blue-line { width: 220px; height: 3px; background: #00adef; margin: 0 auto 25px; }
+        /* النص اللي طلبته متمسحش */
+        .tagline { font-size: 20px; color: #ffffff; margin-top: 5px; font-weight: normal; }
+        .blue-divider { width: 220px; height: 3px; background: #00adef; margin: 15px auto; }
 
-        .dev-btn { 
+        .dev-button { 
             display: inline-block; border: 2px solid #00adef; color: #00adef; 
             padding: 10px 30px; border-radius: 50px; text-decoration: none; 
-            font-weight: bold; margin-bottom: 30px;
+            font-weight: bold; margin: 20px 0;
         }
 
-        /* معرض الأعمال 23 صورة */
+        /* شبكة الأعمال - الـ 23 صورة */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
         .card { background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
         .card img { width: 100%; height: 240px; object-fit: cover; }
-        .card p { padding: 12px; font-weight: bold; color: #00adef; margin: 0; }
+        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #1f1f1f; }
 
-        /* الزراير النهائية */
+        /* الزراير السفلية كاملة */
         .footer-btns { margin: 50px 0; padding-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .main-cta { 
-            background: #00adef; color: #fff; padding: 15px 40px; border-radius: 50px; 
-            font-size: 20px; font-weight: bold; text-decoration: none; width: 80%; max-width: 400px;
+        .cta-btn { 
+            background: #00adef; color: #fff; padding: 18px 50px; border-radius: 50px; 
+            font-size: 22px; font-weight: bold; text-decoration: none; width: 85%; max-width: 450px;
+            box-shadow: 0 5px 20px rgba(0, 173, 239, 0.4);
         }
-        .social-row { display: flex; gap: 10px; width: 80%; max-width: 400px; }
-        .s-btn { flex: 1; padding: 12px; border-radius: 50px; text-decoration: none; font-weight: bold; color: #fff; }
-        .wa { background: #25d366; }
-        .fb { background: #1877f2; }
+        .social-links { display: flex; gap: 15px; width: 85%; max-width: 450px; }
+        .social-links a { flex: 1; padding: 12px; border-radius: 50px; text-decoration: none; font-weight: bold; color: #fff; text-align: center; }
+        .wa-bg { background: #25d366; }
+        .fb-bg { background: #1877f2; }
     </style>
 </head>
 <body>
 
     <div class="header-section">
-        <h1 class="brand-logo"><span class="moving-t">T</span><span class="rest-text">rend Adv</span></h1>
+        <div class="brand-logo">
+            <span class="moving-t">T</span><span class="cyan-text">rend Adv</span>
+        </div>
         
         <div class="tagline">للخدمات الإعلانية والتقنية المتكاملة</div>
-        <div class="blue-line"></div>
+        <div class="blue-divider"></div>
         
-        <a href="https://wa.me/201027676344" class="dev-btn">🌐 طلب برمجة موقع أو تطبيق</a>
-        <h2 style="color: #00adef;">سابقة أعمالنا الاحترافية</h2>
+        <a href="https://wa.me/201027676344" class="dev-button">🌐 طلب برمجة موقع أو تطبيق</a>
+        <h2 style="color: #00adef; margin-top: 30px;">سابقة أعمالنا الاحترافية</h2>
     </div>
 
     <div class="portfolio-grid">
@@ -88,10 +92,10 @@
     </div>
 
     <div class="footer-btns">
-        <a href="https://wa.me/201027676344" class="main-cta">انقر هنا لبدء حملتك الاعلانية</a>
-        <div class="social-row">
-            <a href="https://wa.me/201027676344" class="s-btn wa">واتساب</a>
-            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="s-btn fb">فيسبوك</a>
+        <a href="https://wa.me/201027676344" class="cta-btn">انقر هنا لبدء حملتك الاعلانية</a>
+        <div class="social-links">
+            <a href="https://wa.me/201027676344" class="wa-bg">واتساب</a>
+            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="fb-bg">فيسبوك</a>
         </div>
     </div>
 
