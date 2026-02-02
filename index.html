@@ -12,16 +12,17 @@
         
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
         
-        /* التعديل هنا: جعل Trend تتلون بالكامل و Adv باللون الأحمر */
-                .logo { 
+        /* التعديل الجوهري لضبط الترتيب Trend ثم Adv */
+        .logo { 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 10px; 
-            flex-direction: row; /* لضمان الترتيب من اليمين لليسار أو العكس حسب اللغة */
+            gap: 15px; 
+            flex-direction: row-reverse; /* هذا السطر يضمن ظهور Trend على اليسار و Adv على اليمين برغم الـ RTL */
         }
+
         .trend-colored { 
-            background: linear-gradient(90deg, #00d2ff, #9d50bb, #ff00ff, #00d2ff); 
+            background: linear-gradient(90deg, var(--cyan), var(--purple), #ff00ff, var(--cyan)); 
             background-size: 200% auto;
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
@@ -29,23 +30,7 @@
             font-weight: 900; 
             animation: flowText 3s linear infinite;
         }
-        .adv-red { 
-            font-size: 4.5rem; 
-            font-weight: 800; 
-            color: #ff0000; 
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
-        }
-        @keyframes flowText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            font-size: 4.5rem; 
-            font-weight: 900; 
-            animation: flowText 3s linear infinite;
-        }
         .adv-red { 
             font-size: 4.5rem; 
             font-weight: 800; 
@@ -105,8 +90,8 @@
 
 <header>
     <div class="logo">
-        <span class="trend-colored">Trend</span>
         <span class="adv-red">Adv</span>
+        <span class="trend-colored">Trend</span>
     </div>
     <div style="color: #888; margin-top: 10px; font-size: 1.1rem;">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
 </header>
