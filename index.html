@@ -13,10 +13,33 @@
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
         
         /* التعديل هنا: جعل Trend تتلون بالكامل و Adv باللون الأحمر */
-        .logo { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+                .logo { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            flex-direction: row; /* لضمان الترتيب من اليمين لليسار أو العكس حسب اللغة */
+        }
         .trend-colored { 
-            background: linear-gradient(90deg, var(--cyan), var(--purple), #ff00ff, var(--cyan)); 
+            background: linear-gradient(90deg, #00d2ff, #9d50bb, #ff00ff, #00d2ff); 
             background-size: 200% auto;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            animation: flowText 3s linear infinite;
+        }
+        .adv-red { 
+            font-size: 4.5rem; 
+            font-weight: 800; 
+            color: #ff0000; 
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+        }
+        @keyframes flowText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             font-size: 4.5rem; 
