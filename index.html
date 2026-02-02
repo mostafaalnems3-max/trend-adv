@@ -3,116 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | المنصة الإعلانية المتكاملة</title>
+    <title>Trend Adv | نظام الوكالات الاحترافي</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; }
-        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; }
-        header { text-align: center; padding: 25px; background: #000; border-bottom: 2px solid #222; }
-        .logo span { background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3rem; font-weight: 900; animation: shine 3s linear infinite; }
-        @keyframes shine { to { background-position: 200% center; } }
-        .social-sidebar { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
-        .social-sidebar a { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 18px; box-shadow: 0 4px 10px #000; transition: 0.3s; }
-        .wa { background: #25D366; } .fb { background: #1877F2; } .li { background: #0077b5; }
-        .intro-box { background: #111; margin: 15px; padding: 20px; border-radius: 15px; border-right: 5px solid var(--cyan); }
-        .main-controls { display: flex; justify-content: center; gap: 10px; padding: 10px; flex-wrap: wrap; }
-        .btn-action { background: var(--cyan); color: #000; border: none; padding: 14px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-        .btn-agency { background: transparent; border: 1px solid var(--purple); color: var(--purple); }
-        .admin-panel { background: #1a1a1a; margin: 15px; padding: 20px; border-radius: 15px; border: 1px dashed var(--cyan); display: none; }
-        .admin-panel input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
-        #map { height: 400px; width: 95%; margin: 20px auto; border-radius: 20px; border: 2px solid var(--cyan); display: none; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 15px; }
-        .ad-card { background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
-        .ad-card img { width: 100%; height: 220px; object-fit: cover; }
-        .card-body { padding: 15px; text-align: center; }
-        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; --red: #ff0000; }
+        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; overflow-x: hidden; }
+        
+        /* تصميم اللوجو الإبداعي */
+        header { text-align: center; padding: 30px 10px; background: #000; border-bottom: 3px solid #222; }
+        .logo-container { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .trend-text { 
+            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); 
+            background-size: 200% auto;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-size: 4rem; 
+            font-weight: 900; 
+            animation: moveGradient 3s linear infinite, glow 3s infinite;
+            letter-spacing: -2px;
+        }
+        
+        .adv-text { 
+            color: var(--red); 
+            font-size: 3.5rem; 
+            font-weight: 800; 
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
+        }
+
+        @keyframes moveGradient { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 10px var(--cyan)); } 50% { filter: drop-shadow(0 0 20px var(--purple)); } }
+
+        /* الشريط المتحرك */
+        .promo-banner { background: linear-gradient(45deg, #222, #000); border-bottom: 1px solid var(--cyan); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+        .scrolling-text { display: inline-block; animation: marquee 25s linear infinite; font-weight: bold; color: var(--cyan); font-size: 1.1rem; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* الأزرار واللوحة */
+        .main-controls { display: flex; justify-content: center; gap: 15px; padding: 20px; }
+        .btn-action { background: var(--cyan); color: #000; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
+        .btn-agency { background: transparent; border: 2px solid var(--red); color: var(--red); }
+        .btn-agency:hover { background: var(--red); color: white; }
+
+        .admin-panel { background: #151515; margin: 20px; padding: 30px; border-radius: 20px; border: 1px dashed var(--cyan); display: none; box-shadow: 0 0 20px rgba(0,210,255,0.1); }
+        .admin-panel input, .admin-panel select { width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px; border: 1px solid #333; background: #000; color: white; }
+
+        /* الكروت */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; padding: 25px; }
+        .ad-card { background: var(--card); border-radius: 25px; overflow: hidden; position: relative; border: 1px solid #333; transition: 0.4s; }
+        .ad-card:hover { transform: translateY(-10px); border-color: var(--cyan); }
+        .duration-tag { position: absolute; top: 15px; left: 15px; background: var(--red); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; z-index: 10; }
+        .ad-card img { width: 100%; height: 260px; object-fit: cover; }
+        .card-body { padding: 20px; text-align: center; }
+        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1rem; }
     </style>
 </head>
 <body>
 
-<div class="social-sidebar">
-    <a href="https://wa.me/201027676344" class="wa"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.facebook.com/share/1A8tTYNpdP/" class="fb"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.linkedin.com/in/mostafa-alnems-02b569330" class="li"><i class="fab fa-linkedin-in"></i></a>
+<header>
+    <div class="logo-container">
+        <span class="trend-text">Trend</span>
+        <span class="adv-text">Adv</span>
+    </div>
+</header>
+
+<div class="promo-banner">
+    <div class="scrolling-text">
+        🚀 عرض خاص للوكالات: سجل الآن واحصل على 3 شهور مجاناً — ارفع لوحاتك وشاهد النتائج فوراً مع Trend Adv 🚀
+    </div>
 </div>
 
-<header><div class="logo"><span>T</span>rend Adv</div></header>
-
-<section class="intro-box">
-    <h2>ليه تختار ترند ادف؟ 🌍</h2>
-    <p>بوابتك الإعلانية الأولى في الوطن العربي. نربط الوكالات بالمعلنين عبر تكنولوجيا الـ GPS لضمان أعلى دقة وصول.</p>
-</section>
-
 <div class="main-controls">
-    <button class="btn-action" onclick="showMap()">📍 استكشف اللوحات القريبة</button>
-    <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 بوابة الوكالات (إضافة لوحة)</button>
+    <button class="btn-action" onclick="showMap()">📍 عرض الخريطة</button>
+    <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 سجل لوحتك (مجاناً)</button>
 </div>
 
 <div class="admin-panel" id="adminPanel">
-    <h3>إضافة لوحة إعلانية جديدة</h3>
-    <input type="text" id="siteName" placeholder="اسم الوكالة أو موقع اللوحة">
-    <input type="text" id="siteImg" placeholder="رابط صورة اللوحة (مباشر)">
-    <input type="text" id="siteGeo" placeholder="الإحداثيات">
-    <button class="book-btn" id="sendBtn" onclick="submitToSheet()">إرسال للمراجعة والإضافة</button>
+    <h3 style="color:var(--cyan)">إضافة لوحة إعلانية جديدة</h3>
+    <input type="text" id="siteName" placeholder="اسم الوكالة (العمود B)">
+    <input type="text" id="siteImg" placeholder="رابط صورة اللوحة (العمود C)">
+    <input type="text" id="siteGeo" placeholder="إحداثيات GPS (العمود D)">
+    
+    <label style="color:#888; font-size:0.8rem; margin-right:10px;">مدة الاشتراك (العمود E):</label>
+    <select id="siteDuration">
+        <option value="3 شهور مجاناً">3 شهور مجاناً (عرض الوكالات)</option>
+        <option value="6 شهور">6 شهور</option>
+        <option value="سنة واحدة">سنة واحدة</option>
+    </select>
+
+    <input type="text" id="adminNote" placeholder="ملاحظة الإدارة (العمود F)">
+    <input type="text" id="dropdownBackup" placeholder="تصنيف إضافي (العمود G)">
+    
+    <button class="book-btn" id="sendBtn" onclick="submitToSheet()">تأكيد وحفظ البيانات</button>
 </div>
 
-<div id="map"></div>
-<div class="gallery" id="adsGallery">
-    <p style="text-align:center; width:100%;">جاري مزامنة اللوحات...</p>
-</div>
+<div id="map" style="height: 400px; width: 90%; margin: 0 auto; border-radius: 20px; display: none;"></div>
+<div class="gallery" id="adsGallery"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzzg0j1idvFOUjbfUspAS9u2tRVVYDMT8QMonF0XM3eg_-q06eul6MjJuRviacAe9r4/exec";
-
-    // قائمة الروابط المباشرة التي أرسلتها (تستخدم كاحتياطي أو للعرض الافتراضي)
-    const backupImages = [
-        "https://i.ibb.co/qMJvnDNC/1000133864.png", "https://i.ibb.co/Kc8kwrtP/1000133863.png",
-        "https://i.ibb.co/84L1KGxk/1000133862.png", "https://i.ibb.co/5g51xgQj/1000133861.png",
-        "https://i.ibb.co/9HMpZwwq/1000133860.png", "https://i.ibb.co/fVtrRz2K/1000133859.png",
-        "https://i.ibb.co/R4s051YR/1000133858.png", "https://i.ibb.co/4whPdcyk/1000133857.png"
-    ];
+    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-O4PT3qyH5Ci0K6EsW/exec";
 
     async function loadAds() {
         const gal = document.getElementById('adsGallery');
         try {
             const res = await fetch(GOOGLE_URL);
             const data = await res.json();
-            
+            gal.innerHTML = "";
             if(data && data.length > 0) {
-                gal.innerHTML = "";
                 data.forEach(ad => {
-                    renderCard(ad.title, ad.img, ad.coords);
+                    gal.innerHTML += `
+                        <div class="ad-card">
+                            <div class="duration-tag">${ad.duration || '3 شهور مجاناً'}</div>
+                            <img src="${ad.img}" onerror="this.src='https://via.placeholder.com/400x250/111/ff0000?text=Trend+Adv'">
+                            <div class="card-body">
+                                <b style="color:var(--cyan); font-size:1.2rem;">${ad.title}</b>
+                                <p style="font-size:12px; color:#aaa; margin: 10px 0;">${ad.coords}</p>
+                                <p style="font-size:10px; color:var(--red);">${ad.adminNote || ''}</p>
+                                <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">سجل الآن مجاناً</button>
+                            </div>
+                        </div>`;
                 });
-            } else {
-                // إذا كان الجدول فارغاً، نعرض الصور التي أرسلتها أنت
-                loadBackupGallery();
             }
-        } catch (e) { 
-            loadBackupGallery();
-        }
-    }
-
-    function loadBackupGallery() {
-        const gal = document.getElementById('adsGallery');
-        gal.innerHTML = "";
-        backupImages.forEach((url, index) => {
-            renderCard(`موقع إعلاني مميز #${index + 1}`, url, "موقع استراتيجي");
-        });
-    }
-
-    function renderCard(title, img, coords) {
-        const gal = document.getElementById('adsGallery');
-        gal.innerHTML += `
-            <div class="ad-card">
-                <img src="${img}" onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv'">
-                <div class="card-body">
-                    <b style="color:var(--cyan)">${title}</b>
-                    <p style="font-size:11px; color:#888;">${coords || ''}</p>
-                    <button class="book-btn" style="margin-top:10px" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
-                </div>
-            </div>`;
+        } catch (e) { console.log("خطأ في التحميل"); }
     }
 
     async function submitToSheet() {
@@ -120,28 +135,22 @@
         const payload = {
             title: document.getElementById('siteName').value,
             img: document.getElementById('siteImg').value,
-            coords: document.getElementById('siteGeo').value
+            coords: document.getElementById('siteGeo').value,
+            duration: document.getElementById('siteDuration').value,
+            adminNote: document.getElementById('adminNote').value,
+            dropdownChoice: document.getElementById('dropdownBackup').value
         };
-        if(!payload.title || !payload.img) return alert("برجاء إدخال البيانات");
-        btn.innerText = "جاري الحفظ...";
-        try {
-            await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("تم إرسال لوحتك بنجاح!");
-            location.reload(); 
-        } catch (e) { alert("حدث خطأ"); }
-        btn.innerText = "إرسال للمراجعة والإضافة";
+        
+        if(!payload.title || !payload.img) return alert("الرجاء ملء الخانات الأساسية");
+        
+        btn.innerText = "جاري الحفظ في الشيت...";
+        await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+        alert("تم حفظ البيانات بنجاح في الأعمدة السبعة!");
+        location.reload();
     }
 
-    function toggleAdmin() {
-        const p = document.getElementById('adminPanel');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function showMap() {
-        document.getElementById('map').style.display = 'block';
-        var map = L.map('map').setView([30.04, 31.23], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    }
+    function toggleAdmin() { const p = document.getElementById('adminPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
+    function showMap() { document.getElementById('map').style.display = 'block'; var map = L.map('map').setView([30.04, 31.23], 11); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); setTimeout(() => map.invalidateSize(), 200); }
 
     window.onload = loadAds;
 </script>
