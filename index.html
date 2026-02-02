@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trend Adv - Professional Agency</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="theme-color" content="#ffffff">
     <style>
-        body { background-color: #1a1a1a; color: #ffffff; text-align: center; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; margin: 0; }
+        /* الخلفية بيضاء كما طلبت */
+        body { background-color: #ffffff; color: #1a1a1a; text-align: center; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; margin: 0; }
         
-        /* حاوية اللوجو المبتكر */
-        .logo-wrapper { position: relative; display: inline-block; margin-top: 40px; margin-bottom: 20px; }
+        /* حاوية اللوجو الاحترافي */
+        .logo-wrapper { position: relative; display: inline-block; margin-top: 50px; margin-bottom: 30px; }
         
-        /* حرف T المتغير الألوان */
+        /* حرف T بيغير ألوانه (تأثير الطباعة) */
         .dynamic-t {
-            font-size: 120px; font-weight: 900; font-family: 'Arial Black', sans-serif;
+            font-size: 130px; font-weight: 900; font-family: 'Arial Black', sans-serif;
             background: linear-gradient(270deg, #ff0000, #00d4ff, #ffee00, #ff00ea);
             background-size: 400% 400%;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: PrintingColors 5s ease infinite;
-            line-height: 0.9;
+            line-height: 0.8;
+            position: relative; z-index: 1;
         }
 
-        /* السهم المنحني الاحترافي (SVG) */
+        /* السهم المنحني الأخضر معدي من نص الحرف */
         .curved-arrow {
-            position: absolute; top: 10px; right: -30px; width: 100px; height: 100px;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.5));
-            animation: ArrowPulse 2s infinite ease-in-out;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px; height: 180px;
+            z-index: 2; /* يظهر فوق الحرف */
+            filter: drop-shadow(0 5px 15px rgba(0, 128, 0, 0.3));
+            animation: ArrowGrowth 3s infinite ease-in-out;
         }
 
         @keyframes PrintingColors {
@@ -35,29 +41,27 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes ArrowPulse {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-            50% { transform: scale(1.1) translate(5px, -10px); opacity: 1; }
-            100% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+        @keyframes ArrowGrowth {
+            0% { transform: translate(-55%, -45%) scale(0.95); opacity: 0.9; }
+            50% { transform: translate(-45%, -55%) scale(1.05); opacity: 1; }
+            100% { transform: translate(-55%, -45%) scale(0.95); opacity: 0.9; }
         }
 
-        .tagline { border-bottom: 2px solid #00d4ff; display: inline-block; margin-bottom: 30px; padding-bottom: 5px; font-size: 18px; color: #00d4ff; }
-        .tech-btn { display: inline-block; padding: 12px 25px; border: 2px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 30px; font-weight: bold; margin-bottom: 30px; transition: 0.3s; }
-        .tech-btn:hover { background: #00d4ff; color: #000; }
+        .tagline { border-bottom: 3px solid #00d4ff; display: inline-block; margin-bottom: 30px; padding-bottom: 5px; font-size: 22px; font-weight: bold; color: #333; }
+        .tech-btn { display: inline-block; padding: 15px 30px; background: #1a1a1a; color: #ffffff; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 40px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .tech-btn:hover { background: #00d4ff; color: #000; transform: scale(1.05); }
 
         /* معرض الصور */
-        .portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; padding: 0 10px; }
-        .work-card { background: #262626; border-radius: 15px; overflow: hidden; border: 1px solid #3d3d3d; transition: 0.4s; }
-        .work-card:hover { border-color: #00d4ff; transform: translateY(-8px); }
-        .work-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
-        .work-card p { padding: 12px; margin: 0; background: #333; color: #00d4ff; font-weight: bold; }
+        .portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .work-card { background: #f9f9f9; border-radius: 15px; overflow: hidden; border: 1px solid #eee; transition: 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .work-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .work-card img { width: 100%; height: 250px; object-fit: cover; }
+        .work-card p { padding: 15px; margin: 0; background: #fff; color: #00d4ff; font-weight: bold; border-top: 1px solid #eee; }
 
-        /* التواصل */
-        .contact-card { background: #262626; padding: 25px; border-radius: 20px; max-width: 450px; margin: 0 auto; border: 1px solid #00d4ff; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #444; background: #1a1a1a; color: #fff; box-sizing: border-box; }
-        .submit-btn { background: #00d4ff; color: #000; width: 100%; padding: 15px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; }
-        .social { margin-top: 40px; padding-bottom: 40px; }
-        .social a { color: #00d4ff; text-decoration: none; margin: 10px; border: 1px solid #00d4ff; padding: 10px 20px; border-radius: 10px; display: inline-block; }
+        /* نموذج التواصل */
+        .contact-card { background: #f4f4f4; padding: 30px; border-radius: 20px; max-width: 450px; margin: 0 auto; border: 2px solid #00d4ff; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ccc; background: #fff; box-sizing: border-box; }
+        .submit-btn { background: #00d4ff; color: #fff; width: 100%; padding: 15px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -65,20 +69,20 @@
     <div class="logo-wrapper">
         <div class="dynamic-t">T</div>
         <svg class="curved-arrow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 90C30 70 40 40 90 10" stroke="url(#paint0_linear)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M90 10L70 15M90 10L85 30" stroke="url(#paint0_linear)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 80C25 80 40 70 50 50C60 30 75 20 90 15" stroke="url(#arrow_grad)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M90 15L75 12M90 15L85 30" stroke="url(#arrow_grad)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
             <defs>
-                <linearGradient id="paint0_linear" x1="10" y1="90" x2="90" y2="10" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="white"/>
+                <linearGradient id="arrow_grad" x1="10" y1="80" x2="90" y2="15" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#ffffff"/>
                     <stop offset="1" stop-color="#00ff00"/>
                 </linearGradient>
             </defs>
         </svg>
     </div>
     <br>
-    <div class="tagline">Trend Adv | للخدمات الإعلانية والتقنية المتكاملة</div>
+    <div class="tagline">Trend Adv | إبداع لا يتوقف</div>
 
-    <div><a href="#form" class="tech-btn">🌐 طلب برمجة موقع أو تطبيق</a></div>
+    <div><a href="#form" class="tech-btn">🚀 اطلب مشروعك التقني الآن</a></div>
 
     <div class="portfolio">
         <div class="work-card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
@@ -87,38 +91,19 @@
         <div class="work-card"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
         <div class="work-card"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
         <div class="work-card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/whd9cXcv/12.jpg" alt="13"><p>مونتاج فيديو</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/RTn9n56C/13.jpg" alt="14"><p>موشن جرافيك</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/k2sBTN81/14.jpg" alt="15"><p>إعلانات طرق</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/SwWnCf4k/15.jpg" alt="16"><p>تنفيذ فعاليات</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
-        <div class="work-card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Adv Agency</p></div>
     </div>
 
     <div class="contact-card" id="form">
-        <h3>تواصل معنا الآن</h3>
+        <h3 style="margin-top:0">تواصل معنا</h3>
         <input type="text" id="cust-name" placeholder="الاسم">
-        <select id="cust-service">
-            <option value="إعلانات أوت دور">إعلانات أوت دور</option>
-            <option value="برمجة مواقع">برمجة مواقع</option>
-        </select>
         <textarea id="cust-msg" placeholder="تفاصيل مشروعك..." rows="3"></textarea>
-        <button class="submit-btn" onclick="sendWhatsApp()">إرسال عبر واتساب</button>
+        <button class="submit-btn" onclick="sendWhatsApp()">إرسال واتساب</button>
     </div>
 
     <script>
         function sendWhatsApp() {
             const name = document.getElementById('cust-name').value;
-            const service = document.getElementById('cust-service').value;
-            const message = `مرحباً Trend Adv، أنا ${name}. محتاج خدمة: ${service}`;
+            const message = `مرحباً Trend Adv، أنا ${name}، أرغب في الاستفسار عن خدماتكم.`;
             window.open(`https://wa.me/201027676344?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
