@@ -3,50 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | المنصة الإعلانية الأولى</title>
+    <title>Trend Adv | المنصة الإعلانية المتكاملة</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; }
-        body { background: var(--dark); color: white; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 150px; }
-        
-        /* لوجو جالاكسي Trend Adv */
-        header { text-align: center; padding: 35px 10px; background: #000; border-bottom: 2px solid #222; }
-        .logo { font-size: 3.5rem; font-weight: 900; }
-        .logo span { 
-            background: linear-gradient(120deg, #00d2ff, #9d50bb, #6e48aa, #00d2ff);
-            background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: galaxy 4s ease infinite;
-        }
-        @keyframes galaxy { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-
-        /* رصة السوشيال المظبوطة على اليسار */
-        .social-sidebar { position: fixed; left: 15px; top: 50%; transform: translateY(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 15px; }
-        .social-sidebar a { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 22px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; }
+        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; }
+        header { text-align: center; padding: 25px; background: #000; border-bottom: 2px solid #222; }
+        .logo span { background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3rem; font-weight: 900; animation: shine 3s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
+        .social-sidebar { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
+        .social-sidebar a { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 18px; box-shadow: 0 4px 10px #000; transition: 0.3s; }
         .wa { background: #25D366; } .fb { background: #1877F2; } .li { background: #0077b5; }
-        .social-sidebar a:hover { transform: scale(1.1); filter: brightness(1.2); }
-
-        /* السيرة الذاتية المزدوجة */
-        .intro-section { background: linear-gradient(145deg, #111, #1a1a1a); margin: 20px; padding: 30px; border-radius: 20px; border-right: 6px solid var(--cyan); }
-        .intro-section h1 { color: var(--cyan); font-size: 1.8rem; margin: 0 0 10px; }
-        .intro-section p { font-size: 1.1rem; color: #ccc; line-height: 1.6; }
-
-        /* الخريطة والـ GPS */
-        #map { height: 450px; width: 95%; margin: 20px auto; border-radius: 25px; border: 2px solid var(--cyan); display: none; }
-        .btn-gps { display: block; width: 90%; max-width: 500px; margin: 20px auto; background: var(--cyan); color: #000; border: none; padding: 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 25px rgba(0,210,255,0.3); }
-
-        /* معرض الـ 23 صورة (بدون تكرار) */
-        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; padding: 20px; }
-        .ad-card { background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid #222; position: relative; transition: 0.4s; }
-        .ad-card:hover { transform: translateY(-10px); border-color: var(--cyan); }
-        .ad-card img { width: 100%; height: 260px; object-fit: cover; background: #222; }
-        .ad-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: var(--cyan); padding: 5px 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; }
-        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 15px; font-weight: 800; cursor: pointer; }
-
-        /* شريط الشركات */
-        .sticky-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.95); border-top: 2px solid var(--cyan); z-index: 1000; }
-        .footer-banner { display: flex; align-items: center; justify-content: space-around; padding: 12px; }
-        .footer-banner img { height: 30px; background: white; border-radius: 4px; padding: 2px; }
+        .intro-box { background: #111; margin: 15px; padding: 20px; border-radius: 15px; border-right: 5px solid var(--cyan); }
+        .main-controls { display: flex; justify-content: center; gap: 10px; padding: 10px; flex-wrap: wrap; }
+        .btn-action { background: var(--cyan); color: #000; border: none; padding: 14px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+        .btn-agency { background: transparent; border: 1px solid var(--purple); color: var(--purple); }
+        .admin-panel { background: #1a1a1a; margin: 15px; padding: 20px; border-radius: 15px; border: 1px dashed var(--cyan); display: none; }
+        .admin-panel input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
+        #map { height: 400px; width: 95%; margin: 20px auto; border-radius: 20px; border: 2px solid var(--cyan); display: none; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 15px; }
+        .ad-card { background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
+        .ad-card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-body { padding: 15px; text-align: center; }
+        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -59,65 +39,111 @@
 
 <header><div class="logo"><span>T</span>rend Adv</div></header>
 
-<section class="intro-section">
-    <h1>أول منصة خريطة إعلانية في الوطن العربي 🌍</h1>
-    <p>Trend Adv: الحل الذكي لربط وكالات الدعاية بالمعلنين عبر تكنولوجيا الـ GPS. اعرض مواقعك أو احجز حملتك بضغطة واحدة.</p>
+<section class="intro-box">
+    <h2>ليه تختار ترند ادف؟ 🌍</h2>
+    <p>بوابتك الإعلانية الأولى في الوطن العربي. نربط الوكالات بالمعلنين عبر تكنولوجيا الـ GPS لضمان أعلى دقة وصول.</p>
 </section>
 
-<button class="btn-gps" onclick="initGPS()">📍 استكشف المواقع حولك (GPS)</button>
+<div class="main-controls">
+    <button class="btn-action" onclick="showMap()">📍 استكشف اللوحات القريبة</button>
+    <button class="btn-action btn-agency" onclick="toggleAdmin()">🏢 بوابة الوكالات (إضافة لوحة)</button>
+</div>
+
+<div class="admin-panel" id="adminPanel">
+    <h3>إضافة لوحة إعلانية جديدة</h3>
+    <input type="text" id="siteName" placeholder="اسم الوكالة أو موقع اللوحة">
+    <input type="text" id="siteImg" placeholder="رابط صورة اللوحة (مباشر)">
+    <input type="text" id="siteGeo" placeholder="الإحداثيات">
+    <button class="book-btn" id="sendBtn" onclick="submitToSheet()">إرسال للمراجعة والإضافة</button>
+</div>
+
 <div id="map"></div>
-
-<div class="ads-grid" id="mainGallery"></div>
-
-<div class="sticky-footer">
-    <div class="footer-banner">
-        <img src="https://logowik.com/content/uploads/images/almarai-company8003.jpg">
-        <img src="https://logowik.com/content/uploads/images/huawei-new-20205801.jpg">
-    </div>
+<div class="gallery" id="adsGallery">
+    <p style="text-align:center; width:100%;">جاري مزامنة اللوحات...</p>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // روابط الصور الـ 19 اللي بعتها (تم تحويلها لروابط مباشرة)
-    const rawLinks = [
+    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzzg0j1idvFOUjbfUspAS9u2tRVVYDMT8QMonF0XM3eg_-q06eul6MjJuRviacAe9r4/exec";
+
+    // قائمة الروابط المباشرة التي أرسلتها (تستخدم كاحتياطي أو للعرض الافتراضي)
+    const backupImages = [
         "https://i.ibb.co/qMJvnDNC/1000133864.png", "https://i.ibb.co/Kc8kwrtP/1000133863.png",
         "https://i.ibb.co/84L1KGxk/1000133862.png", "https://i.ibb.co/5g51xgQj/1000133861.png",
         "https://i.ibb.co/9HMpZwwq/1000133860.png", "https://i.ibb.co/fVtrRz2K/1000133859.png",
-        "https://i.ibb.co/R4s051YR/1000133858.png", "https://i.ibb.co/4whPdcyk/1000133857.png",
-        "https://i.ibb.co/Kp0bqwqw/1000133856.png", "https://i.ibb.co/XfvcHC0h/1000133855.png",
-        "https://i.ibb.co/ZRVxdpY3/1000133854.png", "https://i.ibb.co/LHhb2J4/1000133853.png",
-        "https://i.ibb.co/9k64jkV0/1000133852.png", "https://i.ibb.co/mCJfJGD4/1000133851.png",
-        "https://i.ibb.co/nMtMK9C4/1000133850.png", "https://i.ibb.co/k2M5vp4K/1000133849.png",
-        "https://i.ibb.co/Hp7mtrR0/1000133848.png", "https://i.ibb.co/f6bTxfY/1000133847.png",
-        "https://i.ibb.co/fz9RN4ff/1000133846.png"
+        "https://i.ibb.co/R4s051YR/1000133858.png", "https://i.ibb.co/4whPdcyk/1000133857.png"
     ];
 
-    const gallery = document.getElementById('mainGallery');
-    // توليد 23 كارت (باستخدام الـ 19 صورة وتكرار 4 لضمان العدد)
-    for (let i = 1; i <= 23; i++) {
-        let currentImg = rawLinks[(i-1) % rawLinks.length].replace("ibb.co", "i.ibb.co") + ".png";
-        gallery.innerHTML += `
+    async function loadAds() {
+        const gal = document.getElementById('adsGallery');
+        try {
+            const res = await fetch(GOOGLE_URL);
+            const data = await res.json();
+            
+            if(data && data.length > 0) {
+                gal.innerHTML = "";
+                data.forEach(ad => {
+                    renderCard(ad.title, ad.img, ad.coords);
+                });
+            } else {
+                // إذا كان الجدول فارغاً، نعرض الصور التي أرسلتها أنت
+                loadBackupGallery();
+            }
+        } catch (e) { 
+            loadBackupGallery();
+        }
+    }
+
+    function loadBackupGallery() {
+        const gal = document.getElementById('adsGallery');
+        gal.innerHTML = "";
+        backupImages.forEach((url, index) => {
+            renderCard(`موقع إعلاني مميز #${index + 1}`, url, "موقع استراتيجي");
+        });
+    }
+
+    function renderCard(title, img, coords) {
+        const gal = document.getElementById('adsGallery');
+        gal.innerHTML += `
             <div class="ad-card">
-                <div class="ad-tag">👁️ ${1200 + (i*30)} مشاهدة</div>
-                <img src="${currentImg}" onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv+Site'" alt="Ad">
-                <div style="padding:15px;">
-                    <b style="color:var(--cyan);">موقع إعلاني مميز #${i}</b>
-                    <button class="book-btn" style="margin-top:10px;" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
+                <img src="${img}" onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv'">
+                <div class="card-body">
+                    <b style="color:var(--cyan)">${title}</b>
+                    <p style="font-size:11px; color:#888;">${coords || ''}</p>
+                    <button class="book-btn" style="margin-top:10px" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
                 </div>
             </div>`;
     }
 
-    function initGPS() {
-        document.getElementById('map').style.display = 'block';
-        var map = L.map('map').setView([30.0444, 31.2357], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                map.setView([p.coords.latitude, p.coords.longitude], 13);
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup("أنت هنا").openPopup();
-            });
-        }
+    async function submitToSheet() {
+        const btn = document.getElementById('sendBtn');
+        const payload = {
+            title: document.getElementById('siteName').value,
+            img: document.getElementById('siteImg').value,
+            coords: document.getElementById('siteGeo').value
+        };
+        if(!payload.title || !payload.img) return alert("برجاء إدخال البيانات");
+        btn.innerText = "جاري الحفظ...";
+        try {
+            await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+            alert("تم إرسال لوحتك بنجاح!");
+            location.reload(); 
+        } catch (e) { alert("حدث خطأ"); }
+        btn.innerText = "إرسال للمراجعة والإضافة";
     }
+
+    function toggleAdmin() {
+        const p = document.getElementById('adminPanel');
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function showMap() {
+        document.getElementById('map').style.display = 'block';
+        var map = L.map('map').setView([30.04, 31.23], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    }
+
+    window.onload = loadAds;
 </script>
 </body>
 </html>
