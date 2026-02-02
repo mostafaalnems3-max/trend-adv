@@ -3,52 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | Professional</title>
+    <title>Trend Adv | Complete Edition</title>
     <style>
-        body { background-color: #111111; color: #ffffff; text-align: center; font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; text-align: center; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         
-        /* الهيدر المطلوب */
-        .header-main { padding: 40px 20px; }
-        .brand-logo { font-size: 60px; font-weight: bold; margin: 0; }
-        .t-red { color: #ff0000; }
-        .text-cyan { color: #00adef; }
-        .sub-title { font-size: 20px; margin-top: 10px; color: #eee; }
-        .line-decorator { width: 250px; height: 3px; background: #00adef; margin: 15px auto; }
-
-        /* زر البرمجة */
-        .dev-btn { 
-            display: inline-block; border: 2px solid #00adef; color: #00adef; 
-            padding: 12px 30px; border-radius: 50px; text-decoration: none; 
-            font-weight: bold; font-size: 18px; margin: 20px 0;
+        /* تأثير حرف T المتحرك */
+        @keyframes colorShift {
+            0% { color: #ff0000; }
+            33% { color: #00adef; }
+            66% { color: #00ffcc; }
+            100% { color: #ff0000; }
         }
 
-        .section-title { color: #00adef; font-size: 28px; margin: 40px 0 20px; font-weight: bold; }
+        .header-section { padding: 50px 20px; }
+        .moving-t { 
+            font-size: 150px; font-weight: 900; 
+            animation: colorShift 4s infinite linear; 
+            display: inline-block; margin: 0;
+        }
 
-        /* الألبوم الكامل (23 صورة) */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333; }
+        /* معرض الصور */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 20px; }
+        .card { background: #111; border: 1px solid #333; border-radius: 12px; overflow: hidden; }
         .card img { width: 100%; height: 240px; object-fit: cover; }
-        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #222; }
+        .card p { padding: 10px; color: #00adef; font-weight: bold; }
 
-        /* الأكشن تحت خالص */
-        .footer-cta { margin: 50px 0; padding-bottom: 60px; }
-        .campaign-link { 
-            background: #00adef; color: #fff; padding: 15px 40px; border-radius: 50px; 
-            font-size: 20px; font-weight: bold; text-decoration: none; display: inline-block;
-            box-shadow: 0 4px 15px rgba(0, 173, 239, 0.3);
+        /* منطقة الزراير (الأكشن) */
+        .buttons-area { margin: 50px 0; padding-bottom: 100px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        
+        .main-action-btn { 
+            background: #00adef; color: #fff; padding: 18px 50px; border-radius: 50px; 
+            font-size: 22px; font-weight: bold; text-decoration: none; 
+            box-shadow: 0 5px 20px rgba(0, 173, 239, 0.4); width: 80%; max-width: 400px;
         }
+
+        .social-row { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        .social-btn { 
+            padding: 12px 30px; border-radius: 50px; text-decoration: none; 
+            font-weight: bold; font-size: 16px; flex: 1; max-width: 200px;
+        }
+        .whatsapp { background: #25d366; color: #fff; }
+        .facebook { background: #1877f2; color: #fff; }
     </style>
 </head>
 <body>
 
-    <div class="header-main">
-        <h1 class="brand-logo"><span class="t-red">T</span>rend <span class="text-cyan">Adv</span></h1>
-        <div class="sub-title">للخدمات الإعلانية والتقنية المتكاملة</div>
-        <div class="line-decorator"></div>
-        
-        <a href="#" class="dev-btn">🌐 طلب برمجة موقع أو تطبيق</a>
-        
-        <div class="section-title">سابقة أعمالنا الاحترافية</div>
+    <div class="header-section">
+        <div class="moving-t">T</div>
+        <h2 style="margin-top: 10px;">Trend Adv | Professional</h2>
+        <p style="color: #00adef;">سابقة أعمالنا الاحترافية</p>
     </div>
 
     <div class="portfolio-grid">
@@ -59,7 +62,7 @@
         <div class="card"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
         <div class="card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
         <div class="card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
-        <div class="card"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
+        <div class="card"><img src="https://i.ibb.co/8DckY7Jc/8.jpg" alt="8"><p>هويات بصرية</p></div>
         <div class="card"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
         <div class="card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
         <div class="card"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
@@ -71,14 +74,19 @@
         <div class="card"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
         <div class="card"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
         <div class="card"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
-        <div class="card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Adv</p></div>
-        <div class="card"><img src="https://i.ibb.co/1000134354/21.png" alt="21"><p>هوية بصرية</p></div>
-        <div class="card"><img src="https://i.ibb.co/1000134351/22.png" alt="22"><p>مشاريع الطرق</p></div>
-        <div class="card"><img src="https://i.ibb.co/1000134353/23.png" alt="23"><p>تنفيذ واجهات</p></div>
+        <div class="card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Agency</p></div>
+        <div class="card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="21"><p>هوية بصرية</p></div>
+        <div class="card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="22"><p>مشاريع الطرق</p></div>
+        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="23"><p>تنفيذ واجهات</p></div>
     </div>
 
-    <div class="footer-cta">
-        <a href="https://wa.me/201027676344" class="campaign-link">انقر هنا لبدء حملتك الاعلانية</a>
+    <div class="buttons-area">
+        <a href="https://wa.me/201027676344" class="main-action-btn">انقر هنا لبدء حملتك الاعلانية</a>
+        
+        <div class="social-row">
+            <a href="https://wa.me/201027676344" class="social-btn whatsapp">إرسال واتساب</a>
+            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="social-btn facebook">Facebook</a>
+        </div>
     </div>
 
 </body>
