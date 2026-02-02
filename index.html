@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | Official</title>
+    <title>Trend Adv | Official Site</title>
     <style>
-        body { background-color: #0b0b0b; color: #ffffff; text-align: center; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        body { background-color: #0b0b0b; color: #ffffff; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* تأثير الألوان لحرف T فقط */
+        /* تأثير الألوان المشتعلة لحرف T */
         @keyframes colorShift {
             0% { color: #ff0000; }
             33% { color: #00adef; }
@@ -15,40 +16,77 @@
             100% { color: #ff0000; }
         }
 
-        .header-section { padding: 40px 20px; }
+        .header-section { padding: 50px 20px 20px; }
         
-        /* تجميع الكلمة في سطر واحد عشان الحرف ميهربش أبداً */
-        .brand-logo { font-size: 55px; font-weight: bold; display: flex; justify-content: center; align-items: baseline; gap: 0; margin-bottom: 5px; }
-        .moving-t { animation: colorShift 3s infinite linear; }
+        /* الحل النهائي لمشكلة حرف T: إجبار اتجاه الكتابة من اليسار لليمين للوجو فقط */
+        .brand-logo { 
+            font-size: 60px; 
+            font-weight: bold; 
+            display: flex; 
+            justify-content: center; 
+            align-items: baseline; 
+            direction: ltr !important; /* لضمان بقاء T على اليسار */
+            margin-bottom: 5px;
+        }
+        .moving-t { animation: colorShift 3s infinite linear; display: inline-block; }
         .cyan-text { color: #00adef; }
 
-        /* النص اللي طلبته متمسحش */
-        .tagline { font-size: 20px; color: #ffffff; margin-top: 5px; font-weight: normal; }
-        .blue-divider { width: 220px; height: 3px; background: #00adef; margin: 15px auto; }
+        .tagline { font-size: 22px; color: #ffffff; margin-top: 5px; font-weight: 300; }
+        .blue-divider { width: 250px; height: 3px; background: #00adef; margin: 20px auto; }
 
         .dev-button { 
             display: inline-block; border: 2px solid #00adef; color: #00adef; 
-            padding: 10px 30px; border-radius: 50px; text-decoration: none; 
-            font-weight: bold; margin: 20px 0;
+            padding: 12px 35px; border-radius: 50px; text-decoration: none; 
+            font-weight: bold; font-size: 18px; margin: 20px 0; transition: 0.3s;
         }
+        .dev-button:hover { background: #00adef; color: #fff; }
 
-        /* شبكة الأعمال - الـ 23 صورة */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
-        .card img { width: 100%; height: 240px; object-fit: cover; }
-        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #1f1f1f; }
+        .section-title { color: #00adef; font-size: 32px; margin: 40px 0 30px; font-weight: bold; text-shadow: 0 0 10px rgba(0,173,239,0.3); }
 
-        /* الزراير السفلية كاملة */
-        .footer-btns { margin: 50px 0; padding-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        /* شبكة الصور الاحترافية */
+        .portfolio-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 25px; 
+            padding: 20px 40px; 
+            max-width: 1400px; 
+            margin: 0 auto;
+        }
+        .card { 
+            background: #1a1a1a; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); border-color: #00adef; }
+        .card img { width: 100%; height: 250px; object-fit: cover; filter: brightness(0.9); transition: 0.3s; }
+        .card:hover img { filter: brightness(1.1); }
+        .card p { padding: 15px; font-weight: bold; color: #00adef; margin: 0; background: #1f1f1f; font-size: 18px; }
+
+        /* أزرار التواصل في النهاية */
+        .footer-btns { margin: 60px 0 100px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .cta-btn { 
-            background: #00adef; color: #fff; padding: 18px 50px; border-radius: 50px; 
-            font-size: 22px; font-weight: bold; text-decoration: none; width: 85%; max-width: 450px;
-            box-shadow: 0 5px 20px rgba(0, 173, 239, 0.4);
+            background: #00adef; color: #fff; padding: 20px 60px; border-radius: 50px; 
+            font-size: 24px; font-weight: bold; text-decoration: none; width: 90%; max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 173, 239, 0.4); transition: 0.3s;
         }
-        .social-links { display: flex; gap: 15px; width: 85%; max-width: 450px; }
-        .social-links a { flex: 1; padding: 12px; border-radius: 50px; text-decoration: none; font-weight: bold; color: #fff; text-align: center; }
+        .cta-btn:hover { transform: scale(1.05); background: #0099d1; }
+        
+        .social-links { display: flex; gap: 20px; width: 90%; max-width: 500px; }
+        .social-links a { 
+            flex: 1; padding: 15px; border-radius: 50px; text-decoration: none; 
+            font-weight: bold; color: #fff; text-align: center; font-size: 18px; transition: 0.3s;
+        }
         .wa-bg { background: #25d366; }
         .fb-bg { background: #1877f2; }
+        .social-links a:hover { opacity: 0.8; transform: translateY(-3px); }
+
+        @media (max-width: 600px) {
+            .brand-logo { font-size: 45px; }
+            .tagline { font-size: 18px; }
+            .portfolio-grid { padding: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -62,7 +100,7 @@
         <div class="blue-divider"></div>
         
         <a href="https://wa.me/201027676344" class="dev-button">🌐 طلب برمجة موقع أو تطبيق</a>
-        <h2 style="color: #00adef; margin-top: 30px;">سابقة أعمالنا الاحترافية</h2>
+        <div class="section-title">سابقة أعمالنا الاحترافية</div>
     </div>
 
     <div class="portfolio-grid">
@@ -74,7 +112,7 @@
         <div class="card"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
         <div class="card"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
         <div class="card"><img src="https://i.ibb.co/8DckY7Jc/8.jpg" alt="8"><p>هويات بصرية</p></div>
-        <div class="card"><img src="https://i.ibb.co/bMs0Bnk5/9.jpg" alt="9"><p>أعمال فنية</p></div>
+        <div class="card"><img src="https://i.ibb.co/bMs0Bnk5/9.jpg" alt="9"><p>أعمال دعائية</p></div>
         <div class="card"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
         <div class="card"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
         <div class="card"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
@@ -88,11 +126,11 @@
         <div class="card"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Agency</p></div>
         <div class="card"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="21"><p>هوية بصرية</p></div>
         <div class="card"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="22"><p>مشاريع الطرق</p></div>
-        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="23"><p>تنفيذ واجهات</p></div>
+        <div class="card"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="23"><p>واجهات إبداعية</p></div>
     </div>
 
     <div class="footer-btns">
-        <a href="https://wa.me/201027676344" class="cta-btn">انقر هنا لبدء حملتك الاعلانية</a>
+        <a href="https://wa.me/201027676344" class="cta-btn">انقر هنا لبدء حملتك الإعلانية</a>
         <div class="social-links">
             <a href="https://wa.me/201027676344" class="wa-bg">واتساب</a>
             <a href="https://www.facebook.com/profile.php?id=61556673621455" class="fb-bg">فيسبوك</a>
