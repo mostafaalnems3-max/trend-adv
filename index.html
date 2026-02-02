@@ -3,95 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | الشراكة الإعلانية</title>
+    <title>Trend Adv | المنصة الإعلانية المتكاملة</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
-        :root { --primary: #ffcc00; --dark: #111; --white: #ffffff; }
-        body { background-color: var(--dark); color: var(--white); font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; padding-bottom: 150px; }
+        :root { --primary: #ffcc00; --dark: #111; --blue: #0055a5; --red: #cf0a2c; }
+        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 140px; }
         
-        /* اللوجو وحرف T اللي بيلمع */
-        header { text-align: center; padding: 25px; background: #000; border-bottom: 1px solid #333; }
-        .logo { font-size: 2.8rem; font-weight: bold; }
-        .logo span { color: var(--primary); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        /* أزرار السوشيال ميديا الجانبية */
+        .social-sidebar { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+        .social-sidebar a { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: 0.3s; }
+        .fb { background: #1877F2; } .wa { background: #25D366; }
+        .social-sidebar a:hover { transform: scale(1.1); }
 
-        /* قسم الشراكة الاحترافية الجديد */
-        .partnership-section {
-            background: linear-gradient(45deg, #1a1a1a, #000);
-            margin: 20px; padding: 20px; border-radius: 15px;
-            border: 1px solid var(--primary); text-align: center;
-        }
-        .partnership-tag { background: var(--primary); color: #000; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        /* اللوجو */
+        header { text-align: center; padding: 30px 10px; background: #000; border-bottom: 2px solid #222; }
+        .logo { font-size: 3rem; font-weight: bold; }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px rgba(255,204,0,0.5); }
 
-        /* الأزرار والإعلانات الثابتة */
-        .ads-container { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 9999; }
-        .ad-banner { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: rgba(0,0,0,0.9); border-top: 1px solid var(--primary); }
-        .ad-banner img { height: 35px; }
-        .ad-banner a { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem; }
+        /* صندوق الشراكة */
+        .partnership-card { background: linear-gradient(145deg, #1a1a1a, #000); margin: 20px; padding: 25px; border-radius: 15px; border: 2px solid var(--primary); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .partnership-card h2 { color: var(--primary); margin-top: 0; }
+        .partnership-card p { font-size: 0.95rem; line-height: 1.6; color: #ccc; }
 
-        .geo-btn { display: block; width: 90%; max-width: 400px; margin: 20px auto; background: var(--primary); color: #000; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        #map { height: 300px; width: 95%; margin: 15px auto; border-radius: 15px; display: none; border: 2px solid #444; }
+        /* أزرار التحكم والخريطة */
+        .geo-btn { display: block; width: 90%; max-width: 450px; margin: 20px auto; background: var(--primary); border: none; padding: 18px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 5px 20px rgba(255,204,0,0.3); transition: 0.3s; }
+        .geo-btn:hover { background: #fff; transform: translateY(-2px); }
+        #map { height: 400px; width: 95%; margin: 15px auto; border-radius: 20px; display: none; border: 3px solid #333; }
 
-        /* معرض الصور الـ 23 */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .ad-card { background: #222; border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
-        .ad-card img { width: 100%; height: 220px; object-fit: cover; }
-        .views-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; color: var(--primary); }
+        /* معرض الصور */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+        .ad-card { background: #1a1a1a; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid #333; transition: 0.3s; }
+        .ad-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .ad-card img { width: 100%; height: 230px; object-fit: cover; }
+        .ad-stats { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: var(--primary); padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; }
+
+        /* الإعلانات الثابتة الممولة */
+        .sticky-footer { position: fixed; bottom: 0; width: 100%; z-index: 999; display: flex; flex-direction: column; }
+        .ad-banner { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; font-size: 0.9rem; }
+        .ad-banner img { height: 35px; width: 100px; object-fit: contain; border-radius: 5px; }
+        .ad-banner a { text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo"><span>T</span>rend Adv</div>
-</header>
+<div class="social-sidebar">
+    <a href="https://www.facebook.com/YOUR_PAGE" class="fb"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://wa.me/201027676344" class="wa"><i class="fab fa-whatsapp"></i></a>
+</div>
 
-<section class="partnership-section">
-    <span class="partnership-tag">عرض انضمام الوكالات</span>
-    <h2 style="color: var(--primary);">أعلن معنا مجاناً لمدة 3 شهور!</h2>
-    <p>بوابتك التكنولوجية لعرض مواقعك الإعلانية بنظام GPS. انضم الآن واستفد من فترة السماح المجانية قبل بدء رسوم الخدمة الدورية.</p>
-    <a href="https://wa.me/201027676344?text=أريد_تسجيل_وكالتي_في_فترة_السماح" style="color: white; text-decoration: underline;">سجل وكالتك الآن مجاناً 🤝</a>
-</section>
+<header><div class="logo"><span>T</span>rend Adv</div></header>
 
-<button class="geo-btn" onclick="startMap()">📍 ابحث عن أقرب موقع إعلاني متاح</button>
+<div class="partnership-card">
+    <h2>شراكة احترافية للوكالات 🤝</h2>
+    <p>انضم إلينا الآن واعترض مواقعك الإعلانية بنظام GPS مجاناً لأول 3 شهور.<br>استفد من فترة السماح قبل تطبيق رسوم الخدمة الدورية.</p>
+    <a href="https://wa.me/201027676344?text=أريد_تسجيل_وكالتي" style="color: var(--primary); font-weight: bold; text-decoration: underline;">سجل وكالتك اليوم مجاناً</a>
+</div>
+
+<button class="geo-btn" onclick="showMap()">📍 ابحث عن أقرب موقع إعلاني متاح (GPS)</button>
 <div id="map"></div>
 
-<div class="gallery">
-    <div class="ad-card">
-        <div class="views-tag">👁️ 1,450 مشاهدة</div>
-        <img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="Trend Adv">
-        <div style="padding: 10px;"><b>موقع: طريق السويس</b></div>
-    </div>
-    </div>
+<div class="gallery" id="imageGallery"></div>
 
-<div class="ads-container">
-    <div class="ad-banner">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3e/Almarai_Logo.svg/1200px-Almarai_Logo.svg.png" alt="Almarai">
-        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_المراعي">المراعي: شراكة استراتيجية. متاح للحجز 🔗</a>
+<div class="sticky-footer">
+    <div class="ad-banner" style="background: #f8f9fa; border-top: 3px solid var(--blue);">
+        <img src="https://logowik.com/content/uploads/images/almarai-company8003.jpg" alt="Almarai">
+        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_المراعي" style="color: var(--blue);">المراعي: شراكة استراتيجية. متاح للحجز الآن 🔗</a>
+        <span onclick="this.parentElement.style.display='none'" style="color:#888; cursor:pointer;">✕</span>
     </div>
-    <div class="ad-banner" style="background: #000;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Huawei_logo.svg/1200px-Huawei_logo.svg.png" alt="Huawei">
-        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_هواوي">هواوي: التكنولوجيا في خدمتك. متاح للعرض 🚀</a>
+    <div class="ad-banner" style="background: #ffffff; border-top: 3px solid var(--red);">
+        <img src="https://logowik.com/content/uploads/images/huawei-new-20205801.jpg" alt="Huawei">
+        <a href="https://wa.me/201027676344?text=استفسار_عن_إعلان_هواوي" style="color: var(--red);">هواوي: التكنولوجيا في خدمتك. متاح للعرض 🚀</a>
+        <span onclick="this.parentElement.style.display='none'" style="color:#888; cursor:pointer;">✕</span>
     </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    function startMap() {
-        const mapDiv = document.getElementById('map');
-        mapDiv.style.display = 'block';
-        let map = L.map('map').setView([30.0444, 31.2357], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                const lat = p.coords.latitude;
-                const lng = p.coords.longitude;
-                map.setView([lat, lng], 13);
-                L.marker([lat, lng]).addTo(map).bindPopup("أنت هنا").openPopup();
-                // إضافة نقاط افتراضية للوكالات
-                L.marker([lat+0.01, lng+0.01]).addTo(map).bindPopup("موقع إعلاني متاح (فترة سماح)");
+    // توزيع النقط الجغرافية للإعلانات
+    const adLocations = [
+        { lat: 30.0444, lng: 31.2357, title: "موقع وسط البلد - شاشة عملاقة" },
+        { lat: 30.0074, lng: 31.4472, title: "التجمع الخامس - لوحة يوني بول" },
+        { lat: 30.0197, lng: 30.9733, title: "الشيخ زايد - محور 26 يوليو" },
+        { lat: 30.0585, lng: 31.3361, title: "مدينة نصر - طريق النصر" },
+        { lat: 29.9765, lng: 31.2859, title: "المعادي - الطريق الدائري" }
+    ];
+
+    // عرض الـ 23 صورة تلقائياً
+    const gallery = document.getElementById('imageGallery');
+    for(let i=1; i<=23; i++) {
+        gallery.innerHTML += `
+            <div class="ad-card">
+                <div class="ad-stats">👁️ ${Math.floor(Math.random()*2500)+400} مشاهدة</div>
+                <img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="Trend Adv">
+                <div style="padding:15px;">
+                    <b style="font-size:1.1rem; color:var(--primary);">موقع إعلاني استراتيجي #${i}</b>
+                    <p style="margin:5px 0 0; font-size:0.85rem; color:#888;">متاح للحجز خلال فترة السماح</p>
+                </div>
+            </div>
+        `;
+    }
+
+    let map;
+    function showMap() {
+        document.getElementById('map').style.display = 'block';
+        if (!map) {
+            map = L.map('map').setView([30.0444, 31.2357], 10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+            // إضافة نقط الإعلانات
+            adLocations.forEach(loc => {
+                L.marker([loc.lat, loc.lng]).addTo(map)
+                .bindPopup(`<b>${loc.title}</b><br>احجز موقعك الآن مجاناً`);
             });
         }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                const userLoc = [p.coords.latitude, p.coords.longitude];
+                map.setView(userLoc, 13);
+                L.circle(userLoc, {radius: 800, color: 'yellow'}).addTo(map).bindPopup("أنت هنا").openPopup();
+            });
+        }
+        window.scrollTo(0, document.getElementById('map').offsetTop - 50);
     }
 </script>
 
