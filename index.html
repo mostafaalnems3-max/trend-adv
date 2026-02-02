@@ -7,22 +7,32 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; }
+        :root { --cyan: #00d2ff; --dark: #0a0a0a; --card: #161616; --purple: #9d50bb; --red: #ff0000; }
         body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; overflow-x: hidden; }
         
         header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 2px solid #222; }
-        .logo { display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .t-brand { 
-            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            font-size: 4.5rem; font-weight: 900; animation: shine 3s linear infinite;
+        
+        /* التعديل هنا: جعل Trend تتلون بالكامل و Adv باللون الأحمر */
+        .logo { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .trend-colored { 
+            background: linear-gradient(90deg, var(--cyan), var(--purple), #ff00ff, var(--cyan)); 
+            background-size: 200% auto;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            animation: flowText 3s linear infinite;
         }
-        .brand-name { font-size: 2.8rem; font-weight: 700; color: white; }
+        .adv-red { 
+            font-size: 4.5rem; 
+            font-weight: 800; 
+            color: var(--red); 
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+        }
 
-        @keyframes shine { 
-            0% { filter: drop-shadow(0 0 5px var(--cyan)); }
-            50% { filter: drop-shadow(0 0 15px var(--purple)); }
-            100% { filter: drop-shadow(0 0 5px var(--cyan)); }
+        @keyframes flowText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .promo-banner {
@@ -71,7 +81,11 @@
 </div>
 
 <header>
-    <div class="logo"><span class="t-brand">T</span><span class="brand-name">rend Adv</span></div>
+    <div class="logo">
+        <span class="trend-colored">Trend</span>
+        <span class="adv-red">Adv</span>
+    </div>
+    <div style="color: #888; margin-top: 10px; font-size: 1.1rem;">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
 </header>
 
 <div class="promo-banner">
@@ -160,7 +174,7 @@
             title: document.getElementById('siteName').value,
             img: document.getElementById('siteImg').value,
             coords: document.getElementById('siteGeo').value,
-            duration: document.getElementById('siteDuration').value // الخانة الجديدة
+            duration: document.getElementById('siteDuration').value
         };
         if(!payload.title || !payload.img) return alert("برجاء إكمال البيانات");
         btn.innerText = "جاري الحفظ...";
