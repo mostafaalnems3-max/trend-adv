@@ -5,74 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trend Adv | Professional</title>
     <style>
-        body { background-color: #ffffff; color: #333; text-align: center; font-family: sans-serif; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; text-align: center; font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
         
-        /* تصميم اللوجو طبق الأصل من الصورة */
-        .logo-container { position: relative; display: inline-block; margin-top: 50px; padding: 20px; }
-        
-        /* حرف T الأسود الضخم */
-        .main-t { font-size: 180px; font-weight: 900; color: #000; line-height: 0.8; margin: 0; }
-
-        /* حروف re المتدرجة تحت الـ T */
-        .re-letters { 
-            font-size: 120px; font-weight: 900; position: absolute; left: -40px; bottom: 10px;
-            background: linear-gradient(to right, #ff0000, #ff00ff, #00ccff);
+        /* الهيدر وحرف T المتدرج بدون سهم */
+        .header { padding: 50px 20px; }
+        .logo-t { 
+            font-size: 160px; font-weight: 900; 
+            background: linear-gradient(45deg, #00adef, #ff00ff, #00ffcc);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            z-index: 2;
+            display: inline-block; line-height: 0.8;
         }
+        .brand-title { font-size: 24px; font-weight: bold; margin-top: 20px; }
 
-        /* السهم الأخضر المنحني كما في الصورة */
-        .green-curve-arrow {
-            position: absolute; bottom: 20px; left: -20px; width: 300px; z-index: 3;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        /* معرض الأعمال - الـ 21 صورة كاملة */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 20px; }
+        .item { background: #111; border: 1px solid #333; border-radius: 12px; overflow: hidden; }
+        .item img { width: 100%; height: 230px; object-fit: cover; }
+        .item p { padding: 12px; font-weight: bold; color: #00adef; }
+
+        /* منطقة الأكشن النهائية تحت الألبوم */
+        .footer-cta { margin: 50px 0; padding-bottom: 70px; }
+        .main-cta { 
+            background: #00adef; color: #fff; padding: 15px 40px; border-radius: 50px; 
+            font-size: 20px; font-weight: bold; text-decoration: none; display: inline-block;
+            box-shadow: 0 0 20px rgba(0, 173, 239, 0.4); margin-bottom: 30px;
         }
-
-        .brand-sub { font-size: 24px; font-weight: bold; border-bottom: 2px solid #333; display: inline-block; padding-bottom: 5px; margin-top: 20px; }
-        
-        /* زرار الأكشن الملون */
-        .tech-btn { 
-            background: #00adef; color: #fff; border: none; padding: 10px 30px; 
-            border-radius: 25px; font-size: 18px; font-weight: bold; margin: 20px 0; cursor: pointer;
-        }
-
-        /* قسم المعرض (الصور الـ 20) */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
-        .portfolio-item { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .portfolio-item img { width: 100%; height: 220px; object-fit: cover; }
-        .portfolio-item p { padding: 15px; font-weight: bold; background: #f8f8f8; margin: 0; }
-
-        /* الزراير تحت خالص بناءً على طلبك */
-        .bottom-actions { margin: 50px 0; display: flex; justify-content: center; gap: 20px; padding-bottom: 50px; }
-        .btn-link { padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; }
-        .btn-blue { background: #00adef; color: #fff; }
-        .btn-outline { border: 2px solid #00adef; color: #00adef; }
+        .social-box { display: flex; justify-content: center; gap: 15px; }
+        .social-btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; }
+        .wa { background: #00adef; color: #fff; }
+        .fb { border: 2px solid #00adef; color: #00adef; }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <h1 class="main-t">T</h1>
-        <span class="re-letters">re</span>
-        <svg class="green-curve-arrow" viewBox="0 0 300 150" fill="none">
-            <path d="M10 130C60 130 140 100 200 60C260 20 280 10 295 5" stroke="#00ff00" stroke-width="22" stroke-linecap="round"/>
-            <path d="M295 5L260 5 M295 5 L280 30" stroke="#00ff00" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+    <div class="header">
+        <div class="logo-t">T</div>
+        <div class="brand-title">Trend Adv | Professional</div>
     </div>
 
-    <br>
-    <div class="brand-sub">Trend Adv | Professional لا تسويق العكان</div>
-    <br>
-    <button class="tech-btn">انقر هنا لبدء مشروعك</button>
+    <div class="gallery">
+        <div class="item"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
+        <div class="item"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
+        <div class="item"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
+        <div class="item"><img src="https://i.ibb.co/Kd7b4Ly/3.jpg" alt="4"><p>لوحات إعلانية</p></div>
+        <div class="item"><img src="https://i.ibb.co/hFvVCkqL/4.jpg" alt="5"><p>تسويق رقمي</p></div>
+        <div class="item"><img src="https://i.ibb.co/dJKvxq9m/5.jpg" alt="6"><p>تنفيذ مطبوعات</p></div>
+        <div class="item"><img src="https://i.ibb.co/84L1KGxk/6.jpg" alt="7"><p>إدارة محتوى</p></div>
+        <div class="item"><img src="https://i.ibb.co/8DckY7Jc/7.jpg" alt="8"><p>هويات بصرية</p></div>
+        <div class="item"><img src="https://i.ibb.co/bMs0Bnk5/8.jpg" alt="9"><p>أعمال فنية</p></div>
+        <div class="item"><img src="https://i.ibb.co/RGVQ8ZTS/9.jpg" alt="10"><p>دعاية متكاملة</p></div>
+        <div class="item"><img src="https://i.ibb.co/Xf1jvwkN/10.jpg" alt="11"><p>تصميم مواقع</p></div>
+        <div class="item"><img src="https://i.ibb.co/27jn28hB/11.jpg" alt="12"><p>برمجيات خاصة</p></div>
+        <div class="item"><img src="https://i.ibb.co/whd9cXcv/12.jpg" alt="13"><p>مونتاج فيديو</p></div>
+        <div class="item"><img src="https://i.ibb.co/RTn9n56C/13.jpg" alt="14"><p>موشن جرافيك</p></div>
+        <div class="item"><img src="https://i.ibb.co/k2sBTN81/14.jpg" alt="15"><p>إعلانات طرق</p></div>
+        <div class="item"><img src="https://i.ibb.co/SwWnCf4k/15.jpg" alt="16"><p>تنظيم فعاليات</p></div>
+        <div class="item"><img src="https://i.ibb.co/QjdBJJDR/16.jpg" alt="17"><p>حلول تقنية</p></div>
+        <div class="item"><img src="https://i.ibb.co/HLTvhnZ0/17.jpg" alt="18"><p>برندات تجارية</p></div>
+        <div class="item"><img src="https://i.ibb.co/B5bQRB1j/18.jpg" alt="19"><p>تميز بلا حدود</p></div>
+        <div class="item"><img src="https://i.ibb.co/d4wnb08b/19.jpg" alt="20"><p>Trend Agency</p></div>
+        <div class="item"><img src="https://i.ibb.co/1000134354/21.png" alt="21"><p>مشاريع احترافية</p></div>
+    </div>
 
-    <div class="portfolio-grid">
-        <div class="portfolio-item"><img src="https://i.ibb.co/jPQrK498/1000133864.png" alt="1"><p>إعلانات أوت دور</p></div>
-        <div class="portfolio-item"><img src="https://i.ibb.co/v4FRw2z9/1000133866.png" alt="2"><p>حملات إعلانية</p></div>
-        <div class="portfolio-item"><img src="https://i.ibb.co/7tW8X4c2/2.jpg" alt="3"><p>تصاميم إبداعية</p></div>
+    <div class="footer-cta">
+        <a href="#" class="main-cta">انقر هنا لبدء حملتك الاعلانية</a>
+        <div class="social-box">
+            <a href="https://wa.me/201027676344" class="social-btn wa">إرسال واتساب</a>
+            <a href="https://www.facebook.com/profile.php?id=61556673621455" class="social-btn fb">Facebook</a>
         </div>
-
-    <div class="bottom-actions">
-        <a href="https://wa.me/201027676344" class="btn-link btn-blue">إرسال واتساب</a>
-        <a href="https://www.facebook.com/profile.php?id=61556673621455" class="btn-link btn-outline">Facebook</a>
     </div>
 
 </body>
