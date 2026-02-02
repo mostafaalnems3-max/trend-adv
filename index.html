@@ -3,40 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | أول خريطة إعلانية في الوطن العربي</title>
+    <title>Trend Adv | أول خريطة إعلانية عربية</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        :root { --cyan: #00d2ff; --dark: #0a0a0a; }
-        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 150px; }
+        :root { --accent: #00d2ff; --bg: #0a0a0a; --card: #161616; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 140px; }
         
-        header { text-align: center; padding: 25px; background: #000; }
-        .logo { font-size: 3rem; font-weight: bold; }
+        header { text-align: center; padding: 25px; background: #000; border-bottom: 2px solid #222; }
+        .logo { font-size: 3rem; font-weight: 900; }
         .logo span { background: linear-gradient(90deg, #00d2ff, #9d50bb, #00d2ff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
 
-        .hero { background: #111; margin: 15px; padding: 20px; border-radius: 15px; border-right: 5px solid var(--cyan); text-align: center; }
-        .hero h1 { color: var(--cyan); font-size: 1.5rem; margin-bottom: 10px; }
-
-        /* تنسيق الخريطة */
-        #map { height: 450px; width: 95%; margin: 15px auto; border-radius: 20px; border: 2px solid var(--cyan); box-shadow: 0 0 20px rgba(0,210,255,0.2); }
-
-        .btn-gps { display: block; width: 90%; max-width: 400px; margin: 20px auto; background: var(--cyan); color: #000; border: none; padding: 18px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,210,255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0,210,255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0,210,255, 0); } }
-
-        /* السوشيال */
-        .social-sidebar { position: fixed; left: 10px; top: 40%; z-index: 1000; display: flex; flex-direction: column; gap: 12px; }
-        .social-sidebar a { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 20px; transition: 0.3s; }
+        /* رصة أزرار السوشيال المظبوطة على الجنب */
+        .social-sidebar { position: fixed; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+        .social-sidebar a { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .wa { background: #25D366; } .fb { background: #1877F2; } .li { background: #0077b5; }
 
-        /* معرض الصور */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; padding: 20px; }
-        .ad-card { background: #161616; border-radius: 15px; overflow: hidden; border: 1px solid #222; }
-        .ad-card img { width: 100%; height: 220px; object-fit: cover; }
-        .book-btn { width: 100%; background: var(--cyan); color: #000; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
+        .hero { background: linear-gradient(145deg, #111, #1a1a1a); margin: 15px; padding: 25px; border-radius: 15px; border-right: 5px solid var(--accent); }
+        .hero h1 { color: var(--accent); font-size: 1.5rem; margin-bottom: 8px; }
 
-        .sticky-ads { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.9); border-top: 2px solid var(--cyan); padding: 10px; display: flex; justify-content: space-around; z-index: 9999; }
-        .sticky-ads img { height: 30px; background: white; border-radius: 4px; padding: 2px; }
+        /* المعرض - 23 صورة بدون اختفاء */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+        .card img { width: 100%; height: 210px; object-fit: cover; background: #222; display: block; }
+        .card-body { padding: 12px; }
+        .btn-book { width: 100%; background: var(--accent); border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; color: #000; }
+
+        #map { height: 400px; width: 95%; margin: 15px auto; border-radius: 20px; border: 1px solid var(--accent); display: none; }
+        .btn-gps { display: block; width: 90%; max-width: 400px; margin: 15px auto; background: var(--accent); color: #000; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+
+        .sticky { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.95); border-top: 1px solid var(--accent); display: flex; justify-content: space-around; padding: 8px; z-index: 999; }
+        .sticky img { height: 28px; background: white; border-radius: 3px; padding: 2px; }
     </style>
 </head>
 <body>
@@ -51,63 +49,58 @@
 
 <section class="hero">
     <h1>أول منصة خريطة إعلانية في الوطن العربي 🌍</h1>
-    <p>للمعلنين والوكالات: تصفح واحجز مواقعك المفضلة بتقنية الـ GPS</p>
+    <p>بوابتك الذكية لربط الوكالات بالمعلنين عبر الـ GPS.</p>
 </section>
 
-<button class="btn-gps" onclick="initMap()">📍 استكشف اللوحات حولك الآن</button>
+<button class="btn-gps" onclick="showMap()">📍 استكشف المواقع القريبة (GPS)</button>
 <div id="map"></div>
 
-<div class="gallery" id="adsGallery"></div>
+<div class="gallery" id="mainGallery"></div>
 
-<div class="sticky-ads">
+<div class="sticky">
     <img src="https://logowik.com/content/uploads/images/almarai-company8003.jpg">
     <img src="https://logowik.com/content/uploads/images/huawei-new-20205801.jpg">
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // نظام الخريطة
-    function initMap() {
-        document.getElementById('map').style.display = 'block';
-        // تركيز الخريطة على القاهرة مبدئياً
-        var map = L.map('map').setView([30.0444, 31.2357], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-        // محاولة تحديد موقع المستخدم (GPS الحقيقي)
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var userLat = position.coords.latitude;
-                var userLng = position.coords.longitude;
-                map.setView([userLat, userLng], 13);
-                
-                L.marker([userLat, userLng]).addTo(map)
-                    .bindPopup("<b>أنت هنا</b>").openPopup();
-
-                // توزيع ماركرات تجريبية حول المستخدم
-                for(let i=0; i<10; i++) {
-                    L.marker([userLat + (Math.random()*0.02), userLng + (Math.random()*0.02)]).addTo(map)
-                        .bindPopup("لوحة إعلانية متاحة للحجز");
-                }
-            });
-        }
-    }
-
-    // توليد الـ 23 صورة بدون تكرار
-    const myImages = [
-        "https://i.ibb.co/jPQrK498/1000133864.png", "https://i.ibb.co/LhbVvY8N/1000133863.png",
-        "https://i.ibb.co/p66vWfVj/1000133862.png", "https://i.ibb.co/N6L9mZ9Q/1000133861.png"
+    // قائمة روابط الصور الـ 23 اللي كانت معاك (تأكد من الروابط المباشرة)
+    const allImages = [
+        "https://i.ibb.co/jPQrK498/1000133864.png",
+        "https://i.ibb.co/LhbVvY8N/1000133863.png",
+        "https://i.ibb.co/p66vWfVj/1000133862.png",
+        "https://i.ibb.co/N6L9mZ9Q/1000133861.png",
+        "https://i.ibb.co/jPQrK498/1000133864.png", // مثال تكرار مؤقت لو الروابط ناقصة
+        // ضيف هنا الـ 23 رابط بتوعك بالظبط
     ];
-    const gallery = document.getElementById('adsGallery');
+
+    const gallery = document.getElementById('mainGallery');
+    
+    // حلقة لتكرار 23 كارت صور
     for (let i = 1; i <= 23; i++) {
-        let img = myImages[(i-1) % myImages.length];
+        let currentImg = allImages[(i-1) % allImages.length];
         gallery.innerHTML += `
-            <div class="ad-card">
-                <img src="${img}" alt="Ad Site">
-                <div style="padding:15px;">
-                    <b style="color:var(--cyan);">موقع إعلاني #${i}</b>
-                    <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
+            <div class="card">
+                <img src="${currentImg}" 
+                     onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv+Site+${i}'"
+                     alt="موقع إعلاني">
+                <div class="card-body">
+                    <b style="color:var(--accent);">موقع استراتيجي #${i}</b>
+                    <button class="btn-book" onclick="location.href='https://wa.me/201027676344?text=حجز_موقع_${i}'">احجز الآن</button>
                 </div>
             </div>`;
+    }
+
+    function showMap() {
+        document.getElementById('map').style.display = 'block';
+        var map = L.map('map').setView([30.0444, 31.2357], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                map.setView([p.coords.latitude, p.coords.longitude], 13);
+                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup("موقعك").openPopup();
+            });
+        }
     }
 </script>
 </body>
