@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المعلنين | Trend Adv</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main-color: #00bcd4; --dark-bg: #1a1a1a; }
+        body { font-family: sans-serif; background-color: #f4f7f6; margin: 0; }
+        .dash-header { background: var(--dark-bg); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
+        .stat-card { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-bottom: 3px solid var(--main-color); }
+        .add-ad-btn { background: var(--main-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; display: block; margin: 10px auto; font-weight: bold; }
+        .ads-list { padding: 20px; background: white; margin: 15px; border-radius: 10px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: right; border-bottom: 1px solid #eee; font-size: 14px; }
+        .back-home { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 5px 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="dash-header">
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> الخريطة</a>
+        <span>لوحة تحكم المعلن</span>
+    </div>
+    <div class="stats-container">
+        <div class="stat-card"><h3>1,250</h3><p>مشاهدة</p></div>
+        <div class="stat-card"><h3>340</h3><p>نقرة</p></div>
+    </div>
+    <button class="add-ad-btn"><i class="fas fa-plus"></i> إضافة لوحة جديدة</button>
+    <div class="ads-list">
+        <table>
+            <thead><tr><th>اللوحة</th><th>الحالة</th><th>تعديل</th></tr></thead>
+            <tbody>
+                <tr><td>لوحة طريق السويس</td><td style="color:green">نشط</td><td><i class="fas fa-edit"></i></td></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
