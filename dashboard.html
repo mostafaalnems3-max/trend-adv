@@ -1,60 +1,104 @@
-<form id="google-form">
-    <input type="text" id="siteName" placeholder="اسم الوكالة" required>
-    
-    <label>📸 صورة اللوحة:</label>
-    <input type="file" id="adImage" accept="image/*" required>
-    
-    <input type="text" id="location" placeholder="الإحداثيات (مثال: 30.1, 31.2)" required>
-    
-    <label>🛡️ صورة QR الرخصة:</label>
-    <input type="file" id="qrCode" accept="image/*" required>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | Trend Adv</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main-color: #00bcd4; --dark-bg: #1a1a1a; }
+        body { font-family: sans-serif; background-color: #f4f7f6; margin: 0; padding-bottom: 50px; }
+        .dash-header { background: var(--dark-bg); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .add-ad-btn { background: var(--main-color); color: white; border: none; padding: 15px 30px; border-radius: 25px; display: block; margin: 20px auto; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 10px rgba(0,188,212,0.3); }
+        .modal { display:none; position:fixed; top:0; right:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; padding-top:20px; overflow-y: auto; }
+        .modal-content { background:white; width:90%; max-width:450px; margin:auto; padding:20px; border-radius:15px; color:#333; }
+        input { width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; }
+        label { font-size: 13px; color: #666; display: block; margin-top: 5px; }
+    </style>
+</head>
+<body>
 
-    <button type="submit" id="submitBtn">إرسال البيانات والصور 🚀</button>
-</form>
+    <div class="dash-header">
+        <a href="index.html" style="color:white; text-decoration:none; font-size:14px;"><i class="fas fa-arrow-right"></i> الخريطة</a>
+        <span style="font-weight: bold;">لوحة تحكم Trend Adv</span>
+    </div>
 
-<script>
-    const scriptURL = 'رابط_جوجل_سكريبت_الجديد'; // ستحصل عليه من الخطوة القادمة
+    <button class="add-ad-btn" onclick="document.getElementById('adModal').style.display='block'">➕ إضافة لوحة جديدة</button>
 
-    document.getElementById('google-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.innerHTML = "جاري رفع الصور... انتظر قليلاً";
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <h3 style="text-align:center;">سجل بيانات اللوحة</h3>
+            <form id="google-form">
+                <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
+                
+                <label>📸 تحميل صورة اللوحة:</label>
+                <input type="file" name="siteImg" accept="image/*" required>
+                
+                <input type="text" name="location" placeholder="الإحداثيات (مثال: 30.0, 31.2)" required>
+                
+                <label>🛡️ تحميل QR رخصة الإعلان:</label>
+                <input type="file" name="adLicense" accept="image/*" required>
+                
+                <button type="submit" id="submitBtn" style="width:100%; background:var(--main-color); color:white; padding:15px; border:none; border-radius:8px; font-weight:bold; margin-top:10px; cursor:pointer;">
+                    إرسال للجدول 🚀
+                </button>
+                <button type="button" onclick="document.getElementById('adModal').style.display='none'" style="width:100%; background:#eee; padding:10px; border:none; border-radius:8px; margin-top:10px; cursor:pointer;">إلغاء</button>
+            </form>
+        </div>
+    </div>
 
-        // وظيفة لتحويل الصورة لنص (Base64)
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-        });
+    <script>
+        // اللينك الجديد اللي أنت طلعته يا صحبي
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4yrmVWAjGR3QN4pMtgpZIxERafSf_tvWx52inptmUmHiy-oI6tzCUMg6Y_j-9XU6z/exec';
+        
+        const form = document.getElementById('google-form');
+        const submitBtn = document.getElementById('submitBtn');
 
-        try {
-            const imgFile = document.getElementById('adImage').files[0];
-            const qrFile = document.getElementById('qrCode').files[0];
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "جاري رفع الصور والبيانات... ⏳";
 
-            const data = {
-                siteName: document.getElementById('siteName').value,
-                location: document.getElementById('location').value,
-                adImageName: imgFile.name,
-                adImageData: await toBase64(imgFile),
-                qrCodeName: qrFile.name,
-                qrCodeData: await toBase64(qrFile)
-            };
-
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(res => {
-                alert('الله ينور! الصور اترفعت والبيانات اتسجلت ✅');
-                location.reload();
+            // وظيفة تحويل الصورة لنص (Base64)
+            const toBase64 = file => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
             });
 
-        } catch (err) {
-            alert('حصل خطأ في الرفع، جرب تاني');
-            btn.disabled = false;
-        }
-    });
-</script>
+            try {
+                const imgFile = form.querySelector('input[name="siteImg"]').files[0];
+                const qrFile = form.querySelector('input[name="adLicense"]').files[0];
+
+                const payload = {
+                    siteName: form.querySelector('input[name="siteName"]').value,
+                    location: form.querySelector('input[name="location"]').value,
+                    adImageName: imgFile.name,
+                    adImageData: await toBase64(imgFile),
+                    qrCodeName: qrFile.name,
+                    qrCodeData: await toBase64(qrFile)
+                };
+
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.result === "success") {
+                    alert('الله ينور! اللوحة والترخيص ارفعوا بنجاح ✅');
+                    location.reload();
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                alert('حصلت مشكلة في الرفع. تأكد من حجم الصور أو الاتصال.');
+                console.error(error);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "إرسال للجدول 🚀";
+            }
+        });
+    </script>
+</body>
+</html>
