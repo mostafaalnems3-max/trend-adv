@@ -3,98 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم الوكالات | Trend Adv</title>
+    <title>لوحة التحكم | Trend Adv</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-color: #00bcd4; --dark-bg: #1a1a1a; }
-        body { font-family: sans-serif; background-color: #f4f7f6; margin: 0; padding-bottom: 50px; }
-        .dash-header { background: var(--dark-bg); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
-        .stat-card { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-bottom: 3px solid var(--main-color); }
-        .add-ad-btn { background: var(--main-color); color: white; border: none; padding: 15px 30px; border-radius: 25px; display: block; margin: 10px auto; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 10px rgba(0,188,212,0.3); }
-        .ads-list { padding: 20px; background: white; margin: 15px; border-radius: 10px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: right; border-bottom: 1px solid #eee; }
-        .back-home { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 5px 10px; border-radius: 5px; }
-        
-        /* تنسيق النافذة المنبثقة (Modal) */
-        .modal { display:none; position:fixed; top:0; right:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; }
-        .modal-content { background:white; width:90%; max-width:500px; margin:50px auto; padding:25px; border-radius:15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .modal-content h3 { margin-top: 0; color: var(--dark-bg); }
-        .modal-content input { width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; font-size: 14px; }
+        :root { --main: #00bcd4; --dark: #1a1a1a; }
+        body { font-family: sans-serif; background: #f4f7f6; margin: 0; text-align: right; }
+        .header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; }
+        .btn-open { background: var(--main); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; display: block; margin: 20px auto; width: 80%; font-weight: bold; }
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; }
+        .modal-content { background:white; width:90%; max-width:400px; margin:50px auto; padding:20px; border-radius:15px; }
+        input { width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; }
+        .btn-send { width:100%; background:var(--main); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; }
     </style>
 </head>
 <body>
 
-    <div class="dash-header">
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> العودة للخريطة</a>
-        <span style="font-weight: bold;">لوحة تحكم Trend Adv</span>
+    <div class="header">
+        <span>لوحة تحكم Trend Adv</span>
+        <a href="index.html" style="color:white; text-decoration:none;">خروج</a>
     </div>
 
-    <div class="stats-container">
-        <div class="stat-card"><h3>1,250</h3><p>مشاهدة</p></div>
-        <div class="stat-card"><h3>340</h3><p>نقرة</p></div>
-    </div>
-
-    <button class="add-ad-btn"><i class="fas fa-plus"></i> إضافة لوحة جديدة</button>
-
-    <div class="ads-list">
-        <h3>لوحاتك الحالية</h3>
-        <table>
-            <thead><tr><th>اللوحة</th><th>الحالة</th><th>إجراء</th></tr></thead>
-            <tbody>
-                <tr><td>لوحة طريق السويس</td><td style="color:green">نشط</td><td><i class="fas fa-edit"></i></td></tr>
-            </tbody>
-        </table>
-    </div>
+    <button class="btn-open" id="showBtn">➕ إضافة لوحة جديدة</button>
 
     <div id="adModal" class="modal">
         <div class="modal-content">
-            <h3 style="text-align:center;">سجل بيانات اللوحة الجديدة</h3>
-            <form id="google-sheet-form">
-                <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
+            <h3 style="text-align:center">بيانات اللوحة</h3>
+            <form id="google-form">
+                <input type="text" name="siteName" placeholder="اسم الوكالة" required>
                 <input type="text" name="siteImg" placeholder="رابط صورة اللوحة" required>
-                <input type="text" name="location" placeholder="الإحداثيات (مثال: 30.0, 31.2)" required>
-                <input type="text" name="adLicense" placeholder="رابط QR رخصة الإعلان (للمصداقية)" required>
-                
-                <button type="submit" style="width:100%; background:var(--main-color); color:white; padding:15px; border:none; border-radius:8px; font-weight:bold; margin-top:10px; cursor:pointer; font-size:16px;">
-                    إرسال للجدول 🚀
-                </button>
-                <button type="button" onclick="document.getElementById('adModal').style.display='none'" style="width:100%; background:#eee; color:#333; padding:10px; border:none; border-radius:8px; margin-top:10px; cursor:pointer;">إلغاء</button>
+                <input type="text" name="location" placeholder="الإحداثيات (30.1, 31.2)" required>
+                <input type="text" name="adLicense" placeholder="رابط QR الرخصة" required>
+                <button type="submit" class="btn-send" id="submitBtn">إرسال للجدول 🚀</button>
+                <button type="button" onclick="document.getElementById('adModal').style.display='none'" style="width:100%; background:#eee; margin-top:10px; border:none; padding:8px; border-radius:8px;">إلغاء</button>
             </form>
         </div>
     </div>
 
     <script>
-        // رابط Google Apps Script الخاص بك
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec';
-        const form = document.getElementById('google-sheet-form');
-        const modal = document.getElementById('adModal');
-        const addBtn = document.querySelector('.add-ad-btn');
-
-        // فتح النافذة
-        addBtn.onclick = () => { modal.style.display = 'block'; };
+        
+        // فتح المودال
+        document.getElementById('showBtn').onclick = function() {
+            document.getElementById('adModal').style.display = 'block';
+        };
 
         // إرسال البيانات
-        form.addEventListener('submit', e => {
+        document.getElementById('google-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = "جاري الحفظ والرفع...";
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = "جاري الحفظ...";
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    alert('تم تسجيل اللوحة بنجاح! سيتم التحقق من الترخيص وإظهارها على الخريطة.');
-                    modal.style.display = 'none';
-                    form.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = "إرسال للجدول 🚀";
+            fetch(scriptURL, { method: 'POST', body: new FormData(this)})
+                .then(res => {
+                    alert('تم التسجيل بنجاح يا بطل! ✅');
+                    document.getElementById('adModal').style.display = 'none';
+                    this.reset();
+                    btn.disabled = false;
+                    btn.innerHTML = "إرسال للجدول 🚀";
                 })
-                .catch(error => {
-                    alert('حدث خطأ، تأكد من الاتصال بالإنترنت وجرب مرة أخرى.');
-                    console.error('Error!', error.message);
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = "إرسال للجدول 🚀";
+                .catch(err => {
+                    alert('في مشكلة في الرابط أو النت! ❌');
+                    btn.disabled = false;
+                    btn.innerHTML = "إرسال للجدول 🚀";
                 });
         });
     </script>
