@@ -86,9 +86,8 @@
             </form>
         </div>
     </div>
-
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzGlKbqNZ_zTW0_XP4tKUNUB-3zfS957fTOoXgShmbQnwpPCZ9g6eWCMKShCu63p4sX/exec';
+   
+https://script.google.com/macros/s/AKfycbw8ZrQrl51ogJeOTo6ZWLSYQKo8BazR6bLJNLKAbFU51B6ydJZYklsgcKuOMjxHuwiS/exec
         
         const modal = document.getElementById('adModal');
         const form = document.getElementById('uploadForm');
@@ -116,8 +115,12 @@
                 const f3 = form.img3.files[0];
                 const fqr = form.qr.files[0];
 
+
                 const payload = {
-                    siteName: form.siteName.value,
+               
+   phone: form.phone.value,
+
+  siteName: form.siteName.value,
                     location: form.location.value,
                     imgName1: f1 ? f1.name : "",
                     imgData1: await toBase64(f1),
