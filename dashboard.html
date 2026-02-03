@@ -3,117 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | لوحة التحكم</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Trend Adv | لوحة التحكم المتطورة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --main: #00bcd4; --bg: #f8f9fa; --dark: #1a1a1a; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; }
+        :root { --main: #00bcd4; --bg: #f0f2f5; --card: #ffffff; --text: #1c1e21; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; align-items: center; }
         
-        /* الهيدر */
-        .header { width: 100%; background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
-        .back-home { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 5px 12px; border-radius: 8px; }
+        .header { width: 100%; background: #1a1a1a; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .back-btn { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 6px 15px; border-radius: 20px; transition: 0.3s; }
+        .back-btn:hover { background: var(--main); border-color: var(--main); color: #000; }
 
-        /* زرار الإضافة اللبني (زي صورتك بالضبط) */
-        .add-btn-container { margin-top: 30px; }
-        .add-ad-btn { background: var(--main); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 16px; box-shadow: 0 4px 15px rgba(0,188,212,0.3); }
+        /* الزرار اللبني الجامد */
+        .add-btn { margin-top: 40px; background: var(--main); color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(0,188,212,0.3); transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .add-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,188,212,0.4); }
 
-        /* النافذة المنبثقة (الـ Modal الشيك) */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 15px; }
-        .modal-content { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .modal h3 { text-align: center; color: #333; margin-bottom: 20px; font-size: 20px; }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; margin-bottom: 5px; font-size: 13px; color: #666; font-weight: bold; }
-        input[type="text"], input[type="file"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; }
+        /* المودال الشيك */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: var(--card); width: 100%; max-width: 500px; padding: 30px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; max-height: 90vh; overflow-y: auto; }
         
-        .submit-btn { width: 100%; background: var(--main); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
-        .cancel-btn { width: 100%; background: #f1f1f1; color: #666; border: none; padding: 10px; border-radius: 10px; margin-top: 10px; cursor: pointer; }
+        h3 { text-align: center; color: #333; margin-bottom: 25px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 13px; color: #666; font-weight: bold; }
+        input[type="text"], input[type="file"] { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+        input:focus { border-color: var(--main); outline: none; background: #fff; }
+
+        .submit-btn { width: 100%; background: var(--main); color: white; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .cancel-btn { width: 100%; background: none; color: #999; border: none; padding: 10px; cursor: pointer; margin-top: 5px; font-size: 14px; }
+        
+        .hint { font-size: 11px; color: #00bcd4; margin-top: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <span style="font-weight: bold;">Trend Adv لوحة تحكم</span>
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> الخريطة</a>
-    </div>
+    <header class="header">
+        <div style="font-weight: bold; font-size: 20px;">Trend Adv <span style="font-weight: normal; font-size: 14px; opacity: 0.7;">Dashboard</span></div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> الخريطة</a>
+    </header>
 
-    <div class="add-btn-container">
-        <button class="add-ad-btn" onclick="openModal()">
-            <i class="fas fa-plus"></i> إضافة لوحة جديدة
-        </button>
-    </div>
-
-<div id="agencies-list" style="width: 90%; max-width: 500px; margin: 30px auto; display: flex; flex-direction: column; gap: 15px;">
-    <h4 style="color: #666; font-size: 14px; margin-bottom: 5px;">الوكالات المسجلة (حسب أسبقية التسجيل):</h4>
-    <div id="list-items" style="display: flex; flex-direction: column; gap: 10px;">
-        <p style="text-align: center; color: #999;">جاري جلب البيانات... ⏳</p>
-    </div>
-</div>
-
+    <button class="add-btn" id="openModal">
+        <i class="fas fa-plus-circle"></i> إضافة لوحة إعلانية جديدة
+    </button>
 
     <div id="adModal" class="modal">
         <div class="modal-content">
-            <h3>سجل بيانات اللوحة</h3>
+            <h3>تسجيل بيانات اللوحة</h3>
             <form id="uploadForm">
-                <div class="input-group">
+                <div class="form-group">
                     <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
                 </div>
-                
-                <div class="input-group">
-                    <label>📸 تحميل صورة اللوحة:</label>
-                    <input type="file" name="siteImg" accept="image/*" required>
+
+                <div class="form-group">
+                    <label>📸 الصورة الأساسية (إجباري):</label>
+                    <input type="file" name="img1" accept="image/*" required>
                 </div>
 
-                <div class="input-group">
-                    <input type="text" name="location" placeholder="الإحداثيات (30.1, 31.2)" required>
+                <div class="form-group">
+                    <label>📸 صورة إضافية 1 (اختياري):</label>
+                    <input type="file" name="img2" accept="image/*">
                 </div>
 
-                <div class="input-group">
-                    <label>🛡️ تحميل QR رخصة الاعلان:</label>
-                    <input type="file" name="adLicense" accept="image/*" required>
+                <div class="form-group">
+                    <label>📸 صورة إضافية 2 (اختياري):</label>
+                    <input type="file" name="img3" accept="image/*">
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">إرسال للجدول 🚀</button>
-                <button type="button" class="cancel-btn" onclick="closeModal()">إلغاء</button>
+                <div class="form-group">
+                    <input type="text" name="location" placeholder="الإحداثيات (مثلاً: 30.1, 31.4)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>🛡️ صورة QR رخصة الإعلان (للمراجعة):</label>
+                    <input type="file" name="qr" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">رفع اللوحة للمراجعة 🚀</button>
+                <button type="button" class="cancel-btn" id="closeModal">إلغاء</button>
+                <p style="font-size: 10px; color: #aaa; text-align: center; margin-top: 10px;">* سيتم عرض اللوحة فور موافقة الإدارة</p>
             </form>
         </div>
     </div>
 
     <script>
-        // الرابط الجديد بتاعك
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4yrmVWAjGR3QN4pMtgpZIxERafSf_tvWx52inptmUmHiy-oI6tzCUMg6Y_j-9XU6z/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzGlKbqNZ_zTW0_XP4tKUNUB-3zfS957fTOoXgShmbQnwpPCZ9g6eWCMKShCu63p4sX/exec';
         
         const modal = document.getElementById('adModal');
         const form = document.getElementById('uploadForm');
         const submitBtn = document.getElementById('submitBtn');
 
-        function openModal() { modal.style.display = 'flex'; }
-        function closeModal() { modal.style.display = 'none'; }
+        document.getElementById('openModal').onclick = () => modal.style.display = 'flex';
+        document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            if (!file) resolve(""); 
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             submitBtn.disabled = true;
-            submitBtn.innerHTML = "جاري الرفع... ⏳";
-
-            const toBase64 = file => new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-            });
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الرفع...';
 
             try {
-                const imgFile = form.siteImg.files[0];
-                const qrFile = form.adLicense.files[0];
+                const f1 = form.img1.files[0];
+                const f2 = form.img2.files[0];
+                const f3 = form.img3.files[0];
+                const fqr = form.qr.files[0];
 
                 const payload = {
                     siteName: form.siteName.value,
                     location: form.location.value,
-                    adImageName: imgFile.name,
-                    adImageData: await toBase64(imgFile),
-                    qrCodeName: qrFile.name,
-                    qrCodeData: await toBase64(qrFile)
+                    imgName1: f1 ? f1.name : "",
+                    imgData1: await toBase64(f1),
+                    imgName2: f2 ? f2.name : "",
+                    imgData2: await toBase64(f2),
+                    imgName3: f3 ? f3.name : "",
+                    imgData3: await toBase64(f3),
+                    qrName: fqr ? fqr.name : "",
+                    qrData: await toBase64(fqr)
                 };
 
                 const response = await fetch(scriptURL, {
@@ -123,13 +132,13 @@
 
                 const result = await response.json();
                 if (result.result === "success") {
-                    alert('تم الرفع بنجاح يا بطل! ✅');
+                    alert('تم الرفع بنجاح! اللوحة الآن قيد المراجعة ✅');
                     location.reload();
                 }
             } catch (err) {
-                alert('حصلت مشكلة في الرفع، جرب تاني ❌');
+                alert('حدث خطأ أثناء الرفع، يرجى المحاولة مرة أخرى ❌');
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = "إرسال للجدول 🚀";
+                submitBtn.innerHTML = "رفع اللوحة للمراجعة 🚀";
             }
         });
     </script>
