@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم المعلنين | Trend Adv</title>
+    <title>لوحة تحكم الوكالات | Trend Adv</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --main-color: #00bcd4; --dark-bg: #1a1a1a; }
@@ -17,10 +17,11 @@
         th, td { padding: 12px; text-align: right; border-bottom: 1px solid #eee; }
         .back-home { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 5px 10px; border-radius: 5px; }
         
-        /* تنسيق النافذة المنبثقة */
+        /* تنسيق النافذة المنبثقة (Modal) */
         .modal { display:none; position:fixed; top:0; right:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; }
-        .modal-content { background:white; width:90%; max-width:500px; margin:50px auto; padding:20px; border-radius:15px; }
-        .modal-content input { width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; }
+        .modal-content { background:white; width:90%; max-width:500px; margin:50px auto; padding:25px; border-radius:15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-content h3 { margin-top: 0; color: var(--dark-bg); }
+        .modal-content input { width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -31,8 +32,8 @@
     </div>
 
     <div class="stats-container">
-        <div class="stat-card"><h3>10,653</h3><p>مشاهدة</p></div>
-        <div class="stat-card"><h3>3406</h3><p>نقرة</p></div>
+        <div class="stat-card"><h3>1,250</h3><p>مشاهدة</p></div>
+        <div class="stat-card"><h3>340</h3><p>نقرة</p></div>
     </div>
 
     <button class="add-ad-btn"><i class="fas fa-plus"></i> إضافة لوحة جديدة</button>
@@ -49,31 +50,32 @@
 
     <div id="adModal" class="modal">
         <div class="modal-content">
-            <h3 style="text-align:center; color: var(--dark-bg);">سجل بيانات اللوحة</h3>
+            <h3 style="text-align:center;">سجل بيانات اللوحة الجديدة</h3>
             <form id="google-sheet-form">
                 <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
                 <input type="text" name="siteImg" placeholder="رابط صورة اللوحة" required>
                 <input type="text" name="location" placeholder="الإحداثيات (مثال: 30.0, 31.2)" required>
-
-<input type="text" name="adLicense" placeholder="رابط QR رخصة الإعلان (لضمان المصداقية)" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;" required>
-
-                <button type="submit" style="width:100%; background:var(--main-color); color:white; padding:15px; border:none; border-radius:8px; font-weight:bold; margin-top:10px; cursor:pointer;">إرسال للجدول 🚀</button>
+                <input type="text" name="adLicense" placeholder="رابط QR رخصة الإعلان (للمصداقية)" required>
+                
+                <button type="submit" style="width:100%; background:var(--main-color); color:white; padding:15px; border:none; border-radius:8px; font-weight:bold; margin-top:10px; cursor:pointer; font-size:16px;">
+                    إرسال للجدول 🚀
+                </button>
                 <button type="button" onclick="document.getElementById('adModal').style.display='none'" style="width:100%; background:#eee; color:#333; padding:10px; border:none; border-radius:8px; margin-top:10px; cursor:pointer;">إلغاء</button>
             </form>
         </div>
     </div>
 
     <script>
-        // الرابط السحري بتاعك
+        // رابط Google Apps Script الخاص بك
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec';
         const form = document.getElementById('google-sheet-form');
         const modal = document.getElementById('adModal');
         const addBtn = document.querySelector('.add-ad-btn');
 
-        // فتح النافذة عند الضغط على الزرار
+        // فتح النافذة
         addBtn.onclick = () => { modal.style.display = 'block'; };
 
-        // إرسال البيانات لجوجل سكريبت
+        // إرسال البيانات
         form.addEventListener('submit', e => {
             e.preventDefault();
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -82,14 +84,14 @@
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    alert('الله ينور! البيانات اتسجلت في جدول جوجل وهتظهر على الخريطة فوراً.');
+                    alert('تم تسجيل اللوحة بنجاح! سيتم التحقق من الترخيص وإظهارها على الخريطة.');
                     modal.style.display = 'none';
                     form.reset();
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = "إرسال للجدول 🚀";
                 })
                 .catch(error => {
-                    alert('حصلت مشكلة بسيطة، جرب تاني يا بطل!');
+                    alert('حدث خطأ، تأكد من الاتصال بالإنترنت وجرب مرة أخرى.');
                     console.error('Error!', error.message);
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = "إرسال للجدول 🚀";
