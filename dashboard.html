@@ -36,5 +36,50 @@
             </tbody>
         </table>
     </div>
+
+<div id="adModal" style="display:none; position:fixed; top:0; right:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; padding-top:50px;">
+    <div style="background:white; width:90%; margin:auto; padding:20px; border-radius:15px; color:#333;">
+        <h3 style="text-align:center;">سجل لوحتك المتاحة للاعلان هنا</h3>
+        <form id="google-sheet-form">
+            <input type="text" name="siteName" placeholder="اسم الوكالة/اللوحة" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;" required>
+            <input type="text" name="siteImg" placeholder="رابط صورة اللوحة" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;" required>
+            <input type="text" name="location" placeholder="الإحداثيات (مثال: 30.0, 31.2)" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;" required>
+            <button type="submit" style="width:100%; background:#00bcd4; color:white; padding:15px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">إرسال للجدول 🚀</button>
+            <button type="button" onclick="document.getElementById('adModal').style.display='none'" style="width:100%; background:#eee; color:#333; padding:10px; border:none; border-radius:8px; margin-top:10px;">إلغاء</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec'; // رابط الجداول الخاص بك
+    const form = document.getElementById('google-sheet-form');
+    const modal = document.getElementById('adModal');
+    const addBtn = document.querySelector('.add-ad-btn');
+
+    // فتح النافذة
+    addBtn.onclick = () => modal.style.display = 'block';
+
+    // إرسال البيانات
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "جاري الحفظ...";
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                alert('الله ينور! البيانات اتسجلت في جدول جوجل وهتظهر على الخريطة فوراً.');
+                modal.style.display = 'none';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "إرسال للجدول 🚀";
+            })
+            .catch(error => {
+                alert('حصلت مشكلة بسيطة، جرب تاني يا بطل!');
+                submitBtn.disabled = false;
+            });
+    });
+</script>
+
 </body>
 </html>
