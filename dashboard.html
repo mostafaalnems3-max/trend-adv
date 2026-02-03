@@ -3,97 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم الاحترافية | Trend Adv</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Trend Adv | لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main: #00bcd4; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        :root { --main: #00bcd4; --bg: #f8f9fa; --dark: #1a1a1a; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; }
         
         /* الهيدر */
-        .header { width: 100%; padding: 20px; background: var(--card); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 22px; font-weight: 800; color: var(--main); text-transform: uppercase; letter-spacing: 1px; }
-        .back-link { color: var(--text); text-decoration: none; font-size: 14px; padding: 8px 15px; border-radius: 8px; background: rgba(255,255,255,0.05); transition: 0.3s; }
-        .back-link:hover { background: var(--main); color: #000; }
+        .header { width: 100%; background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .back-home { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 5px 12px; border-radius: 8px; }
 
-        /* الزرار الجامد */
-        .main-btn { margin-top: 50px; background: var(--main); color: #000; border: none; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 20px rgba(0,188,212,0.3); }
-        .main-btn:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 30px rgba(0,188,212,0.5); }
+        /* زرار الإضافة اللبني (زي صورتك بالضبط) */
+        .add-btn-container { margin-top: 30px; }
+        .add-ad-btn { background: var(--main); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 16px; box-shadow: 0 4px 15px rgba(0,188,212,0.3); }
 
-        /* المودال الشيك */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: var(--card); width: 100%; max-width: 480px; padding: 35px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); position: relative; animation: slideUp 0.5s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        /* النافذة المنبثقة (الـ Modal الشيك) */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 15px; }
+        .modal-content { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .modal-content h3 { text-align: center; margin-bottom: 25px; font-size: 24px; color: var(--main); }
+        .modal h3 { text-align: center; color: #333; margin-bottom: 20px; font-size: 20px; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 13px; color: #666; font-weight: bold; }
+        input[type="text"], input[type="file"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; }
         
-        /* الخانات */
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #94a3b8; }
-        input[type="text"], input[type="file"] { width: 100%; padding: 14px; background: #0f172a; border: 2px solid #334155; border-radius: 12px; color: #fff; font-size: 15px; transition: 0.3s; box-sizing: border-box; }
-        input:focus { border-color: var(--main); outline: none; background: #1e293b; }
-        
-        .submit-btn { width: 100%; background: var(--main); color: #000; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .cancel-btn { width: 100%; background: transparent; color: #94a3b8; border: none; padding: 10px; margin-top: 10px; cursor: pointer; font-size: 14px; }
+        .submit-btn { width: 100%; background: var(--main); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .cancel-btn { width: 100%; background: #f1f1f1; color: #666; border: none; padding: 10px; border-radius: 10px; margin-top: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">Trend Adv <span style="font-size: 12px; color: #94a3b8;">Dashboard</span></div>
-        <a href="index.html" class="back-link"><i class="fas fa-map-marked-alt"></i> العودة للخريطة</a>
-    </header>
+    <div class="header">
+        <span style="font-weight: bold;">Trend Adv لوحة تحكم</span>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> الخريطة</a>
+    </div>
 
-    <button class="main-btn" id="openModal">
-        <i class="fas fa-plus-circle"></i> إضافة لوحة إعلانية جديدة
-    </button>
+    <div class="add-btn-container">
+        <button class="add-ad-btn" onclick="openModal()">
+            <i class="fas fa-plus"></i> إضافة لوحة جديدة
+        </button>
+    </div>
 
     <div id="adModal" class="modal">
         <div class="modal-content">
             <h3>سجل بيانات اللوحة</h3>
             <form id="uploadForm">
                 <div class="input-group">
-                    <label>اسم الوكالة أو اللوحة</label>
-                    <input type="text" name="siteName" placeholder="مثلاً: وكالة النمس الإعلانية" required>
+                    <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
                 </div>
                 
                 <div class="input-group">
-                    <label>📸 صورة اللوحة (من الاستوديو)</label>
+                    <label>📸 تحميل صورة اللوحة:</label>
                     <input type="file" name="siteImg" accept="image/*" required>
                 </div>
-                
+
                 <div class="input-group">
-                    <label>الإحداثيات الجغرافية</label>
-                    <input type="text" name="location" placeholder="30.123, 31.456" required>
+                    <input type="text" name="location" placeholder="الإحداثيات (30.1, 31.2)" required>
                 </div>
-                
+
                 <div class="input-group">
-                    <label>🛡️ صورة QR رخصة الإعلان</label>
+                    <label>🛡️ تحميل QR رخصة الاعلان:</label>
                     <input type="file" name="adLicense" accept="image/*" required>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">نشر اللوحة الآن 🚀</button>
-                <button type="button" class="cancel-btn" id="closeModal">إلغاء العملية</button>
+                <button type="submit" class="submit-btn" id="submitBtn">إرسال للجدول 🚀</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">إلغاء</button>
             </form>
         </div>
     </div>
 
     <script>
+        // الرابط الجديد بتاعك
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw4yrmVWAjGR3QN4pMtgpZIxERafSf_tvWx52inptmUmHiy-oI6tzCUMg6Y_j-9XU6z/exec';
+        
         const modal = document.getElementById('adModal');
-        const openBtn = document.getElementById('openModal');
-        const closeBtn = document.getElementById('closeModal');
         const form = document.getElementById('uploadForm');
+        const submitBtn = document.getElementById('submitBtn');
 
-        openBtn.onclick = () => modal.style.display = 'flex';
-        closeBtn.onclick = () => modal.style.display = 'none';
-        window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; }
+        function openModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري معالجة الصور...';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "جاري الرفع... ⏳";
 
             const toBase64 = file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -122,13 +115,13 @@
 
                 const result = await response.json();
                 if (result.result === "success") {
-                    alert('عاش يا بطل! تم رفع اللوحة وتوثيق الرخصة بنجاح ✅');
+                    alert('تم الرفع بنجاح يا بطل! ✅');
                     location.reload();
                 }
-            } catch (error) {
-                alert('حصلت مشكلة! اتأكد من حجم الصور والنت عندك ❌');
-                btn.disabled = false;
-                btn.innerHTML = "إرسال للجدول 🚀";
+            } catch (err) {
+                alert('حصلت مشكلة في الرفع، جرب تاني ❌');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "إرسال للجدول 🚀";
             }
         });
     </script>
