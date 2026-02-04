@@ -1,194 +1,174 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="appBody">
+<html lang="ar" dir="rtl" id="appFrame">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trend Adv | Global App</title>
+    <title>Trend Adv | The Future of Out-of-Home Ads</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
-        :root { --primary: #004e92; --accent: #ffc107; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Tahoma; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
-        
+        :root { --main: #004e92; --gold: #ffcc00; --dark: #000428; --white: #ffffff; }
+        body { font-family: 'Cairo', sans-serif; background: #f4f7f9; margin: 0; padding-bottom: 90px; }
+
         /* شريط الأخبار المتحرك */
-        .marquee-bar { background: var(--primary); color: white; padding: 10px 0; font-size: 14px; position: sticky; top: 0; z-index: 1001; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .promo-header { background: var(--dark); color: white; padding: 10px 0; font-size: 13px; position: sticky; top: 0; z-index: 2000; border-bottom: 2px solid var(--gold); }
 
-        /* الهيدر الاحترافي */
-        .app-header { background: linear-gradient(135deg, var(--primary), #000428); color: white; padding: 25px 20px; border-radius: 0 0 35px 35px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .lang-select { background: var(--accent); border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; }
+        /* هيدر التطبيق */
+        .app-top { background: linear-gradient(135deg, var(--dark), var(--main)); padding: 25px 20px; border-radius: 0 0 40px 40px; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .lang-btn { background: var(--gold); border: none; padding: 7px 15px; border-radius: 20px; font-weight: 900; cursor: pointer; color: black; }
 
-        .search-container { background: white; border-radius: 30px; display: flex; padding: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .search-container input { border: none; flex: 1; padding: 10px 15px; outline: none; border-radius: 30px; font-size: 14px; color: #333; }
-        .search-trigger { background: var(--accent); border: none; width: 45px; height: 45px; border-radius: 50%; color: #000; cursor: pointer; }
+        /* محرك البحث */
+        .search-area { background: white; border-radius: 30px; display: flex; padding: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .search-area input { flex: 1; border: none; padding: 12px 15px; outline: none; border-radius: 30px; font-size: 14px; font-weight: bold; }
+        .search-trigger { background: var(--gold); border: none; width: 45px; height: 45px; border-radius: 50%; color: black; cursor: pointer; }
 
-        /* الخريطة والمثلثات */
-        #map { height: 320px; width: 94%; margin: 20px auto; border-radius: 25px; border: 4px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .triangle-icon { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 24px solid var(--accent); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+        /* الخريطة */
+        #map { height: 300px; width: 92%; margin: 20px auto; border-radius: 25px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .triangle-marker { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid var(--gold); filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4)); }
 
-        /* Dashboard */
-        .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; }
-        .nav-btn { background: white; padding: 18px 10px; border-radius: 20px; text-align: center; text-decoration: none; color: var(--primary); font-size: 11px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.2s; }
-        .nav-btn i { font-size: 24px; margin-bottom: 10px; display: block; color: var(--accent); }
-        .nav-btn:active { transform: scale(0.95); }
+        /* لوحة التحكم */
+        .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
+        .dash-item { background: white; padding: 15px 5px; border-radius: 20px; text-align: center; text-decoration: none; color: var(--dark); font-size: 10px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .dash-item i { font-size: 22px; color: var(--main); display: block; margin-bottom: 7px; }
 
-        /* كروت الإعلانات */
-        .ads-list { padding: 10px; }
-        .ad-item { background: white; border-radius: 25px; margin-bottom: 15px; overflow: hidden; display: flex; box-shadow: 0 6px 15px rgba(0,0,0,0.08); position: relative; }
-        .ad-img { width: 120px; height: 120px; object-fit: cover; }
-        .ad-content { padding: 15px; flex: 1; }
-        .ad-content h3 { margin: 0 0 8px 0; font-size: 16px; color: var(--primary); }
-        .distance-badge { position: absolute; top: 12px; left: 12px; background: var(--accent); font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: #000; z-index: 10; }
+        /* رادار الإعلانات */
+        .ad-card { background: white; border-radius: 25px; margin: 15px; overflow: hidden; display: flex; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.06); border: 1px solid #eee; }
+        .dist-tag { position: absolute; top: 10px; left: 10px; background: var(--gold); padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: 900; z-index: 5; }
+        .ad-card img { width: 100px; height: 100px; object-fit: cover; }
+        .ad-info { padding: 12px; flex: 1; }
+        .ad-info h3 { margin: 0; font-size: 15px; color: var(--main); }
+        .book-btn { background: var(--main); color: white; border: none; padding: 8px; border-radius: 10px; width: 100%; margin-top: 8px; font-weight: 900; cursor: pointer; }
 
-        /* الشريط السفلي */
-        .footer-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .footer-nav a { font-size: 26px; }
-
-        /* تعديلات الاتجاهات */
-        [dir="ltr"] .distance-badge { left: auto; right: 12px; }
+        /* شريط التواصل */
+        .nav-footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #ddd; z-index: 2500; }
+        
+        [dir="ltr"] .dist-tag { left: auto; right: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="marquee-bar">
-        <marquee id="newsBar">تريند للإعلان (Trend Adv) - شريكك الاستراتيجي للوصول إلى جمهورك المستهدف بأحدث تقنيات الـ GPS والأقرب إليك دائماً.</marquee>
+<div class="promo-header">
+    <marquee id="marquee">📢 عرض حصري للوكالات: اشترك الآن واعرض لوحاتك مجاناً لمدة 3 شهور! | Trend Adv بوابتك للوصول لآلاف المعلنين.</marquee>
+</div>
+
+<div class="app-top">
+    <div class="top-row">
+        <span style="font-size: 1.5rem; font-weight: 900;">TREND ADV</span>
+        <button class="lang-btn" onclick="switchLang()" id="lBtn">English</button>
     </div>
-
-    <div class="app-header">
-        <div class="header-flex">
-            <span id="txtLogo" style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">TREND ADV</span>
-            <select class="lang-select" onchange="changeLang(this.value)">
-                <option value="ar">العربية</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="zh">中文</option>
-            </select>
-        </div>
-        <div class="search-container">
-            <input type="text" id="mainSearchInput" placeholder="ابحث عن إعلانك في منطقتك..." onkeyup="startGlobalSearch()">
-            <button class="search-trigger" onclick="startGlobalSearch()"><i class="fa fa-location-crosshairs"></i></button>
-        </div>
+    <div class="search-area">
+        <input type="text" id="searchInput" placeholder="ابحث عن إعلانك في منطقتك..." onkeyup="runRadar()">
+        <button class="search-trigger" onclick="runRadar()"><i class="fa fa-location-arrow"></i></button>
     </div>
+</div>
 
-    <div id="map"></div>
+<div id="map"></div>
 
-    <div class="nav-grid">
-        <a href="#" class="nav-btn"><i class="fa fa-building"></i><span data-lang="agency">بوابة الوكالات</span></a>
-        <a href="#" class="nav-btn"><i class="fa fa-chart-line"></i><span data-lang="dashboard">لوحة التحكم</span></a>
-        <a href="#" class="nav-btn"><i class="fa fa-file-excel"></i><span data-lang="gsheet">جوجل شيت</span></a>
-        <a href="#" class="nav-btn"><i class="fa fa-plus-circle"></i><span data-lang="add">إضافة إعلان</span></a>
-        <a href="#" class="nav-btn"><i class="fa fa-address-card"></i><span data-lang="about">من نحن</span></a>
-        <a href="#" class="nav-btn"><i class="fa fa-headset"></i><span data-lang="support">الدعم الفني</span></a>
-    </div>
+<div class="dashboard">
+    <a href="#" class="dash-item"><i class="fa fa-building-user"></i><span data-i18n="agency">بوابة الوكالات</span></a>
+    <a href="#" class="dash-item"><i class="fa fa-chart-line"></i><span data-i18n="dash">لوحة التحكم</span></a>
+    <a href="#" class="dash-item"><i class="fa fa-file-excel"></i><span data-i18n="sheet">جوجل شيت</span></a>
+    <a href="#" class="dash-item"><i class="fa fa-plus-circle"></i><span data-i18n="add">إضافة إعلان</span></a>
+    <a href="#" class="dash-item"><i class="fa fa-info-circle"></i><span data-i18n="about">من نحن</span></a>
+    <a href="#" class="dash-item"><i class="fa fa-headset"></i><span data-i18n="support">الدعم</span></a>
+</div>
 
-    <div class="ads-list" id="adsGallery"></div>
+<div id="adsList"></div>
 
-    <div class="footer-nav">
-        <a href="https://wa.me/201027676344" style="color:#25d366"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" style="color:#1877f2"><i class="fab fa-facebook"></i></a>
-        <a href="#" style="color:#0a66c2"><i class="fab fa-linkedin"></i></a>
-        <a href="#" style="color:#ff0000"><i class="fab fa-youtube"></i></a>
-    </div>
+<div class="nav-footer">
+    <a href="https://wa.me/201027676344" style="color:#25d366"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" style="color:#1877f2"><i class="fab fa-facebook"></i></a>
+    <a href="#" style="color:#0a66c2"><i class="fab fa-linkedin"></i></a>
+    <a href="#" style="color:#ff0000"><i class="fab fa-youtube"></i></a>
+</div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        let map, userLocation, markersGroup, currentLang = 'ar';
-        let allAds = [];
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // بيانات تجريبية (Mock Data) عشان الزراير تشتغل فوراً
+    const mockData = [
+        { name: "إعلان كوبري أكتوبر - عبدالمنعم رياض", lat: 30.0490, lng: 31.2330, loc: "وسط البلد", img: "https://picsum.photos/100" },
+        { name: "شاشة يونيبول - طريق السويس", lat: 30.0700, lng: 31.4500, loc: "التجمع الخامس", img: "https://picsum.photos/101" },
+        { name: "لوحة طريق الإسكندرية الصحراوي", lat: 30.0100, lng: 31.0200, loc: "الشيخ زايد", img: "https://picsum.photos/102" }
+    ];
 
-        const i18n = {
-            ar: { agency: "بوابة الوكالات", dashboard: "لوحة التحكم", gsheet: "جوجل شيت", add: "إضافة إعلان", about: "من نحن", support: "الدعم الفني", placeholder: "ابحث عن إعلانك في منطقتك...", news: "تريند للإعلان (Trend Adv) - شريكك الاستراتيجي للأقرب إليك دائماً بالـ GPS.", unitM: "متر", unitK: "كم", book: "احجز الآن" },
-            en: { agency: "Agencies", dashboard: "Dashboard", gsheet: "G-Sheet", add: "Add Ad", about: "About Us", support: "Support", placeholder: "Search ads in your area...", news: "Trend Adv - Your strategic partner, always closest to you via GPS.", unitM: "m", unitK: "km", book: "Book Now" },
-            fr: { agency: "Agences", dashboard: "Tableau", gsheet: "G-Sheet", add: "Ajouter", about: "À propos", support: "Support", placeholder: "Rechercher des pubs...", news: "Trend Adv - Votre partenaire, toujours le plus proche via GPS.", unitM: "m", unitK: "km", book: "Réserver" },
-            de: { agency: "Agenturen", dashboard: "Dashboard", gsheet: "G-Sheet", add: "Hinzufügen", about: "Über uns", support: "Support", placeholder: "Suche Werbung...", news: "Trend Adv - Ihr Partner, per GPS immer am nächsten.", unitM: "m", unitK: "km", book: "Buchen" },
-            zh: { agency: "代理机构", dashboard: "仪表板", gsheet: "表格", add: "添加广告", about: "关于我们", support: "支持", placeholder: "搜索您区域的广告...", news: "Trend Adv - 您的合作伙伴，通过 GPS 始终离您最近。", unitM: "米", unitK: "公里", book: "现在预订" }
-        };
+    let map, userLoc, markersLayer, currentLang = 'ar';
 
-        function changeLang(lang) {
-            currentLang = lang;
-            const body = document.getElementById('appBody');
-            body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('mainSearchInput').placeholder = i18n[lang].placeholder;
-            document.getElementById('newsBar').innerText = i18n[lang].news;
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.innerText = i18n[lang][el.getAttribute('data-lang')];
-            });
-            startGlobalSearch();
-        }
+    const langSet = {
+        ar: { agency: "بوابة الوكالات", dash: "لوحة التحكم", sheet: "جوجل شيت", add: "إضافة إعلان", about: "من نحن", support: "الدعم", holder: "ابحث عن إعلانك في منطقتك...", unit: "متر", book: "احجز الآن", promo: "📢 عرض حصري للوكالات: اشترك الآن واعرض لوحاتك مجاناً لمدة 3 شهور!" },
+        en: { agency: "Agencies", dash: "Dashboard", sheet: "G-Sheet", add: "Post Ad", about: "About Us", support: "Support", holder: "Search ads in your area...", unit: "m", book: "Book Now", promo: "📢 Agency Exclusive: Join now and display your boards FREE for 3 months!" }
+    };
 
-        function initApp() {
-            map = L.map('map', { zoomControl: false }).setView([30.0444, 31.2357], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            markersGroup = L.layerGroup().addTo(map);
+    function switchLang() {
+        currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+        const t = langSet[currentLang];
+        document.getElementById('appFrame').dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+        document.getElementById('lBtn').innerText = (currentLang === 'ar') ? 'English' : 'عربي';
+        document.getElementById('searchInput').placeholder = t.holder;
+        document.getElementById('marquee').innerText = t.promo;
+        document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = t[el.getAttribute('data-i18n')]);
+        runRadar();
+    }
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-                    map.setView([userLocation.lat, userLocation.lng], 15);
-                    L.circle([userLocation.lat, userLocation.lng], { radius: 60, color: '#004e92', fillOpacity: 0.5 }).addTo(map);
-                    loadAds();
-                }, () => { loadAds(); });
-            }
-        }
+    function init() {
+        map = L.map('map', { zoomControl: false }).setView([30.0444, 31.2357], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        markersLayer = L.layerGroup().addTo(map);
 
-        async function loadAds() {
-            // ضع رابط API الخاص بك هنا
-            const API_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec";
-            try {
-                const res = await fetch(API_URL);
-                allAds = await res.json();
-                startGlobalSearch();
-            } catch (e) { console.error("Data Load Error"); }
-        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                userLoc = { lat: p.coords.latitude, lng: p.coords.longitude };
+                map.setView([userLoc.lat, userLoc.lng], 13);
+                L.circle([userLoc.lat, userLoc.lng], { radius: 100, color: '#004e92' }).addTo(map);
+                runRadar();
+            }, () => runRadar());
+        } else { runRadar(); }
+    }
 
-        function calcDist(lat1, lon1, lat2, lon2) {
-            const R = 6371e3;
-            const dLat = (lat2-lat1)*Math.PI/180;
-            const dLon = (lon2-lon1)*Math.PI/180;
-            const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        }
+    function calcDist(lat1, lon1, lat2, lon2) {
+        const R = 6371e3;
+        const dLat = (lat2-lat1)*Math.PI/180;
+        const dLon = (lon2-lon1)*Math.PI/180;
+        const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
 
-        function startGlobalSearch() {
-            const q = document.getElementById('mainSearchInput').value.toLowerCase();
-            let results = allAds.map(ad => {
-                const d = userLocation ? calcDist(userLocation.lat, userLocation.lng, ad.lat, ad.lng) : 0;
-                return { ...ad, distance: d };
-            }).sort((a, b) => a.distance - b.distance);
+    function runRadar() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        let list = mockData.map(ad => ({
+            ...ad,
+            distance: userLoc ? calcDist(userLoc.lat, userLoc.lng, ad.lat, ad.lng) : 0
+        })).sort((a, b) => a.distance - b.distance);
 
-            const filtered = results.filter(ad => (ad.siteName || "").toLowerCase().includes(q));
-            renderUI(filtered);
-            drawMarkers(filtered);
-        }
+        const filtered = list.filter(ad => ad.name.toLowerCase().includes(query) || ad.loc.toLowerCase().includes(query));
+        
+        const gal = document.getElementById('adsList');
+        gal.innerHTML = "";
+        markersLayer.clearLayers();
 
-        function renderUI(ads) {
-            const gallery = document.getElementById('adsGallery');
-            gallery.innerHTML = "";
-            ads.forEach(ad => {
-                const dDisplay = ad.distance < 1000 ? `${Math.round(ad.distance)} ${i18n[currentLang].unitM}` : `${(ad.distance/1000).toFixed(1)} ${i18n[currentLang].unitK}`;
-                gallery.innerHTML += `
-                    <div class="ad-item">
-                        <span class="distance-badge">${dDisplay}</span>
-                        <img class="ad-img" src="${ad.img || 'https://via.placeholder.com/120'}">
-                        <div class="ad-content">
-                            <h3>${ad.siteName}</h3>
-                            <p style="font-size:12px; color:#666;"><i class="fa fa-map-marker-alt"></i> ${ad.siteGeo || ''}</p>
-                            <button onclick="window.open('https://wa.me/201027676344')" style="background:var(--primary); color:white; border:none; padding:8px 15px; border-radius:12px; width:100%; font-weight:bold;">${i18n[currentLang].book}</button>
-                        </div>
-                    </div>`;
-            });
-        }
+        filtered.forEach(ad => {
+            const distTxt = ad.distance < 1000 ? `${Math.round(ad.distance)} ${langSet[currentLang].unit}` : `${(ad.distance/1000).toFixed(1)} km`;
+            
+            gal.innerHTML += `
+                <div class="ad-card">
+                    <span class="dist-tag">${distTxt}</span>
+                    <img src="${ad.img}">
+                    <div class="ad-info">
+                        <h3>${ad.name}</h3>
+                        <p style="font-size:11px; color:#777; margin:5px 0;">${ad.loc}</p>
+                        <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">${langSet[currentLang].book}</button>
+                    </div>
+                </div>`;
 
-        function drawMarkers(ads) {
-            markersGroup.clearLayers();
-            ads.forEach(ad => {
-                const icon = L.divIcon({ className: 'triangle-icon', iconSize: [24, 24] });
-                L.marker([ad.lat, ad.lng], { icon: icon }).addTo(markersGroup)
-                 .bindPopup(`<b>${ad.siteName}</b><br>${Math.round(ad.distance)} m`);
-            });
-        }
+            const icon = L.divIcon({ className: 'triangle-marker', iconSize: [20, 20] });
+            L.marker([ad.lat, ad.lng], { icon: icon }).addTo(markersLayer).bindPopup(ad.name);
+        });
+    }
 
-        window.onload = initApp;
-    </script>
+    window.onload = init;
+</script>
 </body>
 </html>
