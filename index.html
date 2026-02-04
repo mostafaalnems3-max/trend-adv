@@ -320,6 +320,72 @@ https://script.google.com/macros/s/AKfycbw8ZrQrl51ogJeOTo6ZWLSYQKo8BazR6bLJNLKAb
     function showMap() { document.getElementById('map').style.display = 'block'; var map = L.map('map').setView([30.04, 31.23], 11); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); setTimeout(() => map.invalidateSize(), 200); }
 
     window.onload = loadAds;
+
+<script>
+// 1. قاموس اللغات (تقدر تضيف لغات تانية هنا بسهولة)
+const translations = {
+    ar: {
+        title: "أكبر منصة لإعلانات الطرق",
+        placeholder: "ابحث عن منطقة أو شارع...",
+        btn: "بحث",
+        result: "نتائج البحث في: ",
+        available: "الوكالات المتوفرة في هذه المنطقة:",
+        dir: "rtl"
+    },
+    en: {
+        title: "The Largest Billboard Platform",
+        placeholder: "Search for area or street...",
+        btn: "Search",
+        result: "Search results in: ",
+        available: "Available agencies in this area:",
+        dir: "ltr"
+    },
+    fr: {
+        title: "La plus grande plateforme d'affichage",
+        placeholder: "Rechercher un quartier ou une rue...",
+        btn: "Chercher",
+        result: "Résultats de recherche pour: ",
+        available: "Agences disponibles dans cette zone:",
+        dir: "ltr"
+    }
+};
+
+// 2. دالة تبديل اللغة (السحر اللي بيقلب الموقع)
+function changeLanguage(lang) {
+    const t = translations[lang];
+    
+    // تحديث العناوين والنصوص
+    document.getElementById('mainTitle').innerText = t.title;
+    document.getElementById('mainSearchInput').placeholder = t.placeholder;
+    document.getElementById('searchBtn').innerText = t.btn;
+    
+    const agenciesText = document.getElementById('agenciesText');
+    if(agenciesText) agenciesText.innerText = t.available;
+    
+    // تغيير اتجاه الصفحة بالكامل
+    document.body.dir = t.dir;
+    
+    // تغيير الخط
+    document.body.style.fontFamily = (lang === 'ar') ? "'Cairo', sans-serif" : "'Segoe UI', Tahoma, sans-serif";
+}
+
+// 3. دالة البحث العالمية
+function startGlobalSearch() {
+    const query = document.getElementById('mainSearchInput').value.trim();
+    const searchHeader = document.getElementById('searchHeader');
+    const areaNameSpan = document.getElementById('areaName');
+
+    if (query !== "") {
+        searchHeader.style.display = "block";
+        areaNameSpan.innerText = query;
+        // الخطوة الجاية هنربط دي بالداتا الحقيقية
+    } else {
+        alert(document.body.dir === 'rtl' ? "برجاء كتابة اسم المنطقة" : "Please enter an area name");
+    }
+}
+</script>
+
+
 </script>
 </body>
 </html>
