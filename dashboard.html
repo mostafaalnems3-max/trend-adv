@@ -215,23 +215,21 @@
         e.preventDefault();
         alert("تم إرسال اللوحة! ستظهر في التقرير بمجرد مراجعة الإدارة.");
     };
-</script>
-
-// دالة معاينة الـ QR فور الرفع
-function previewQR(event) {
-    const reader = new FileReader();
-    const previewArea = document.getElementById('qrPreviewArea');
-    const previewImage = document.getElementById('qrPreviewImage');
-    
-    if (event.target.files && event.target.files[0]) {
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewArea.style.display = 'block';
+    function previewQR(event) {
+        const reader = new FileReader();
+        const previewArea = document.getElementById('qrPreviewArea');
+        const previewImage = document.getElementById('qrPreviewImage');
+        
+        if (event.target.files && event.target.files[0]) {
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewArea.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
         }
-        reader.readAsDataURL(event.target.files[0]);
     }
-}
 
-
+</script>
 </body>
 </html>
+
