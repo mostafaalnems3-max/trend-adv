@@ -3,138 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trend Adv | منصة حجز اللوحات الإعلانية في مصر</title>
-    <meta name="description" content="ترند أدڤ هي المنصة الأولى لحجز اللوحات الإعلانية. ابحث على الخريطة واحجز إعلانك فوراً عبر واتساب.">
-    <meta name="keywords" content="إعلانات, لوحات إعلانية, مصر, حجز إعلانات, Trend Adv">
-<meta name="google-site-verification" content="G_2ojgSFVTup6JkRyIdTYQYUt7hWcIfWNGNRrgOyqDc" />
-
-<!-- Google Tag Manager -->
-
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MVBRXT22');</script>
-<!-- End Google Tag Manager -->
-
+    <title>Trend Adv | منصة حجز اللوحات الإعلانية</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-    :root {
-        --primary: #004e92;
-        --accent: #ffcc00;
-        --glass: rgba(255, 255, 255, 0.9);
-    }
-
-    body {
-        transition: all 0.4s ease;
-        background: #f4f7f6;
-        margin: 0;
-        padding: 0;
-        font-family: 'Cairo', sans-serif; /* خط عربي فخم */
-        overflow-x: hidden;
-    }
-
-    /* محول اللغات العائم */
-    .lang-selector {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 2000;
-        background: var(--glass);
-        backdrop-filter: blur(10px);
-        border: 1px solid #ddd;
-        padding: 5px;
-        border-radius: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    /* واجهة البحث الكبيرة (Hero Section) */
-    .hero-search {
-        background: linear-gradient(135deg, #000428, #004e92);
-        padding: 100px 20px;
-        text-align: center;
-        clip-path: ellipse(150% 100% at 50% 0%);
-    }
-
-    .search-box-wrapper {
-        max-width: 700px;
-        margin: 0 auto;
-        display: flex;
-        background: white;
-        padding: 8px;
-        border-radius: 60px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    }
-
-    .search-box-wrapper input {
-        flex: 1;
-        border: none;
-        padding: 15px 25px;
-        border-radius: 60px;
-        outline: none;
-        font-size: 18px;
-    }
-
-    .search-box-wrapper button {
-        background: var(--accent);
-        color: #000;
-        border: none;
-        padding: 0 40px;
-        border-radius: 60px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-        
-
-<div class="lang-selector">
-    <select id="langPicker" onchange="changeLanguage(this.value)">
-        <option value="ar">العربية 🇪🇬</option>
-        <option value="en">English 🇺🇸</option>
-        <option value="fr">Français 🇫🇷</option>
-    </select>
-</div>
-
-<div class="hero-search">
-    <h1 id="mainTitle" style="color: white; margin-bottom: 30px;">أكبر منصة لإعلانات الطرق</h1>
-    
-    <div class="search-box-wrapper">
-        <input type="text" id="mainSearchInput" placeholder="ابحث عن منطقة أو شارع...">
-        <button id="searchBtn" onclick="startGlobalSearch()">بحث</button>
-    </div>
-</div>
-
-<div id="searchHeader" style="padding: 40px 20px; display: none; max-width: 1200px; margin: 0 auto; text-align: right;">
-    <h2 id="resultTitle" style="color: #004e92;">نتائج البحث في: <span id="areaName"></span></h2>
-    <p id="agenciesText" style="color: #666;">الوكالات المتوفرة في هذه المنطقة:</p>
-    <div id="agenciesInArea" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;"></div>
-</div>
-
-<div id="adsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
-</div>
-
-        @keyframes shine { 
-            0% { filter: drop-shadow(0 0 5px var(--cyan)); }
-            50% { filter: drop-shadow(0 0 15px var(--purple)); }
-            100% { filter: drop-shadow(0 0 5px var(--cyan)); }
+        :root {
+            --primary: #004e92;
+            --accent: #ffcc00;
+            --dark-blue: #000428;
+            --cyan: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.9);
         }
 
+        body {
+            background: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            transition: all 0.4s ease;
+        }
+
+        /* محول اللغات العائم */
+        .lang-selector {
+            position: fixed; top: 20px; left: 20px; z-index: 2000;
+            background: var(--glass); backdrop-filter: blur(10px);
+            border: 1px solid #ddd; padding: 5px 15px; border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .lang-selector select { border: none; background: transparent; font-weight: bold; outline: none; cursor: pointer; }
+
+        /* Header & Logo */
+        header { text-align: center; padding: 20px; background: white; }
+        .logo { font-size: 2.5rem; font-weight: bold; }
+        .t-brand { color: var(--primary); font-size: 3rem; }
+        .brand-name { color: var(--dark-blue); }
+
+        /* Hero Search Section */
+        .hero-search {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary));
+            padding: 80px 20px; text-align: center; color: white;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .search-box-wrapper {
+            max-width: 700px; margin: 30px auto; display: flex;
+            background: white; padding: 8px; border-radius: 60px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .search-box-wrapper input {
+            flex: 1; border: none; padding: 15px 25px;
+            border-radius: 60px; outline: none; font-size: 18px; color: #333;
+        }
+        .search-btn {
+            background: var(--accent); color: #000; border: none;
+            padding: 0 40px; border-radius: 60px; font-weight: bold;
+            cursor: pointer; transition: 0.3s;
+        }
+        .search-btn:hover { transform: scale(1.05); background: #f0c000; }
+
+        /* Promo Banner */
         .promo-banner {
             background: linear-gradient(45deg, #9d50bb, #00d2ff);
             overflow: hidden; white-space: nowrap; padding: 12px 0;
             box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
         }
-
         .scrolling-text {
             display: inline-block; animation: marquee 25s linear infinite;
-            font-weight: bold; color: white; font-size: 1.2rem;
+            font-weight: bold; color: white; font-size: 1.1rem;
+        }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* Gallery Structure */
+        #adsGallery {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px; padding: 40px 20px; max-width: 1200px; margin: 0 auto;
         }
 
+        .ad-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s;
+            position: relative;
+        }
+        .ad-card:hover { transform: translateY(-10px); }
+        .ad-card img { width: 100%; height: 200px; object-fit: cover; }
+        .duration-tag {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--accent); padding: 5px 15px;
+            border-radius: 20px; font-size: 12px; font-weight: bold;
+        }
+        .card-body { padding: 20px; text-align: center; }
+        .book-btn {
+            width: 100%; padding: 12px; background: var(--primary);
+            color: white; border: none; border-radius: 10px;
+            font-weight: bold; cursor: pointer; margin-top: 15px;
+        }
+
+        /* Controls */
+        .main-controls { text-align: center; padding: 30px; }
+        .btn-action {
+            padding: 15px 30px; margin: 10px; border-radius: 50px;
+            border: none; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-map { background: var(--primary); color: white; }
+        .btn-agency { background: #28a745; color: white; text-decoration: none; display: inline-block; }
+
+        /* Map */
+        #map { height: 400px; width: 90%; margin: 20px auto; border-radius: 20px; display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* Social Sidebar */
+        .social-sidebar { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
+        .social-sidebar a { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 20px; }
+        .wa { background: #25d366; } .fb { background: #1877f2; } .li { background: #0077b5; }
     </style>
 </head>
 <body>
+
+<div class="lang-selector">
+    <select id="langPicker" onchange="changeLanguage(this.value)">
+        <option value="ar">العربية 🇪🇬</option>
+        <option value="en">English 🇺🇸</option>
+    </select>
+</div>
+
+<header>
+    <div class="logo"><span class="t-brand">T</span><span class="brand-name">rend Adv</span></div>
+    <div id="subTitle">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
+</header>
+
+<div class="promo-banner">
+    <div class="scrolling-text" id="promoText">
+        📢 عرض حصري للوكالات: اشترك الآن واعرض لوحاتك مجاناً لمدة 3 شهور! — Trend Adv بوابتك للوصول لآلاف المعلنين — 
+    </div>
+</div>
+
+<div class="hero-search">
+    <h1 id="mainTitle">أكبر منصة لإعلانات الطرق</h1>
+    <div class="search-box-wrapper">
+        <input type="text" id="mainSearchInput" placeholder="ابحث عن منطقة أو شارع...">
+        <button class="search-btn" id="searchBtn" onclick="startGlobalSearch()">بحث</button>
+    </div>
+</div>
+
+<div class="main-controls">
+    <button class="btn-action btn-map" id="mapBtn" onclick="showMap()">📍 استكشف الاعلانات على الخريطة</button>
+    <a href="dashboard.html" class="btn-action btn-agency" id="agencyBtn">🏢 بوابة الوكالات (لوحة التحكم)</a>
+</div>
+
+<div id="map"></div>
+
+<div id="adsGallery">
+    </div>
 
 <div class="social-sidebar">
     <a href="https://wa.me/201027676344" class="wa"><i class="fab fa-whatsapp"></i></a>
@@ -142,192 +164,109 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="https://www.linkedin.com/in/mostafa-alnems-02b569330" class="li"><i class="fab fa-linkedin-in"></i></a>
 </div>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MVBRXT22"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<header>
-    <div class="logo">
-        <span class="t-brand">T</span><span class="brand-name">rend Adv</span>
-    </div>
-    <div style="color: #888; margin-top: 10px; font-size: 1.1rem;">أول منصة لخريطة الإعلانات في مصر والوطن العربي</div>
-</header>
-
-<div class="promo-banner">
-    <div class="scrolling-text">
-        📢 عرض حصري للوكالات: اشترك الآن واعرض لوحاتك مجاناً لمدة 3 شهور! — Trend Adv بوابتك للوصول لآلاف المعلنين — 
-    </div>
-</div>
-
-<section class="intro-box">
-    <h2 style="color:var(--cyan)">إدارة الوكالات الإعلانية 🏢</h2>
-    <p>سجل لوحتك الآن وانضم لأكبر تجمع إعلاني تفاعلي. نحن نسهل على المعلن الوصول إليك في ثوانٍ.</p>
-</section>
-
-<div class="features-grid">
-    <div class="feature-item">
-        <i class="fas fa-map-marked-alt"></i>
-        <h4>خريطة ذكية</h4>
-        <p>عرض تفاعلي لمواقع لوحاتك بدقة متناهية.</p>
-    </div>
-    <div class="feature-item">
-        <i class="fas fa-chart-line"></i>
-        <h4>انتشار أوسع</h4>
-        <p>لوحتك ستكون أمام آلاف المعلنين يومياً.</p>
-    </div>
-    <div class="feature-item">
-        <i class="fas fa-bolt"></i>
-        <h4>حجز مباشر</h4>
-        <p>تواصل فوري وسريع عبر واتساب للحجز.</p>
-    </div>
-    <div class="feature-item">
-        <i class="fas fa-gift"></i>
-        <h4>عروض حصرية</h4>
-        <p>اشتراكات مجانية تبدأ من 3 شهور للوكالات.</p>
-    </div>
-</div>
-
-<div class="main-controls">
-    <button class="btn-action" onclick="showMap()">📍 استكشف الاعلانات المحيطة بك</button>
-
-<button class="btn-action btn-agency" onclick="window.location.href='dashboard.html'">
-   🏢 بوابة الوكالات (لوحة التحكم)
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-O4PT3qyH5Ci0K6EsW/exec";
+    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec";
+    
+    let allAds = [];
 
-    const backupImages = [
-        "https://i.ibb.co/qMJvnDNC/1000133864.png", "https://i.ibb.co/Kc8kwrtP/1000133863.png",
-        "https://i.ibb.co/84L1KGxk/1000133862.png", "https://i.ibb.co/5g51xgQj/1000133861.png",
-        "https://i.ibb.co/9HMpZwwq/1000133860.png", "https://i.ibb.co/fVtrRz2K/1000133859.png",
-        "https://i.ibb.co/R4s051YR/1000133858.png", "https://i.ibb.co/4whPdcyk/1000133857.png",
-        "https://i.ibb.co/Kp0bqwqw/1000133856.png", "https://i.ibb.co/XfvcHC0h/1000133855.png",
-        "https://i.ibb.co/ZRVxdpY3/1000133854.png", "https://i.ibb.co/LHhb2J4/1000133853.png",
-        "https://i.ibb.co/9k64jkV0/1000133852.png", "https://i.ibb.co/mCJfJGD4/1000133851.png",
-        "https://i.ibb.co/nMtMK9C4/1000133850.png", "https://i.ibb.co/k2M5vp4K/1000133849.png",
-        "https://i.ibb.co/Hp7mtrR0/1000133848.png", "https://i.ibb.co/f6bTxfY/1000133847.png",
-        "https://i.ibb.co/fz9RN4ff/1000133846.png"
-    ];
+    // قاموس اللغات
+    const translations = {
+        ar: {
+            title: "أكبر منصة لإعلانات الطرق",
+            sub: "أول منصة لخريطة الإعلانات في مصر والوطن العربي",
+            placeholder: "ابحث عن منطقة أو شارع...",
+            searchBtn: "بحث",
+            mapBtn: "📍 استكشف الاعلانات على الخريطة",
+            agencyBtn: "🏢 بوابة الوكالات (لوحة التحكم)",
+            book: "احجز الآن",
+            promo: "📢 عرض حصري للوكالات: اشترك الآن واعرض لوحاتك مجاناً لمدة 3 شهور!",
+            dir: "rtl"
+        },
+        en: {
+            title: "The Largest Billboard Platform",
+            sub: "The first advertising map platform in the Arab world",
+            placeholder: "Search for area or street...",
+            searchBtn: "Search",
+            mapBtn: "📍 Explore Ads on Map",
+            agencyBtn: "🏢 Agency Portal (Dashboard)",
+            book: "Book Now",
+            promo: "📢 Exclusive Offer: Join now and display your boards for FREE for 3 months!",
+            dir: "ltr"
+        }
+    };
+
+    function changeLanguage(lang) {
+        const t = translations[lang];
+        document.body.dir = t.dir;
+        document.getElementById('mainTitle').innerText = t.title;
+        document.getElementById('subTitle').innerText = t.sub;
+        document.getElementById('mainSearchInput').placeholder = t.placeholder;
+        document.getElementById('searchBtn').innerText = t.searchBtn;
+        document.getElementById('mapBtn').innerText = t.mapBtn;
+        document.getElementById('agencyBtn').innerText = t.agencyBtn;
+        document.getElementById('promoText').innerText = t.promo;
+        renderAds(allAds);
+    }
 
     async function loadAds() {
         const gal = document.getElementById('adsGallery');
+        gal.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>جاري تحميل اللوحات الإعلانية...</p>";
         try {
             const res = await fetch(GOOGLE_URL);
-            const data = await res.json();
-            gal.innerHTML = "";
-            if(data && data.length > 0) {
-                data.forEach(ad => renderCard(ad.title, ad.img, ad.coords, ad.duration));
-            }
-            backupImages.forEach((url, i) => renderCard(`موقع Trend #${i+1}`, url, "موقع استراتيجي", "3 شهور مجاناً"));
-        } catch (e) { 
-            gal.innerHTML = "";
-            backupImages.forEach((url, i) => renderCard(`موقع Trend #${i+1}`, url, "موقع استراتيجي", "3 شهور مجاناً"));
+            allAds = await res.json();
+            renderAds(allAds);
+        } catch (e) {
+            console.error("Fetch error");
+            gal.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>عذراً، لا يمكن الاتصال بالسيرفر حالياً.</p>";
         }
     }
 
-https://script.google.com/macros/s/AKfycbw8ZrQrl51ogJeOTo6ZWLSYQKo8BazR6bLJNLKAbFU51B6ydJZYklsgcKuOMjxHuwiS/exec
-
-    function renderCard(title, img, coords, duration) {
-        document.getElementById('adsGallery').innerHTML += `
-            <div class="ad-card">
-                <div class="duration-tag">${duration || '3 شهور مجاناً'}</div>
-                <img src="${img}" onerror="this.src='https://via.placeholder.com/400x250/111/00d2ff?text=Trend+Adv'">
-                <div class="card-body">
-                    <b style="color:var(--cyan); font-size:1.1rem;">${title}</b>
-                    <p style="font-size:11px; color:#888; margin: 10px 0;">${coords || 'موقع مميز'}</p>
-                    <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
-                </div>
-            </div>`;
+    function renderAds(ads) {
+        const gal = document.getElementById('adsGallery');
+        gal.innerHTML = "";
+        const lang = document.getElementById('langPicker').value;
+        
+        ads.forEach(ad => {
+            gal.innerHTML += `
+                <div class="ad-card">
+                    <div class="duration-tag">${ad.duration || '3 Months Free'}</div>
+                    <img src="${ad.siteImg || ad.img}" onerror="this.src='https://via.placeholder.com/400x250?text=Trend+Adv'">
+                    <div class="card-body">
+                        <h3 style="color:var(--primary); margin:0;">${ad.siteName || ad.title}</h3>
+                        <p style="font-size:14px; color:#666;">${ad.siteGeo || ad.coords}</p>
+                        <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">${translations[lang].book}</button>
+                    </div>
+                </div>`;
+        });
     }
 
-    async function submitToSheet() {
-        const btn = document.getElementById('sendBtn');
-        const payload = {
-            title: document.getElementById('siteName').value,
-            img: document.getElementById('siteImg').value,
-            coords: document.getElementById('siteGeo').value,
-            duration: document.getElementById('siteDuration').value
-        };
-        if(!payload.title || !payload.img) return alert("برجاء إكمال البيانات");
-        btn.innerText = "جاري الحفظ...";
-        try {
-            await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("تم التسجيل بنجاح! سيتم مراجعة لوحتك وظهورها فوراً.");
-            location.reload();
-        } catch (e) { alert("حدث خطأ في الاتصال بالسيرفر"); }
-    
-    function toggleAdmin() { const p = document.getElementById('adminPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
-    function showMap() { document.getElementById('map').style.display = 'block'; var map = L.map('map').setView([30.04, 31.23], 11); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); setTimeout(() => map.invalidateSize(), 200); }
+    function startGlobalSearch() {
+        const query = document.getElementById('mainSearchInput').value.toLowerCase();
+        const filtered = allAds.filter(ad => 
+            (ad.siteName || ad.title).toLowerCase().includes(query) || 
+            (ad.siteGeo || ad.coords).toLowerCase().includes(query)
+        );
+        renderAds(filtered);
+    }
+
+    function showMap() {
+        const mapDiv = document.getElementById('map');
+        mapDiv.style.display = 'block';
+        const map = L.map('map').setView([30.0444, 31.2357], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        allAds.forEach(ad => {
+            // محاكاة وضع ماركر لو البيانات فيها إحداثيات حقيقية
+            if(ad.siteGeo && ad.siteGeo.includes(',')) {
+                const latlng = ad.siteGeo.split(',');
+                L.marker([latlng[0], latlng[1]]).addTo(map).bindPopup(ad.siteName);
+            }
+        });
+        setTimeout(() => map.invalidateSize(), 200);
+    }
 
     window.onload = loadAds;
-
-<script>
-// 1. قاموس اللغات (تقدر تضيف لغات تانية هنا بسهولة)
-const translations = {
-    ar: {
-        title: "أكبر منصة لإعلانات الطرق",
-        placeholder: "ابحث عن منطقة أو شارع...",
-        btn: "بحث",
-        result: "نتائج البحث في: ",
-        available: "الوكالات المتوفرة في هذه المنطقة:",
-        dir: "rtl"
-    },
-    en: {
-        title: "The Largest Billboard Platform",
-        placeholder: "Search for area or street...",
-        btn: "Search",
-        result: "Search results in: ",
-        available: "Available agencies in this area:",
-        dir: "ltr"
-    },
-    fr: {
-        title: "La plus grande plateforme d'affichage",
-        placeholder: "Rechercher un quartier ou une rue...",
-        btn: "Chercher",
-        result: "Résultats de recherche pour: ",
-        available: "Agences disponibles dans cette zone:",
-        dir: "ltr"
-    }
-};
-
-// 2. دالة تبديل اللغة (السحر اللي بيقلب الموقع)
-function changeLanguage(lang) {
-    const t = translations[lang];
-    
-    // تحديث العناوين والنصوص
-    document.getElementById('mainTitle').innerText = t.title;
-    document.getElementById('mainSearchInput').placeholder = t.placeholder;
-    document.getElementById('searchBtn').innerText = t.btn;
-    
-    const agenciesText = document.getElementById('agenciesText');
-    if(agenciesText) agenciesText.innerText = t.available;
-    
-    // تغيير اتجاه الصفحة بالكامل
-    document.body.dir = t.dir;
-    
-    // تغيير الخط
-    document.body.style.fontFamily = (lang === 'ar') ? "'Cairo', sans-serif" : "'Segoe UI', Tahoma, sans-serif";
-}
-
-// 3. دالة البحث العالمية
-function startGlobalSearch() {
-    const query = document.getElementById('mainSearchInput').value.trim();
-    const searchHeader = document.getElementById('searchHeader');
-    const areaNameSpan = document.getElementById('areaName');
-
-    if (query !== "") {
-        searchHeader.style.display = "block";
-        areaNameSpan.innerText = query;
-        // الخطوة الجاية هنربط دي بالداتا الحقيقية
-    } else {
-        alert(document.body.dir === 'rtl' ? "برجاء كتابة اسم المنطقة" : "Please enter an area name");
-    }
-}
-
-
-
 </script>
 
 </body>
