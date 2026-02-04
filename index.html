@@ -373,6 +373,26 @@ function renderAds(adsToDraw) {
 window.onload = loadAds;
 
 
+// دالة تحديد موقع المستخدم (GPS)
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+            console.log("تم تحديد موقعك:", userLat, userLon);
+            // تحريك الخريطة لموقع اليوزر
+            if(typeof map !== 'undefined') {
+                map.setView([userLat, userLon], 13);
+                L.marker([userLat, userLon]).addTo(map).bindPopup("أنت هنا").openPopup();
+            }
+        }, () => {
+            alert("يرجى تفعيل الـ GPS لخدمة أدق");
+        });
+    }
+}
+// شغل الـ GPS أول ما الموقع يفتح
+window.addEventListener('load', getLocation);
+
 </script>
 </body>
 </html>
