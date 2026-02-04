@@ -126,6 +126,24 @@
     padding: 60px 20px !important;
 }
 .search-box-wrapper { 
+
+/* سطر 134: شكل المثلث الأصفر للعلامات */
+.triangle-marker {
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 22px solid #ffc107; /* لون تريند */
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+}
+/* مكان الخريطة */
+#map { 
+    height: 350px; 
+    width: 95%; 
+    margin: 10px auto; 
+    border-radius: 20px; 
+    display: block; 
+}
+
     border-radius: 30px !important; 
     background: #ffffff; 
     padding: 6px !important; 
@@ -372,27 +390,38 @@ function renderAds(adsToDraw) {
 // 5. أمر التشغيل التلقائي
 window.onload = loadAds;
 
+let map, userLocation, markersGroup;
+let allAds = [];
 
-// دالة تحديد موقع المستخدم (GPS)
-function getLocation() {
+// دالة تشغيل الخريطة والـ GPS
+function initApp() {
+    // 1. تشغيل الخريطة
+    map = L.map('map').setView([30.0444, 31.2357], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    markersGroup = L.layerGroup().addTo(map);
+
+    // 2. طلب موقع اليوزر
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const userLat = position.coords.latitude;
-            const userLon = position.coords.longitude;
-            console.log("تم تحديد موقعك:", userLat, userLon);
-            // تحريك الخريطة لموقع اليوزر
-            if(typeof map !== 'undefined') {
-                map.setView([userLat, userLon], 13);
-                L.marker([userLat, userLon]).addTo(map).bindPopup("أنت هنا").openPopup();
-            }
-        }, () => {
-            alert("يرجى تفعيل الـ GPS لخدمة أدق");
-        });
+        navigator.geolocation.getCurrentPosition(pos => {
+            userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+            map.setView([userLocation.lat, userLocation.lng], 15);
+            L.marker([userLocation.lat, userLocation.lng]).addTo(map).bindPopup("أنت هنا").openPopup();
+            loadAds(); // حمل البيانات بعد تحديد موقعك
+        }, () => { alert("افتح الـ GPS عشان نشوف الأقرب ليك"); loadAds(); });
     }
 }
-// شغل الـ GPS أول ما الموقع يفتح
-window.addEventListener('load', getLocation);
+
+function getDistanceInMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371e3; // نصف قطر الأرض بالأمتار
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
 
 </script>
+
 </body>
 </html>
