@@ -66,7 +66,42 @@
 
     <div id="sitesStep" class="card hidden">
         <div class="step-title"><i class="fas fa-chart-line"></i> <h3>الخطوة 2: إدارة المواقع والإحصائيات</h3></div>
-        <div id="agencyBadge" class="badge">الوكالة: <span id="currentAgencyName"></span></div>
+        
+
+<form id="uploadForm" style="margin-top:20px; background: #fafafa; padding: 20px; border-radius: 15px; border: 1px dashed #ddd;">
+    <div class="form-group">
+        <label>وصف الموقع الجديد:</label>
+        <input type="text" name="siteName" placeholder="مثلاً: لوحة طريق الجيش - سبورتنج" required>
+    </div>
+
+    <div class="form-group">
+        <label>الموقع الجغرافي:</label>
+        <input type="text" id="locationInput" name="location" readonly placeholder="تحديد الإحداثيات">
+        <button type="button" class="gps-btn" onclick="getLocation()"><i class="fas fa-map-marker-alt"></i> تحديد موقع اللوحة الآن</button>
+    </div>
+
+    <div class="form-group">
+        <label><i class="fas fa-image"></i> صور المعاينة للجمهور:</label>
+        <input type="file" name="img1" accept="image/*" required style="margin-bottom:8px;">
+        <p style="font-size:11px; color:#888;">يمكنك رفع صورة واحدة أساسية للموقع.</p>
+    </div>
+
+    <div class="form-group" style="border: 2px solid #00bcd4; padding: 15px; border-radius: 12px; background: #f0fdff; margin-top: 20px;">
+        <label style="color: #008b9a; font-weight: bold;"><i class="fas fa-certificate"></i> إثبات ملكية وترخيص اللوحة (QR Code):</label>
+        <p style="font-size:11px; color:#555; margin-bottom: 10px;">ارفع صورة الـ QR لضمان مصداقية اللوحة وظهورها للجمهور.</p>
+        
+        <input type="file" name="qr" id="qrInput" accept="image/*" required onchange="previewQR(event)">
+        
+        <div id="qrPreviewArea" style="margin-top:15px; text-align:center; display:none; background: white; padding: 10px; border-radius: 10px; border: 1px solid #ceeef2;">
+            <p style="font-size:11px; color:#666;">معاينة الـ QR المرفوع:</p>
+            <img id="qrPreviewImage" src="#" alt="QR Preview" style="max-width: 120px; border: 2px solid #ddd; border-radius: 8px; margin: 10px 0;">
+            <p style="font-size:11px; color:var(--success); font-weight:bold;"><i class="fas fa-check-circle"></i> جاهز للفحص والتوثيق</p>
+        </div>
+    </div>
+
+    <button type="submit" class="btn-primary" id="submitBtn" style="margin-top: 20px;">تفعيل الموقع (أول 3 شهور مجاناً) 🎁</button>
+</form>
+
         
         <form id="uploadForm" style="margin-top:20px; background: #fafafa; padding: 20px; border-radius: 15px; border: 1px dashed #ddd;">
             <div class="form-group">
