@@ -3,78 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Adv | لوحة التحكم المتطورة</title>
+    <title>Trend Adv | منصة إدارة اللوحات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --main: #00bcd4; --bg: #f0f2f5; --card: #ffffff; --text: #1c1e21; }
+        :root { --main: #00bcd4; --bg: #f0f2f5; --card: #ffffff; --text: #1c1e21; --accent: #ff9800; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; align-items: center; }
         .header { width: 100%; background: #1a1a1a; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .back-btn { color: white; text-decoration: none; font-size: 14px; border: 1px solid #444; padding: 6px 15px; border-radius: 20px; transition: 0.3s; }
-        .back-btn:hover { background: var(--main); border-color: var(--main); color: #000; }
         .add-btn { margin-top: 40px; background: var(--main); color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(0,188,212,0.3); transition: 0.3s; display: flex; align-items: center; gap: 10px; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: var(--card); width: 100%; max-width: 500px; padding: 30px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; max-height: 90vh; overflow-y: auto; }
-        h3 { text-align: center; color: #333; margin-bottom: 25px; }
         .form-group { margin-bottom: 15px; }
-        input[type="text"], input[type="file"] { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
-        .submit-btn { width: 100%; background: var(--main); color: white; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .cancel-btn { width: 100%; background: none; color: #999; border: none; padding: 10px; cursor: pointer; margin-top: 5px; font-size: 14px; }
+        label { font-size: 13px; font-weight: bold; display: block; margin-bottom: 5px; color: #555; }
+        input[type="text"], input[type="tel"], input[type="file"] { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+        .gps-btn { background: #4caf50; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 12px; cursor: pointer; margin-top: 5px; width: 100%; }
+        .payment-info { background: #fff3e0; border: 1px dashed var(--accent); padding: 10px; border-radius: 10px; margin: 15px 0; font-size: 13px; color: #e65100; text-align: center; }
+        .submit-btn { width: 100%; background: var(--main); color: white; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .cancel-btn { width: 100%; background: none; color: #999; border: none; padding: 10px; cursor: pointer; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div style="font-weight: bold; font-size: 20px;">Trend Adv <span style="font-weight: normal; font-size: 14px; opacity: 0.7;">Dashboard</span></div>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> الخريطة</a>
+        <div style="font-weight: bold; font-size: 20px;">Trend Adv <span style="font-weight: normal; font-size: 14px; opacity: 0.7;">Business</span></div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> عرض المنصة</a>
     </header>
 
     <button class="add-btn" id="openModal">
-        <i class="fas fa-plus-circle"></i> إضافة لوحة إعلانية جديدة
+        <i class="fas fa-plus-circle"></i> إضافة موقع إعلاني جديد
     </button>
 
     <div id="adModal" class="modal">
         <div class="modal-content">
-            <h3>تسجيل بيانات اللوحة</h3>
+            <h3>🚀 تسجيل بيانات الموقع</h3>
+            
+            <div class="payment-info">
+                <i class="fas fa-info-circle"></i> رسوم عرض الموقع: <strong>100 ج.م</strong> / شهرياً
+            </div>
+
             <form id="uploadForm">
                 <div class="form-group">
-                    <input type="text" name="siteName" placeholder="اسم الوكالة / اللوحة" required>
+                    <label>🏢 اسم الوكالة المالكة:</label>
+                    <input type="text" name="agencyName" placeholder="مثال: وكالة ترند للدعاية" required>
                 </div>
+
                 <div class="form-group">
-                    <label style="font-size:12px;">📸 الصورة الأساسية:</label>
+                    <label>📍 اسم الموقع الوصفي:</label>
+                    <input type="text" name="siteName" placeholder="مثال: لوحة كوبري ستانلي - اتجاه محطة الرمل" required>
+                </div>
+
+                <div class="form-group">
+                    <label>🗺️ الموقع الجغرافي (GPS):</label>
+                    <input type="text" id="locationInput" name="location" placeholder="سيتم التحديد تلقائياً" required readonly>
+                    <button type="button" class="gps-btn" onclick="getLocation()"><i class="fas fa-map-marker-alt"></i> تحديد موقعي الحالي الآن</button>
+                </div>
+
+                <div class="form-group">
+                    <label>📞 واتساب التواصل (للجمهور):</label>
+                    <input type="tel" name="phone" placeholder="010xxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>🖼️ صور المعاينة (الأساسية):</label>
                     <input type="file" name="img1" accept="image/*" required>
                 </div>
+
                 <div class="form-group">
-                    <label style="font-size:12px;">📸 صور إضافية:</label>
-                    <input type="file" name="img2" accept="image/*" style="margin-bottom:5px;">
-                    <input type="file" name="img3" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="location" placeholder="الإحداثيات (مثلاً: 30.1, 31.4)" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="phone" placeholder="رقم واتساب الوكالة (مثلاً: 010xxxxxxxx)" required>
-                </div>
-                <div class="form-group">
-                    <label style="font-size:12px;">🛡️ صورة QR الرخصة:</label>
+                    <label>🛡️ صورة QR الترخيص (للمصداقية):</label>
                     <input type="file" name="qr" accept="image/*" required>
                 </div>
-                <button type="submit" class="submit-btn" id="submitBtn">رفع اللوحة للمراجعة 🚀</button>
+
+                <button type="submit" class="submit-btn" id="submitBtn">حفظ وتفعيل العرض 💰</button>
                 <button type="button" class="cancel-btn" id="closeModal">إلغاء</button>
             </form>
         </div>
     </div>
 
     <script>
-        // الرابط تم وضعه هنا بشكل صحيح داخل متغير
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwDFvV3u1Y9RhRxth7fEMzvyHhkE5K2jf0wdHrjNpBcsv3nywltpcWsgHXQABUdYYV2/exec';
-
-        
         const modal = document.getElementById('adModal');
         const form = document.getElementById('uploadForm');
         const submitBtn = document.getElementById('submitBtn');
 
         document.getElementById('openModal').onclick = () => modal.style.display = 'flex';
         document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+
+        // دالة الـ GPS الذكية
+        function getLocation() {
+            const btn = event.target;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تحديد الإحداثيات...';
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    document.getElementById('locationInput').value = position.coords.latitude + "," + position.coords.longitude;
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم تحديد الموقع بنجاح';
+                    btn.style.background = '#2e7d32';
+                }, () => {
+                    alert("عذراً، يجب تفعيل الـ GPS في موبايلك");
+                    btn.innerHTML = '<i class="fas fa-redo"></i> حاول مرة أخرى';
+                });
+            }
+        }
 
         const toBase64 = file => new Promise((resolve, reject) => {
             if (!file) resolve(""); 
@@ -87,43 +115,33 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الرفع...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
 
             try {
                 const f1 = form.img1.files[0];
-                const f2 = form.img2.files[0];
-                const f3 = form.img3.files[0];
                 const fqr = form.qr.files[0];
 
                 const payload = {
-                    phone: form.phone.value,
+                    agencyName: form.agencyName.value,
                     siteName: form.siteName.value,
                     location: form.location.value,
-                    imgName1: f1 ? f1.name : "",
+                    phone: form.phone.value,
                     imgData1: await toBase64(f1),
-                    imgName2: f2 ? f2.name : "",
-                    imgData2: await toBase64(f2),
-                    imgName3: f3 ? f3.name : "",
-                    imgData3: await toBase64(f3),
-                    qrName: fqr ? fqr.name : "",
                     qrData: await toBase64(fqr)
                 };
 
-                const response = await fetch(scriptURL, {
+                await fetch(scriptURL, {
                     method: 'POST',
-                    mode: 'no-cors', // لضمان عدم حدوث مشاكل مع جوجل سكريبت
+                    mode: 'no-cors',
                     body: JSON.stringify(payload)
                 });
 
-                // بما أننا استخدمنا no-cors، سنفترض النجاح إذا لم يحدث خطأ
-                alert('تم إرسال البيانات! ستظهر اللوحة فور موافقة الإدارة ✅');
+                alert('تم حفظ البيانات بنجاح! سيتم التواصل معكم لإتمام عملية الدفع وتفعيل اللوحة ✅');
                 location.reload();
 
             } catch (err) {
-                console.error(err);
-                alert('حدث خطأ، تأكد من اتصالك بالإنترنت وحاول مرة أخرى ❌');
+                alert('حدث خطأ في الرفع، حاول مرة أخرى');
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = "رفع اللوحة للمراجعة 🚀";
             }
         });
     </script>
