@@ -282,21 +282,72 @@ function startGlobalSearch() {
         return;
     }
 
-    // 3. فلترة الداتا بناءً على "اسم الموقع" أو "الإحداثيات/العنوان"
-    const filteredResults = allAds.filter(ad => {
-        const adName = (ad.siteName || ad.title || "").toLowerCase();
-        const adLocation = (ad.siteGeo || ad.coords || "").toLowerCase();
-        
-        return adName.includes(query) || adLocation.includes(query);
-    });
+    // 1. تعريف الرابط والمخزن الرئيسي (لازم يكونوا بره الدوال)
+const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbxhoTguhGJBLhE04m9_RF6WlUKvQg7zW6yLhE5tOHSPqfhlv6-04PT3qyH5Ci0K6EsW/exec";
+let allAds = []; 
 
-    // 4. عرض النتائج اللي طلعت بس
-    renderAds(filteredResults);
+// 2. دالة جلب البيانات من جوجل شيت (بتشتغل أول ما الموقع يفتح)
+async function loadAds() {
+    const gal = document.getElementById('adsGallery');
+    try {
+        const res = await fetch(GOOGLE_URL);
+        allAds = await res.json();
+        renderAds(allAds); // اعرض كل اللوحات في البداية
+    } catch (e) {
+        console.error("عطل في جلب البيانات:", e);
+        if(gal) gal.innerHTML = "<p style='text-align:center;'>عذراً، فشل تحميل البيانات.</p>";
+    }
 }
 
-// نصيحة: اتأكد إن دالة عرض الكروت عندك اسمها (renderAds) عشان الكود يربط صح
+// 3. دالة البحث المصلحة (المحرك اللي كان معطل)
+function startGlobalSearch() {
+    // التقاط الكلمة من حقل الإدخال
+    const query = document.getElementById('mainSearchInput').value.toLowerCase().trim();
+    
+    // تأمين: لو الداتا لسه ما وصلتش من السيرفر
+    if (!allAds || allAds.length === 0) return;
+
+    // الفلترة الذكية (بتدور في الاسم والموقع)
+    const filtered = allAds.filter(ad => {
+        const title = (ad.siteName || ad.title || "").toLowerCase();
+        const loc = (ad.siteGeo || ad.coords || "").toLowerCase();
+        return title.includes(query) || loc.includes(query);
+    });
+
+    // إعادة عرض الكروت بناءً على الفلترة
+    renderAds(filtered);
+}
+
+// 4. دالة رسم الكروت (التي تظهر للمستخدم)
+function renderAds(adsToDraw) {
+    const gal = document.getElementById('adsGallery');
+    if (!gal) return;
+    
+    gal.innerHTML = ""; // مسح القديم
+    
+    if (adsToDraw.length === 0) {
+        gal.innerHTML = "<p style='text-align:center; width:100%;'>لا توجد نتائج تطابق بحثك.</p>";
+        return;
+    }
+
+    adsToDraw.forEach(ad => {
+        gal.innerHTML += `
+            <div class="ad-card">
+                <div class="duration-tag">${ad.duration || '3 شهور مجاناً'}</div>
+                <img src="${ad.img || ad.siteImg}" onerror="this.src='https://via.placeholder.com/400x250/004e92/ffffff?text=Trend+Adv'">
+                <div class="card-body">
+                    <b style="color:#004e92; font-size:1.1rem;">${ad.title || ad.siteName}</b>
+                    <p style="font-size:12px; color:#666; margin: 10px 0;">${ad.coords || ad.siteGeo}</p>
+                    <button class="book-btn" onclick="window.open('https://wa.me/201027676344')">احجز الآن</button>
+                </div>
+            </div>`;
+    });
+}
+
+// 5. أمر التشغيل التلقائي
+window.onload = loadAds;
+
 
 </script>
-
 </body>
 </html>
