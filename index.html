@@ -13,19 +13,27 @@
         :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --glass: rgba(255, 255, 255, 0.95); }
         body { font-family: 'Cairo', sans-serif; background: #f8fafc; margin: 0; padding-bottom: 100px; color: #333; }
 
-        /* تميز حرف T واللوجو */
-        @keyframes glowPulse {
-    0% { background: #ffcc00; box-shadow: 0 0 8px #ffcc00; transform: scale(1); }
-    50% { background: #ffaa00; box-shadow: 0 0 25px #ffcc00; transform: scale(1.05); }
-    100% { background: #ffcc00; box-shadow: 0 0 8px #ffcc00; transform: scale(1); }
+/* تأثير تلوين حرف T فقط */
+@keyframes colorShift {
+    0% { color: #fff; text-shadow: 0 0 5px #fff; }
+    33% { color: #ffcc00; text-shadow: 0 0 15px #ffcc00; }
+    66% { color: #00ffcc; text-shadow: 0 0 15px #00ffcc; }
+    100% { color: #fff; text-shadow: 0 0 5px #fff; }
 }
+
 .t-brand { 
-    animation: glowPulse 2s infinite; 
-    color: #000b18; width: 50px; height: 50px; border-radius: 12px; 
+    background: #6a1b9a; /* لون بنفسجي ثابت وفخم للمربع */
+    width: 45px; height: 45px; border-radius: 10px; 
     display: flex; align-items: center; justify-content: center; 
-    font-size: 35px; font-weight: 900; border: 2px solid #fff; 
+    font-size: 30px; font-weight: 900; 
+    border: 2px solid rgba(255,255,255,0.3);
 }
-.logo-text { font-size: 28px; font-weight: 900; color: white; margin-right: 10px; }
+
+.t-brand span {
+    animation: colorShift 3s infinite linear; /* الحرف هو اللي بيلون */
+}
+
+.logo-text { font-size: 26px; font-weight: 900; color: white; margin-right: 8px; }
 
 
             background: var(--gold); color: var(--dark); 
@@ -80,8 +88,11 @@
 <div class="admin-only" onclick="window.open('https://docs.google.com/spreadsheets/d/your-id')">
     🔐 لوحة إدارة النظام (جوجل شيت) - للأدمن فقط
 </div>
-<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-    <div class="t-brand">T</div>
+
+<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px; width: 100%;">
+    <div class="t-brand">
+        <span>T</span>
+    </div>
     <div class="logo-text">REND ADV</div>
 </div>
 
