@@ -141,12 +141,13 @@
 </div>
 
 <div class="hero-search">
-    <h1 id="mainTitle">أكبر منصة لإعلانات الطرق</h1>
+    <h1 style="color: white; margin-bottom: 30px;">Trend Adv</h1>
     <div class="search-box-wrapper">
-        <input type="text" id="mainSearchInput" placeholder="ابحث عن منطقة أو شارع...">
+        <input type="text" id="mainSearchInput" placeholder="ابحث عن الاعلان القريب منك..." onkeyup="startGlobalSearch()">
         <button class="search-btn" id="searchBtn" onclick="startGlobalSearch()">بحث</button>
     </div>
 </div>
+
 
 <div class="main-controls">
     <button class="btn-action btn-map" id="mapBtn" onclick="showMap()">📍 استكشف الاعلانات على الخريطة</button>
@@ -267,6 +268,34 @@
     }
 
     window.onload = loadAds;
+
+
+<script>
+// دالة البحث العالمية - بتشتغل مع الكتابة (onkeyup) أو مع زرار البحث (onclick)
+function startGlobalSearch() {
+    // 1. التقاط الكلمة اللي اليوزر كتبها
+    const query = document.getElementById('mainSearchInput').value.toLowerCase().trim();
+    
+    // 2. التأكد إن الداتا (allAds) اتحملت فعلاً من جوجل شيت
+    if (typeof allAds === 'undefined' || allAds.length === 0) {
+        console.warn("جاري تحميل البيانات، يرجى الانتظار...");
+        return;
+    }
+
+    // 3. فلترة الداتا بناءً على "اسم الموقع" أو "الإحداثيات/العنوان"
+    const filteredResults = allAds.filter(ad => {
+        const adName = (ad.siteName || ad.title || "").toLowerCase();
+        const adLocation = (ad.siteGeo || ad.coords || "").toLowerCase();
+        
+        return adName.includes(query) || adLocation.includes(query);
+    });
+
+    // 4. عرض النتائج اللي طلعت بس
+    renderAds(filteredResults);
+}
+
+// نصيحة: اتأكد إن دالة عرض الكروت عندك اسمها (renderAds) عشان الكود يربط صح
+
 </script>
 
 </body>
