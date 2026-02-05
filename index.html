@@ -124,6 +124,52 @@
 </head>
 <body>
 
+<div id="language-system" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 15px 0; margin-bottom: 10px; scrollbar-width: none;">
+    <style>
+        #language-system::-webkit-scrollbar { display: none; } /* إخفاء شريط التمرير لشكل أنظف */
+        
+        .lang-wrapper {
+            display: inline-flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        .lang-btn {
+            background: rgba(13, 17, 23, 0.8); /* نفس لون خلفية اللوجو الفخمة */
+            color: #ffffff;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #ffcc00;
+            color: #000b18;
+            border-color: #ffcc00;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+
+        /* توهج بسيط للغة النشطة */
+        .lang-btn.active::before {
+            content: "●";
+            font-size: 8px;
+            color: #000b18;
+        }
+    </style>
+
+    <div class="lang-wrapper">
+        <div class="lang-btn active">العربية</div>
+        <div class="lang-btn">English</div>
+        <div class="lang-btn">Deutsch</div> <div class="lang-btn">Italiano</div> <div class="lang-btn">中文</div> <div class="lang-btn">Русский</div> </div>
+</div>
+
 <div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
     <style>
         /* أنيميشن لتغيير لون حرف T فقط */
