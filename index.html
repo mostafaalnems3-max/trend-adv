@@ -124,64 +124,63 @@
 </head>
 <body>
 
-<div id="language-nav" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; margin-bottom: 5px; scrollbar-width: none;">
-    <style>
-        #language-nav::-webkit-scrollbar { display: none; }
-        .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
-        .lang-pill {
-            background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 700;
-            cursor: pointer; transition: 0.3s;
-        }
-        .lang-pill.active { background: #ffcc00; color: #000b18; border-color: #ffcc00; }
-    </style>
-
-    <div class="lang-flex">
-        <div class="lang-pill active" onclick="changeLanguage('ar', this)">العربية</div>
-        <div class="lang-pill" onclick="changeLanguage('en', this)">English</div>
-        <div class="lang-pill" onclick="changeLanguage('de', this)">Deutsch</div>
-        <div class="lang-pill" onclick="changeLanguage('it', this)">Italiano</div>
-        <div class="lang-pill" onclick="changeLanguage('zh', this)">中文</div>
-        <div class="lang-pill" onclick="changeLanguage('ru', this)">Русский</div>
-    </div>
-</div>
-
 <script>
-// كود البرمجة اللي بيشغل الزراير
 function changeLanguage(lang, element) {
-    // 1. تغيير شكل الزرار النشط
+    // 1. تحديث شكل الزراير
     document.querySelectorAll('.lang-pill').forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
 
-    // 2. قاموس الترجمة (تقدر تزود كلمات براحتك هنا)
+    // 2. القاموس العالمي لـ TREND ADV
     const translations = {
         'ar': {
             'slogan': 'أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS',
             'search': 'ابحث عن إعلانك في محيطك الجغرافي...',
-            'welcome': 'مرحباً بكم في TREND ADV'
+            'dir': 'rtl'
         },
         'en': {
             'slogan': 'The first digital platform in the Arab world to link ads with GPS',
             'search': 'Search for ads in your area...',
-            'welcome': 'Welcome to TREND ADV'
+            'dir': 'ltr'
         },
         'de': {
             'slogan': 'Die erste digitale Plattform zur Verknüpfung von Werbung mit GPS',
             'search': 'Suche nach Anzeigen in deiner Nähe...',
-            'welcome': 'Willkommen bei TREND ADV'
+            'dir': 'ltr'
+        },
+        'it': {
+            'slogan': 'La prima piattaforma digitale per collegare gli annunci con il GPS',
+            'search': 'Cerca annunci nella tua zona...',
+            'dir': 'ltr'
+        },
+        'zh': {
+            'slogan': '阿拉伯世界第一个将广告与GPS连接起来的数字平台',
+            'search': '搜索您所在区域的广告...',
+            'dir': 'ltr'
+        },
+        'ru': {
+            'slogan': 'Первая цифровая платформа для связи рекламы с GPS',
+            'search': 'Поиск объявлений в вашем районе...',
+            'dir': 'ltr'
         }
-        // تقدر تضيف باقي اللغات بنفس الطريقة
     };
 
-    // 3. تنفيذ الترجمة في الصفحة
-    if (translations[lang]) {
-        document.querySelector('.global-slogan').innerText = translations[lang].slogan;
-        document.querySelector('.search-container input').placeholder = translations[lang].search;
-        // لو عندك نصوص تانية عايز تترجمها ضيف لها class وناديها هنا
+    const data = translations[lang];
+
+    if (data) {
+        // ترجمة السلوجان (أول منصة رقمية...)
+        const sloganElement = document.querySelector('.global-slogan');
+        if (sloganElement) sloganElement.innerText = data.slogan;
+
+        // ترجمة شريط البحث (PlaceHolder)
+        const searchInput = document.querySelector('.search-container input');
+        if (searchInput) searchInput.placeholder = data.search;
+
+        // تغيير اتجاه الصفحة (يمين لشمال أو العكس)
+        document.body.style.direction = data.dir;
+        
+        // تعديل محاذاة اللوجو عشان ما يضربش مع الاتجاهات
+        document.getElementById('global-header-system').style.direction = 'ltr';
     }
-    
-    // 4. تغيير اتجاه الصفحة (يمين لشمال في العربي، وشمال ليمين في الباقي)
-    document.body.style.direction = (lang === 'ar') ? 'rtl' : 'ltr';
 }
 </script>
 
