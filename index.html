@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="mainApp">
+<html lang="ar" dir="rtl" id="app">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,213 +10,144 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --glass: rgba(255, 255, 255, 0.95); }
-        body { font-family: 'Cairo', sans-serif; background: #f8fafc; margin: 0; padding-bottom: 100px; color: #333; }
+        :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
+        body { font-family: 'Cairo', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 90px; }
 
-/* تأثير تلوين حرف T فقط */
-@keyframes colorShift {
-    0% { color: #fff; text-shadow: 0 0 5px #fff; }
-    33% { color: #ffcc00; text-shadow: 0 0 15px #ffcc00; }
-    66% { color: #00ffcc; text-shadow: 0 0 15px #00ffcc; }
-    100% { color: #fff; text-shadow: 0 0 5px #fff; }
-}
+        /* الهيدر واللوجو */
+        .header { background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%); padding: 30px 20px 50px; border-radius: 0 0 45px 45px; text-align: center; color: white; }
+        .logo-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .t-icon { background: var(--gold); color: var(--dark); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
+        .slogan-tag { color: var(--gold); font-size: 11px; font-weight: 700; background: rgba(255,204,0,0.1); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--gold); }
 
-.t-brand { 
-    background: #6a1b9a; /* لون بنفسجي ثابت وفخم للمربع */
-    width: 45px; height: 45px; border-radius: 10px; 
-    display: flex; align-items: center; justify-content: center; 
-    font-size: 30px; font-weight: 900; 
-    border: 2px solid rgba(255,255,255,0.3);
-}
+        /* البحث التجريبي */
+        .search-wrapper { background: white; border-radius: 35px; display: flex; padding: 5px; width: 90%; margin: -25px auto 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .search-wrapper input { flex: 1; border: none; padding: 12px 20px; outline: none; border-radius: 35px; font-size: 14px; font-weight: bold; }
+        .search-go { background: var(--main); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; }
 
-.t-brand span {
-    animation: colorShift 3s infinite linear; /* الحرف هو اللي بيلون */
-}
-
-.logo-text { font-size: 26px; font-weight: 900; color: white; margin-right: 8px; }
-
-
-            background: var(--gold); color: var(--dark); 
-            width: 50px; height: 50px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 32px; font-weight: 900; box-shadow: 0 0 15px var(--gold);
-        }
-        .brand-name { font-size: 24px; font-weight: 900; color: white; letter-spacing: 1px; }
-
-        /* الهيدر الجديد */
-        .app-header { background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%); padding: 20px; border-radius: 0 0 50px 50px; text-align: center; }
-        .slogan { color: var(--gold); font-size: 13px; font-weight: 700; margin-top: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-
-        /* اللغات */
-        .lang-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .lang-dot { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 4px 10px; border-radius: 15px; font-size: 11px; cursor: pointer; transition: 0.3s; }
-        .lang-dot.active { background: var(--gold); color: black; font-weight: bold; }
-
-        /* البحث */
-        .search-wrapper { background: white; border-radius: 35px; display: flex; padding: 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); max-width: 500px; margin: 15px auto; }
-        .search-wrapper input { flex: 1; border: none; padding: 10px 20px; outline: none; border-radius: 35px; font-size: 15px; }
-        .search-btn { background: var(--main); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; }
-
-        /* الأزرار الهيكلية */
-        .main-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
-        .nav-card { 
-            background: white; padding: 20px; border-radius: 25px; text-align: center; 
-            text-decoration: none; color: var(--dark); font-weight: 900; font-size: 14px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid transparent;
-        }
-        .nav-card:active { transform: scale(0.95); }
-        .nav-card.agency { border-color: var(--gold); background: #fffdf0; }
-        .nav-card i { font-size: 28px; color: var(--main); display: block; margin-bottom: 10px; }
+        /* أزرار الأكشن */
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px 20px; }
+        .btn-card { background: white; padding: 20px; border-radius: 25px; text-align: center; text-decoration: none; color: var(--dark); font-weight: 900; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; border: none; }
+        .btn-card i { font-size: 25px; color: var(--main); display: block; margin-bottom: 8px; }
 
         /* الخريطة */
-        #map { height: 350px; width: 92%; margin: 0 auto 20px; border-radius: 30px; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        /* قسم "من نحن" المحترف */
-        .about-section { background: white; margin: 20px; padding: 25px; border-radius: 30px; line-height: 1.8; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .about-section h2 { color: var(--main); font-size: 20px; border-right: 4px solid var(--gold); padding-right: 10px; margin-bottom: 15px; }
+        #map { height: 300px; width: 92%; margin: 0 auto 20px; border-radius: 30px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* شريط سفلي */
-        .footer-tabs { position: fixed; bottom: 0; width: 100%; background: var(--glass); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
-        .footer-tabs a { font-size: 22px; color: var(--main); }
+        /* قائمة الإعلانات الناتجة عن البحث */
+        #search-results { padding: 0 15px; }
+        .ad-mini-card { background: white; border-radius: 20px; padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .ad-mini-card img { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; }
 
-        /* الأدمن فقط (مخفي) */
-        .admin-only { display: none; background: #333; color: white; padding: 10px; text-align: center; font-size: 12px; cursor: pointer; }
- 
-<div style="text-align: center; background: #001a33; padding: 20px 0; width: 100%;">
-    
-    <div style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-        <div style="background: #6a1b9a; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-left: 10px;">
-            <span style="color: #fff; font-size: 30px; font-weight: bold;">T</span>
-        </div>
-        <span style="color: white; font-size: 26px; font-weight: bold;">REND ADV</span>
-    </div>
+        /* بوابة تسجيل الوكالات (المودال) */
+        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background: white; width: 90%; margin: 15% auto; padding: 25px; border-radius: 30px; text-align: center; }
+        .modal-content input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 15px; border: 1px solid #ddd; outline: none; }
+        .reg-btn { background: var(--main); color: white; width: 100%; padding: 15px; border-radius: 15px; border: none; font-weight: 900; margin-top: 10px; }
 
-    <div style="background: #ffcc00; color: #000; padding: 10px; font-weight: bold; width: 100%; border-top: 2px solid #fff; border-bottom: 2px solid #fff;">
-        <marquee direction="right" scrollamount="8">
-            🚀 المنصة تحت التطوير حالياً .. انتظروا الانطلاق الرسمي قريباً .. TREND ADV 🚀
-        </marquee>
-    </div>
-</div>
-
-<div style="text-align: center; background: #001a33; padding: 20px 0; width: 100%;">
-    
-    <div style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-        <div style="background: #6a1b9a; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-left: 10px;">
-            <span style="color: #fff; font-size: 30px; font-weight: bold;">T</span>
-        </div>
-        <span style="color: white; font-size: 26px; font-weight: bold;">REND ADV</span>
-    </div>
-
- </style>
+        /* شريط التواصل */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
+        .nav-bar a { font-size: 24px; transition: 0.3s; }
+    </style>
 </head>
 <body>
 
-<div class="admin-only" onclick="window.open('https://docs.google.com/spreadsheets/d/your-id')">
-    🔐 لوحة إدارة النظام (جوجل شيت) - للأدمن فقط
-</div>
-
-<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px; width: 100%;">
-    <div class="t-brand">
-        <span>T</span>
-    </div>
-    <div class="logo-text">TحREND ADV</div>
-</div>
-
-    <div class="lang-bar">
-        <div class="lang-dot active" onclick="setLang('ar')">العربية</div>
-        <div class="lang-dot" onclick="setLang('en')">English</div>
-        <div class="lang-dot" onclick="setLang('fr')">Français</div>
-        <div class="lang-dot" onclick="setLang('de')">Deutsch</div>
-        <div class="lang-dot" onclick="setLang('it')">Italiano</div>
-    </div>
-
-    <div class="brand-box">
-        <div class="t-circle">T</div>
-        <div class="brand-name">REND ADV</div>
-    </div>
-    <div class="slogan" id="mainSlogan">أول منصة رقمية في مصر والوطن العربي لربط اللوحات الإعلانية</div>
-
-    <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="ابحث عن إعلانك في منطقتك..." onkeyup="radarSearch()">
-        <button class="search-btn" onclick="radarSearch()"><i class="fa fa-search"></i></button>
+<div id="regModal" class="modal">
+    <div class="modal-content">
+        <h2 style="color:var(--main)">تسجيل وكالة جديدة</h2>
+        <p>انضم لأول منصة رقمية في الوطن العربي</p>
+        <input type="text" placeholder="اسم الوكالة">
+        <input type="email" placeholder="البريد الإلكتروني">
+        <input type="password" placeholder="كلمة المرور">
+        <button class="reg-btn" onclick="goToDashboard()">إنشاء حساب ودخول للداشبورد</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:red; margin-top:15px; cursor:pointer;">إلغاء</button>
     </div>
 </div>
 
-<div class="main-nav">
-    <a href="agency-portal.html" class="nav-card agency">
-        <i class="fa fa-building-shield"></i>
-        <span data-i18n="agency_btn">بوابة الوكالات </span>
-    </a>
-    <a href="https://wa.me/201027676344" class="nav-card">
+<div class="header">
+    <div class="logo-box">
+        <div class="t-icon">T</div>
+        <div style="font-size: 24px; font-weight: 900; letter-spacing: 2px;">REND ADV</div>
+    </div>
+    <div class="slogan-tag">أول منصة رقمية في مصر والوطن العربي لربط اللوحات الإعلانية</div>
+</div>
+
+<div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder="ابحث (جرب أكتوبر أو التجمع)..." onkeyup="searchAds()">
+    <button class="search-go" onclick="searchAds()"><i class="fa fa-search"></i></button>
+</div>
+
+<div class="actions">
+    <button class="btn-card" onclick="openModal()" style="border-right: 4px solid var(--gold);">
+        <i class="fa fa-building-circle-arrow-right"></i>
+        <span>بوابة تسجيل الوكالات</span>
+    </button>
+    <a href="https://wa.me/201027676344" class="btn-card">
         <i class="fa fa-headset"></i>
-        <span data-i18n="support">الدعم الفني</span>
+        <span>الدعم الفني المباشر</span>
     </a>
 </div>
 
 <div id="map"></div>
 
-<div id="adsRadar"></div>
+<div id="search-results"></div>
 
-<div class="about-section" id="aboutText">
-    <h2 data-i18n="about_title">من نحن - Trend Adv</h2>
-    <p data-i18n="about_p">
-        نحن لسنا مجرد منصة إعلانية، بل نحن الشريك التكنولوجي الأول في الشرق الأوسط الذي يطوع تقنيات الـ GPS لخدمة قطاع الـ Out-of-Home. نقوم بربط الوكالات الإعلانية بالمعلنين مباشرة عبر رادار ذكي يضمن لك اختيار الموقع الأدق للوصول لجمهورك المستهدف. شفافية، دقة، وسرعة حجز هي الركائز التي بنينا عليها Trend Adv.
-    </p>
-</div>
-
-<div class="footer-tabs">
-    <a href="https://wa.me/201027676344"><i class="fab fa-whatsapp"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-    <a href="#"><i class="fa fa-home"></i></a>
+<div class="nav-bar">
+    <a href="https://wa.me/201027676344" style="color:#25d366"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/share/1A8tTYNpdP/" style="color:#1877f2"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.linkedin.com/in/mostafa-alnems-02b569330" style="color:#0077b5"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" style="color:var(--main)"><i class="fa fa-home"></i></a>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    let currentLang = 'ar';
-    const translations = {
-        ar: {
-            agency_btn: "بوابة الوكالات والداشبورد",
-            support: "الدعم الفني",
-            about_title: "من نحن - Trend Adv",
-            about_p: "نحن الشريك التكنولوجي الأول في الشرق الأوسط الذي يطوع تقنيات الـ GPS لخدمة قطاع الإعلانات. نقوم بربط الوكالات بالمعلنين عبر رادار ذكي.",
-            holder: "ابحث عن إعلانك في منطقتك...",
-            slogan: "أول منصة رقمية في مصر والوطن العربي لربط اللوحات الإعلانية",
-            dir: "rtl"
-        },
-        en: {
-            agency_btn: "Agency Portal & Dashboard",
-            support: "Technical Support",
-            about_title: "About Us - Trend Adv",
-            about_p: "We are the first tech partner in the Middle East utilizing GPS for the OOH advertising sector. We link agencies directly to advertisers via smart radar.",
-            holder: "Search ads in your area...",
-            slogan: "The 1st Digital Platform in MENA for Billboard Connectivity",
-            dir: "ltr"
-        }
-        // يمكن إضافة باقي اللغات هنا بنفس النمط
-    };
+    // 1. البيانات التجريبية (Mock Data)
+    const ads = [
+        { name: "يونيبول كوبري أكتوبر", area: "أكتوبر", lat: 30.0490, lng: 31.2330, img: "https://picsum.photos/100/100?1" },
+        { name: "شاشة ديجيتال محور المشير", area: "التجمع", lat: 30.0200, lng: 31.4500, img: "https://picsum.photos/100/100?2" },
+        { name: "لوحة طريق الإسكندرية الصحراوي", area: "الشيخ زايد", lat: 30.0100, lng: 31.0200, img: "https://picsum.photos/100/100?3" }
+    ];
 
-    function setLang(l) {
-        currentLang = l;
-        const t = translations[l] || translations['en'];
-        document.getElementById('mainApp').dir = t.dir;
-        document.getElementById('mainSlogan').innerText = t.slogan;
-        document.getElementById('searchInput').placeholder = t.holder;
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            el.innerText = t[el.getAttribute('data-i18n')];
+    // 2. تشغيل الخريطة
+    var map = L.map('map', {zoomControl: false}).setView([30.0444, 31.2357], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    var markersLayer = L.layerGroup().addTo(map);
+
+    // 3. وظيفة البحث
+    function searchAds() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const resultsDiv = document.getElementById('search-results');
+        resultsDiv.innerHTML = "";
+        markersLayer.clearLayers();
+
+        const filtered = ads.filter(ad => ad.name.includes(query) || ad.area.includes(query));
+
+        filtered.forEach(ad => {
+            // إضافة كرت صغير للنتيجة
+            resultsDiv.innerHTML += `
+                <div class="ad-mini-card">
+                    <img src="${ad.img}">
+                    <div>
+                        <b style="color:var(--main)">${ad.name}</b><br>
+                        <small style="color:#777">${ad.area}</small>
+                    </div>
+                </div>`;
+            // إضافة ماركر على الخريطة
+            L.marker([ad.lat, ad.lng]).addTo(markersLayer).bindPopup(ad.name);
         });
-        // تحديث حالة الأزرار
-        document.querySelectorAll('.lang-dot').forEach(dot => dot.classList.remove('active'));
-        event.target.classList.add('active');
     }
 
-    // كود الخريطة والبيانات (نفس المنطق السابق مع تحسين الأداء)
-    let map = L.map('map', {zoomControl: false}).setView([30.0444, 31.2357], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    // 4. وظائف بوابة الوكالات (المودال والربط)
+    function openModal() { document.getElementById('regModal').style.display = 'block'; }
+    function closeModal() { document.getElementById('regModal').style.display = 'none'; }
+    
+    function goToDashboard() {
+        alert("تم التسجيل بنجاح! جاري تحويلك إلى لوحة تحكم الوكالة...");
+        // هنا يتم التوجيه لصفحة الداشبورد الحقيقية
+        window.location.href = "dashboard-agency.html"; 
+    }
 
-    function radarSearch() {
-        // هنا يتم استدعاء بياناتك كما فعلنا سابقاً
-        console.log("Searching in: " + currentLang);
+    // إغلاق المودال عند الضغط خارجه
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('regModal')) closeModal();
     }
 </script>
 </body>
