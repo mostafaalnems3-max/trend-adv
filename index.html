@@ -1,96 +1,70 @@
-<div id="trend-platform-root" style="direction: ltr; font-family: 'Segoe UI', Roboto, sans-serif; background: #001a33; color: white;">
+<div id="app-container" style="direction: rtl; font-family: 'Segoe UI', sans-serif; background: #000b1a; color: white; min-height: 100vh; padding-bottom: 60px;">
 
-    <div style="display: flex; justify-content: flex-end; padding: 10px 20px; background: rgba(0,0,0,0.2); gap: 15px;">
-        <button onclick="changeLang('ar')" style="background: none; border: 1px solid #ffcc00; color: #ffcc00; cursor: pointer; padding: 5px 12px; border-radius: 4px; font-weight: bold;">AR</button>
-        <button onclick="changeLang('en')" style="background: #ffcc00; border: none; color: #000; cursor: pointer; padding: 5px 12px; border-radius: 4px; font-weight: bold;">EN</button>
-    </div>
-
-    <div style="text-align: center; padding: 40px 20px;">
-        <div style="display: inline-flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 5px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-            <div id="logo-icon" style="background: #6a1b9a; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: 0.5s;">
-                <span style="color: #fff; font-size: 40px; font-weight: 900; text-shadow: 0 0 15px #bc4eff;">T</span>
+    <div style="background: #001a33; padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #6a1b9a; position: sticky; top: 0; z-index: 1000;">
+        <div class="logo-area" style="display: flex; align-items: center;">
+            <div style="background: #6a1b9a; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-left: 10px;">
+                <span style="font-weight: 900; font-size: 25px;">T</span>
             </div>
-            <div style="padding: 0 25px; color: #fff; font-size: 35px; font-weight: bold; letter-spacing: 3px;">REND ADV</div>
+            <span style="font-weight: bold; font-size: 20px;">REND ADV</span>
         </div>
-        <p id="tagline" style="margin-top: 15px; color: #aaa; font-size: 14px;">نظام الإعلان الذكي المعتمد على الموقع الجغرافي</p>
-    </div>
 
-    <div style="background: #ffcc00; color: #000; padding: 12px; font-weight: bold; border-top: 2px solid #fff; border-bottom: 2px solid #fff; overflow: hidden;">
-        <marquee id="main-ticker" direction="right" scrollamount="10">
-             🌍 نظام الـ GPS والخرائط قيد التفعيل حالياً.. TREND ADV تحت التطوير للانطلاق الرسمي قريباً.. مرحباً بالوكالات الإعلانية 🚀
-        </marquee>
-    </div>
-
-    <div style="max-width: 800px; margin: 40px auto; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 20px; text-align: center;">
-        <h2 id="section-title">بوابة تسجيل الوكالات</h2>
-        <p id="section-desc">فعل نظام الـ GPS لتحديد نطاق إعلاناتك الجغرافي</p>
-        
-        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            <button onclick="activateGPS()" style="background: #28a745; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.4);">
-                📍 تفعيل الموقع الجغرافي (GPS)
-            </button>
-            
-            <button onclick="openAgencyPortal()" style="background: #6a1b9a; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(106,27,154,0.4);">
-                📝 تسجيل وكالة جديدة
-            </button>
+        <div style="flex-grow: 1; margin: 0 20px; position: relative;">
+            <input type="text" placeholder="استكشف الإعلانات المحيطة بك..." style="width: 100%; padding: 10px 40px 10px 10px; border-radius: 25px; border: none; background: #002b4d; color: white;">
+            <span style="position: absolute; left: 15px; top: 8px; color: #aaa;">🔍</span>
         </div>
-        
-        <div id="gps-status" style="margin-top: 20px; color: #28a745; font-size: 13px; font-family: monospace;"></div>
+
+        <div class="lang-toggle">
+            <button style="background: #6a1b9a; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer;">EN</button>
+        </div>
     </div>
 
+    <div style="background: linear-gradient(90deg, #6a1b9a, #bc4eff); margin: 15px; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+        <h2 style="margin: 0; font-size: 22px;">🎁 عرض الانطلاق الخاص</h2>
+        <p style="margin: 10px 0; font-size: 16px; font-weight: bold; color: #ffcc00;">3 شهور مجاناً للوكالات الجديدة عند التسجيل الآن!</p>
+        <button style="background: white; color: #6a1b9a; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">احجز مكانك الآن</button>
+    </div>
+
+    <div style="background: #ffcc00; color: #000; padding: 8px; font-weight: bold;">
+        <marquee direction="right">🌍 نظام الـ GPS قيد المعايرة.. استكشف الإعلانات في محيطك.. TREND ADV المنصة رقم 1 للوكالات 🚀</marquee>
+    </div>
+
+    <div style="padding: 20px;">
+        <h3 style="border-right: 4px solid #ffcc00; padding-right: 10px;">النماذج التجريبية (Demo)</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+            <div style="background: #002b4d; padding: 15px; border-radius: 10px; border: 1px dashed #6a1b9a;">
+                <p>📊 نموذج إعلان (مطعم)</p>
+                <small>شاهد كيف يظهر لعملائك المحيطين</small>
+            </div>
+            <div style="background: #002b4d; padding: 15px; border-radius: 10px; border: 1px dashed #6a1b9a;">
+                <p>🏬 نموذج إعلان (متجر)</p>
+                <small>تتبع التفاعل الجغرافي الحي</small>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 20px; background: rgba(106, 27, 154, 0.1); margin: 15px; border-radius: 15px;">
+        <h3 style="margin-top: 0;">نظام إدارة المنصة (Admin)</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📁 الدخول إلى الداش بورد (Dashboard)</li>
+            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📈 إحصائيات الشركاء والمستثمرين</li>
+            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📍 إدارة الخرائط والـ GPS</li>
+        </ul>
+    </div>
+
+    <div style="text-align: center; padding: 20px;">
+        <p>تابعنا على:</p>
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 24px;">
+            <span title="Facebook" style="cursor: pointer;">🔵</span>
+            <span title="Instagram" style="cursor: pointer;">📸</span>
+            <span title="WhatsApp" style="cursor: pointer;">🟢</span>
+            <span title="X" style="cursor: pointer;">🐦</span>
+        </div>
+    </div>
+
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #001a33; display: flex; justify-content: space-around; padding: 12px; border-top: 2px solid #6a1b9a;">
+        <div style="text-align: center; font-size: 12px;">🏠<br>الرئيسية</div>
+        <div style="text-align: center; font-size: 12px;">📍<br>استكشف</div>
+        <div style="text-align: center; font-size: 12px;">💼<br>بوابة الوكالات</div>
+        <div style="text-align: center; font-size: 12px;">⚙️<br>الإدارة</div>
+    </div>
 </div>
-
-<script>
-// --- وظائف نظام الإدارة المتكامل ---
-
-// 1. نظام الـ GPS
-function activateGPS() {
-    const status = document.getElementById('gps-status');
-    if (navigator.geolocation) {
-        status.innerHTML = "جاري تحديد موقعك...";
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            status.innerHTML = `✅ تم التفعيل: خط عرض (${lat.toFixed(4)}) | خط طول (${lng.toFixed(4)})`;
-            alert("تم التقاط موقعك الجغرافي بنجاح لربطه بالخريطة.");
-        }, function() {
-            status.innerHTML = "❌ فشل الوصول للموقع. يرجى تفعيل الـ GPS.";
-        });
-    } else {
-        alert("متصفحك لا يدعم الـ GPS");
-    }
-}
-
-// 2. نظام اللغات (تحويل الواجهة)
-function changeLang(lang) {
-    const ticker = document.getElementById('main-ticker');
-    const title = document.getElementById('section-title');
-    const tagline = document.getElementById('tagline');
-
-    if(lang === 'ar') {
-        document.getElementById('trend-platform-root').style.direction = 'rtl';
-        ticker.innerHTML = "🚀 تريند أدف: المنصة تحت التطوير.. نظام الخرائط والـ GPS قيد الربط.. انتظرونا قريباً 🚀";
-        title.innerHTML = "بوابة الوكالات";
-        tagline.innerHTML = "نظام الإعلان الذكي المعتمد على الموقع الجغرافي";
-    } else {
-        document.getElementById('trend-platform-root').style.direction = 'ltr';
-        ticker.innerHTML = "🚀 TREND ADV: Under Development.. GPS & Mapping System Integrating.. Stay Tuned 🚀";
-        title.innerHTML = "Agency Portal";
-        tagline.innerHTML = "Smart Geo-Location Advertising System";
-    }
-}
-
-// 3. بوابة الوكالات (ربط مستقبلي)
-function openAgencyPortal() {
-    alert("سيتم فتح نموذج تسجيل الوكالات وربطه بـ Google Sheets الآن.");
-    // هنا نضع رابط الـ Form أو الـ Dashboard
-}
-
-// تأثير الأنيميشن التلقائي للوجو (تغيير ألوان خفيف)
-setInterval(() => {
-    const icon = document.getElementById('logo-icon');
-    const colors = ['#6a1b9a', '#8e24aa', '#4a148c'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    icon.style.background = randomColor;
-}, 2000);
-</script>
