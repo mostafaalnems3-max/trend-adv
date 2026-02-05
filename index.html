@@ -124,13 +124,35 @@
 </head>
 <body>
 
+<div id="language-section" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; margin-bottom: 5px; scrollbar-width: none;">
+    <style>
+        #language-section::-webkit-scrollbar { display: none; }
+        .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
+        .lang-pill {
+            background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
+            padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 700;
+            cursor: pointer; transition: 0.3s;
+        }
+        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
+    </style>
+
+    <div class="lang-flex">
+        <div class="lang-pill active" onclick="changeLanguage('ar', this)">العربية</div>
+        <div class="lang-pill" onclick="changeLanguage('en', this)">English</div>
+        <div class="lang-pill" onclick="changeLanguage('de', this)">Deutsch</div>
+        <div class="lang-pill" onclick="changeLanguage('it', this)">Italiano</div>
+        <div class="lang-pill" onclick="changeLanguage('zh', this)">中文</div>
+        <div class="lang-pill" onclick="changeLanguage('ru', this)">Русский</div>
+    </div>
+</div>
+
 <script>
 function changeLanguage(lang, element) {
     // 1. تحديث شكل الزراير
     document.querySelectorAll('.lang-pill').forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
 
-    // 2. القاموس العالمي لـ TREND ADV
+    // 2. قاموس الترجمة الكامل
     const translations = {
         'ar': {
             'slogan': 'أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS',
@@ -165,21 +187,21 @@ function changeLanguage(lang, element) {
     };
 
     const data = translations[lang];
-
     if (data) {
-        // ترجمة السلوجان (أول منصة رقمية...)
+        // تحديث السلوجان - اتأكد إن الـ Div بتاع السلوجان فيه class="global-slogan"
         const sloganElement = document.querySelector('.global-slogan');
         if (sloganElement) sloganElement.innerText = data.slogan;
 
-        // ترجمة شريط البحث (PlaceHolder)
+        // تحديث خانة البحث
         const searchInput = document.querySelector('.search-container input');
         if (searchInput) searchInput.placeholder = data.search;
 
-        // تغيير اتجاه الصفحة (يمين لشمال أو العكس)
+        // تغيير اتجاه الموقع
         document.body.style.direction = data.dir;
         
-        // تعديل محاذاة اللوجو عشان ما يضربش مع الاتجاهات
-        document.getElementById('global-header-system').style.direction = 'ltr';
+        // الحفاظ على اتجاه اللوجو ثابت
+        const header = document.getElementById('global-header-system');
+        if (header) header.style.direction = 'ltr';
     }
 }
 </script>
