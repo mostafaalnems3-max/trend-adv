@@ -1,147 +1,96 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl" id="app">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trend Adv | المنصة الرقمية الأولى</title>
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<div id="trend-platform-root" style="direction: ltr; font-family: 'Segoe UI', Roboto, sans-serif; background: #001a33; color: white;">
 
-    <style>
-        :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
-        body { font-family: 'Cairo', sans-serif; background: #f0f4f8; margin: 0; padding-bottom: 90px; }
-
-        /* الهيدر الاحترافي المعدل */
-        .premium-header {
-            background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%);
-            padding: 30px 20px 50px;
-            border-radius: 0 0 45px 45px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        /* اللوجو: دمج الـ T مع الاسم */
-        .logo-container { display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 15px; }
-        .t-brand {
-            background: var(--gold); color: var(--dark);
-            width: 45px; height: 45px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px; font-weight: 900;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            transform: rotate(-5deg); /* حركة فنية */
-        }
-        .logo-text { font-size: 26px; font-weight: 900; color: white; letter-spacing: 2px; }
-
-        /* شعار المنصة */
-        .platform-slogan {
-            background: rgba(255, 204, 0, 0.1);
-            color: var(--gold);
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            margin-bottom: 20px;
-        }
-
-        /* شريط اللغات (أكثر أناقة) */
-        .lang-pills { display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; overflow-x: auto; padding: 5px; }
-        .pill { 
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: white; padding: 4px 12px; border-radius: 15px; font-size: 10px; cursor: pointer;
-        }
-        .pill.active { background: var(--gold); color: var(--dark); font-weight: 900; }
-
-        /* البحث (Float style) */
-        .search-container {
-            background: white; border-radius: 35px;
-            display: flex; padding: 5px;
-            width: 90%; margin: -25px auto 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .search-container input { flex: 1; border: none; padding: 12px 20px; outline: none; border-radius: 35px; font-size: 14px; }
-        .search-icon-btn { background: var(--main); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; }
-
-        /* كروت الأكشن الرئيسية */
-        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 25px 15px; }
-        .action-card {
-            background: white; border-radius: 25px; padding: 20px;
-            text-align: center; text-decoration: none; color: var(--dark);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-bottom: 4px solid var(--main);
-        }
-        .action-card.gold-border { border-bottom-color: var(--gold); }
-        .action-card i { font-size: 30px; color: var(--main); margin-bottom: 10px; display: block; }
-        .action-card span { font-weight: 900; font-size: 14px; }
-
-        /* الخريطة */
-        #map { height: 350px; width: 92%; margin: 10px auto; border-radius: 30px; border: 4px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-
-        /* قسم من نحن (بشكل موثوق) */
-        .trust-box { background: white; margin: 15px; padding: 25px; border-radius: 30px; border-left: 6px solid var(--gold); }
-        .trust-box h2 { color: var(--main); font-size: 18px; margin-top: 0; }
-        .trust-box p { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 0; }
-
-        /* الناف السفلي */
-        .tab-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 1000; }
-        .tab-bar a { color: #ccc; font-size: 22px; transition: 0.3s; }
-        .tab-bar a.active { color: var(--main); }
-    </style>
-</head>
-<body>
-
-<div class="premium-header">
-    <div class="lang-pills">
-        <div class="pill active">العربية</div>
-        <div class="pill">English</div>
-        <div class="pill">Français</div>
-        <div class="pill">Deutsch</div>
-        <div class="pill">Italiano</div>
+    <div style="display: flex; justify-content: flex-end; padding: 10px 20px; background: rgba(0,0,0,0.2); gap: 15px;">
+        <button onclick="changeLang('ar')" style="background: none; border: 1px solid #ffcc00; color: #ffcc00; cursor: pointer; padding: 5px 12px; border-radius: 4px; font-weight: bold;">AR</button>
+        <button onclick="changeLang('en')" style="background: #ffcc00; border: none; color: #000; cursor: pointer; padding: 5px 12px; border-radius: 4px; font-weight: bold;">EN</button>
     </div>
 
-    <div class="logo-container">
-        <div class="t-brand">T</div>
-        <div class="logo-text">REND ADV</div>
+    <div style="text-align: center; padding: 40px 20px;">
+        <div style="display: inline-flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 5px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div id="logo-icon" style="background: #6a1b9a; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: 0.5s;">
+                <span style="color: #fff; font-size: 40px; font-weight: 900; text-shadow: 0 0 15px #bc4eff;">T</span>
+            </div>
+            <div style="padding: 0 25px; color: #fff; font-size: 35px; font-weight: bold; letter-spacing: 3px;">REND ADV</div>
+        </div>
+        <p id="tagline" style="margin-top: 15px; color: #aaa; font-size: 14px;">نظام الإعلان الذكي المعتمد على الموقع الجغرافي</p>
     </div>
-    
-    <div class="platform-slogan">أول منصة رقمية في مصر والوطن العربي لربط اللوحات الإعلانية</div>
+
+    <div style="background: #ffcc00; color: #000; padding: 12px; font-weight: bold; border-top: 2px solid #fff; border-bottom: 2px solid #fff; overflow: hidden;">
+        <marquee id="main-ticker" direction="right" scrollamount="10">
+             🌍 نظام الـ GPS والخرائط قيد التفعيل حالياً.. TREND ADV تحت التطوير للانطلاق الرسمي قريباً.. مرحباً بالوكالات الإعلانية 🚀
+        </marquee>
+    </div>
+
+    <div style="max-width: 800px; margin: 40px auto; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 20px; text-align: center;">
+        <h2 id="section-title">بوابة تسجيل الوكالات</h2>
+        <p id="section-desc">فعل نظام الـ GPS لتحديد نطاق إعلاناتك الجغرافي</p>
+        
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <button onclick="activateGPS()" style="background: #28a745; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.4);">
+                📍 تفعيل الموقع الجغرافي (GPS)
+            </button>
+            
+            <button onclick="openAgencyPortal()" style="background: #6a1b9a; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(106,27,154,0.4);">
+                📝 تسجيل وكالة جديدة
+            </button>
+        </div>
+        
+        <div id="gps-status" style="margin-top: 20px; color: #28a745; font-size: 13px; font-family: monospace;"></div>
+    </div>
+
 </div>
 
-<div class="search-container">
-    <input type="text" placeholder="ابحث عن إعلانك في منطقتك...">
-    <button class="search-icon-btn"><i class="fa fa-search"></i></button>
-</div>
-
-<div class="action-grid">
-    <a href="#" class="action-card gold-border">
-        <i class="fa fa-building-circle-check"></i>
-        <span>بوابة الوكالات والداشبورد</span>
-    </a>
-    <a href="#" class="action-card">
-        <i class="fa fa-headset"></i>
-        <span>الدعم الفني</span>
-    </a>
-</div>
-
-<div id="map"></div>
-
-<div class="trust-box">
-    <h2>Trend Adv: رؤية جديدة للإعلان</h2>
-    <p>بصفتنا أول منصة رقمية في المنطقة، نلتزم بتوفير أعلى معايير الدقة عبر تكنولوجيا الـ GPS لربط أصحاب المواقع بالمعلنين. نحن نضمن لك وصول إعلانك للجمهور المستهدف بأسرع وأذكى وسيلة ممكنة.</p>
-</div>
-
-<div class="tab-bar">
-    <a href="#"><i class="fa fa-whatsapp" style="color:#25d366"></i></a>
-    <a href="#"><i class="fa fa-facebook" style="color:#1877f2"></i></a>
-    <a href="#" class="active"><i class="fa fa-home"></i></a>
-    <a href="#"><i class="fa fa-user-gear"></i></a> </div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map', {zoomControl: false}).setView([30.0444, 31.2357], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+// --- وظائف نظام الإدارة المتكامل ---
+
+// 1. نظام الـ GPS
+function activateGPS() {
+    const status = document.getElementById('gps-status');
+    if (navigator.geolocation) {
+        status.innerHTML = "جاري تحديد موقعك...";
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            status.innerHTML = `✅ تم التفعيل: خط عرض (${lat.toFixed(4)}) | خط طول (${lng.toFixed(4)})`;
+            alert("تم التقاط موقعك الجغرافي بنجاح لربطه بالخريطة.");
+        }, function() {
+            status.innerHTML = "❌ فشل الوصول للموقع. يرجى تفعيل الـ GPS.";
+        });
+    } else {
+        alert("متصفحك لا يدعم الـ GPS");
+    }
+}
+
+// 2. نظام اللغات (تحويل الواجهة)
+function changeLang(lang) {
+    const ticker = document.getElementById('main-ticker');
+    const title = document.getElementById('section-title');
+    const tagline = document.getElementById('tagline');
+
+    if(lang === 'ar') {
+        document.getElementById('trend-platform-root').style.direction = 'rtl';
+        ticker.innerHTML = "🚀 تريند أدف: المنصة تحت التطوير.. نظام الخرائط والـ GPS قيد الربط.. انتظرونا قريباً 🚀";
+        title.innerHTML = "بوابة الوكالات";
+        tagline.innerHTML = "نظام الإعلان الذكي المعتمد على الموقع الجغرافي";
+    } else {
+        document.getElementById('trend-platform-root').style.direction = 'ltr';
+        ticker.innerHTML = "🚀 TREND ADV: Under Development.. GPS & Mapping System Integrating.. Stay Tuned 🚀";
+        title.innerHTML = "Agency Portal";
+        tagline.innerHTML = "Smart Geo-Location Advertising System";
+    }
+}
+
+// 3. بوابة الوكالات (ربط مستقبلي)
+function openAgencyPortal() {
+    alert("سيتم فتح نموذج تسجيل الوكالات وربطه بـ Google Sheets الآن.");
+    // هنا نضع رابط الـ Form أو الـ Dashboard
+}
+
+// تأثير الأنيميشن التلقائي للوجو (تغيير ألوان خفيف)
+setInterval(() => {
+    const icon = document.getElementById('logo-icon');
+    const colors = ['#6a1b9a', '#8e24aa', '#4a148c'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    icon.style.background = randomColor;
+}, 2000);
 </script>
-</body>
-</html>
