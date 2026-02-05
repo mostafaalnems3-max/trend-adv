@@ -124,7 +124,8 @@
 </head>
 <body>
 
-<div id="ai-translation-wrapper" style="text-align: center; margin-bottom: 15px;">
+<div id="ai-master-container" style="text-align: center; margin-bottom: 15px;">
+    
     <div id="language-section" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; scrollbar-width: none;">
         <style>
             #language-section::-webkit-scrollbar { display: none; }
@@ -135,49 +136,56 @@
                 cursor: pointer; transition: 0.3s;
             }
             .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
-            /* إخفاء شريط جوجل الأصلي البايخ عشان نحافظ على شياكة الموقع */
-            .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
+            
+            /* إخفاء أدوات جوجل الافتراضية عشان ما تشوهش التصميم */
+            .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-gadget-simple img { display: none !important; }
+            .goog-te-gadget-simple { background-color: transparent !important; border: none !important; padding: 0 !important; }
             body { top: 0px !important; }
-            .goog-te-combo { display: none !important; }
+            .goog-te-combo { opacity: 0; position: absolute; z-index: -1; }
         </style>
 
         <div class="lang-flex">
-            <div class="lang-pill active" onclick="translatePage('ar', this)">العربية</div>
-            <div class="lang-pill" onclick="translatePage('en', this)">English</div>
-            <div class="lang-pill" onclick="translatePage('de', this)">Deutsch</div>
-            <div class="lang-pill" onclick="translatePage('it', this)">Italiano</div>
-            <div class="lang-pill" onclick="translatePage('zh-CN', this)">中文</div>
-            <div class="lang-pill" onclick="translatePage('ru', this)">Русский</div>
+            <div class="lang-pill active" data-lang="ar" onclick="runAiTranslate('ar', this)">العربية</div>
+            <div class="lang-pill" data-lang="en" onclick="runAiTranslate('en', this)">English</div>
+            <div class="lang-pill" data-lang="de" onclick="runAiTranslate('de', this)">Deutsch</div>
+            <div class="lang-pill" data-lang="it" onclick="runAiTranslate('it', this)">Italiano</div>
+            <div class="lang-pill" data-lang="zh-CN" onclick="runAiTranslate('zh-CN', this)">中文</div>
+            <div class="lang-pill" data-lang="ru" onclick="runAiTranslate('ru', this)">Русский</div>
         </div>
     </div>
 
-    <div id="google_translate_element" style="display:none;"></div>
+    <div id="google_translate_element" style="display:none !important;"></div>
 </div>
 
 <script type="text/javascript">
-    // تحميل محرك جوجل للترجمة
+    // تهيئة محرك الترجمة
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ar',
             includedLanguages: 'ar,en,de,it,zh-CN,ru',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false
         }, 'google_translate_element');
     }
 
-    function translatePage(langCode, element) {
-        // تحديث شكل الزراير
+    // وظيفة التشغيل الذكية
+    function runAiTranslate(langCode, element) {
+        // تغيير شكل الزرار فوراً
         document.querySelectorAll('.lang-pill').forEach(btn => btn.classList.remove('active'));
         element.classList.add('active');
 
-        // استدعاء محرك جوجل لتغيير اللغة
-        var select = document.querySelector('select.goog-te-combo');
-        if (select) {
-            select.value = langCode;
-            select.dispatchEvent(new Event('change'));
+        // محاولة الوصول لمحول جوجل وتغييره
+        var googleSelect = document.querySelector('select.goog-te-combo');
+        if (googleSelect) {
+            googleSelect.value = langCode;
+            googleSelect.dispatchEvent(new Event('change'));
+        } else {
+            console.log("AI Engine still loading... try again in a second.");
+            // إعادة محاولة بسيطة لو لسه بيحمل
+            setTimeout(function() { runAiTranslate(langCode, element); }, 500);
         }
     }
 </script>
+
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
