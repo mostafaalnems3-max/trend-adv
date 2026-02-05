@@ -124,87 +124,61 @@
 </head>
 <body>
 
-<div id="language-section" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; margin-bottom: 5px; scrollbar-width: none;">
-    <style>
-        #language-section::-webkit-scrollbar { display: none; }
-        .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
-        .lang-pill {
-            background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 700;
-            cursor: pointer; transition: 0.3s;
-        }
-        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
-    </style>
+<div id="ai-translation-wrapper" style="text-align: center; margin-bottom: 15px;">
+    <div id="language-section" style="width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; scrollbar-width: none;">
+        <style>
+            #language-section::-webkit-scrollbar { display: none; }
+            .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
+            .lang-pill {
+                background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
+                padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 700;
+                cursor: pointer; transition: 0.3s;
+            }
+            .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
+            /* إخفاء شريط جوجل الأصلي البايخ عشان نحافظ على شياكة الموقع */
+            .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
+            body { top: 0px !important; }
+            .goog-te-combo { display: none !important; }
+        </style>
 
-    <div class="lang-flex">
-        <div class="lang-pill active" onclick="changeLanguage('ar', this)">العربية</div>
-        <div class="lang-pill" onclick="changeLanguage('en', this)">English</div>
-        <div class="lang-pill" onclick="changeLanguage('de', this)">Deutsch</div>
-        <div class="lang-pill" onclick="changeLanguage('it', this)">Italiano</div>
-        <div class="lang-pill" onclick="changeLanguage('zh', this)">中文</div>
-        <div class="lang-pill" onclick="changeLanguage('ru', this)">Русский</div>
+        <div class="lang-flex">
+            <div class="lang-pill active" onclick="translatePage('ar', this)">العربية</div>
+            <div class="lang-pill" onclick="translatePage('en', this)">English</div>
+            <div class="lang-pill" onclick="translatePage('de', this)">Deutsch</div>
+            <div class="lang-pill" onclick="translatePage('it', this)">Italiano</div>
+            <div class="lang-pill" onclick="translatePage('zh-CN', this)">中文</div>
+            <div class="lang-pill" onclick="translatePage('ru', this)">Русский</div>
+        </div>
     </div>
+
+    <div id="google_translate_element" style="display:none;"></div>
 </div>
 
-<script>
-function changeLanguage(lang, element) {
-    // 1. تحديث شكل الزراير
-    document.querySelectorAll('.lang-pill').forEach(btn => btn.classList.remove('active'));
-    element.classList.add('active');
-
-    // 2. قاموس الترجمة الكامل
-    const translations = {
-        'ar': {
-            'slogan': 'أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS',
-            'search': 'ابحث عن إعلانك في محيطك الجغرافي...',
-            'dir': 'rtl'
-        },
-        'en': {
-            'slogan': 'The first digital platform in the Arab world to link ads with GPS',
-            'search': 'Search for ads in your area...',
-            'dir': 'ltr'
-        },
-        'de': {
-            'slogan': 'Die erste digitale Plattform zur Verknüpfung von Werbung mit GPS',
-            'search': 'Suche nach Anzeigen in deiner Nähe...',
-            'dir': 'ltr'
-        },
-        'it': {
-            'slogan': 'La prima piattaforma digitale per collegare gli annunci con il GPS',
-            'search': 'Cerca annunci nella tua zona...',
-            'dir': 'ltr'
-        },
-        'zh': {
-            'slogan': '阿拉伯世界第一个将广告与GPS连接起来的数字平台',
-            'search': '搜索您所在区域的广告...',
-            'dir': 'ltr'
-        },
-        'ru': {
-            'slogan': 'Первая цифровая платформа для связи рекламы с GPS',
-            'search': 'Поиск объявлений в вашем районе...',
-            'dir': 'ltr'
-        }
-    };
-
-    const data = translations[lang];
-    if (data) {
-        // تحديث السلوجان - اتأكد إن الـ Div بتاع السلوجان فيه class="global-slogan"
-        const sloganElement = document.querySelector('.global-slogan');
-        if (sloganElement) sloganElement.innerText = data.slogan;
-
-        // تحديث خانة البحث
-        const searchInput = document.querySelector('.search-container input');
-        if (searchInput) searchInput.placeholder = data.search;
-
-        // تغيير اتجاه الموقع
-        document.body.style.direction = data.dir;
-        
-        // الحفاظ على اتجاه اللوجو ثابت
-        const header = document.getElementById('global-header-system');
-        if (header) header.style.direction = 'ltr';
+<script type="text/javascript">
+    // تحميل محرك جوجل للترجمة
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'ar,en,de,it,zh-CN,ru',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
     }
-}
+
+    function translatePage(langCode, element) {
+        // تحديث شكل الزراير
+        document.querySelectorAll('.lang-pill').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+
+        // استدعاء محرك جوجل لتغيير اللغة
+        var select = document.querySelector('select.goog-te-combo');
+        if (select) {
+            select.value = langCode;
+            select.dispatchEvent(new Event('change'));
+        }
+    }
 </script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
     <style>
