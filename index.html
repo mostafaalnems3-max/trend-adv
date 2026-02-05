@@ -19,33 +19,6 @@
             padding: 30px 20px 50px; border-radius: 0 0 45px 45px;
             text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        
-/* التعديل الجذري في الـ CSS فوق */
-.logo-container { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 12px; 
-    margin-bottom: 15px; 
-    direction: ltr !important; /* عشان الـ T تفضل شمال والكلمة يمين */
-}
-
-.t-brand {
-    background: var(--gold); 
-    color: var(--dark);
-    width: 45px; 
-    height: 45px; 
-    border-radius: 12px;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-size: 28px; 
-    font-weight: 900;
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-    transform: rotate(-5deg);
-    flex-shrink: 0; /* يمنع المربع إنه يتضغط */
-}
-
 
             background: var(--gold); color: var(--dark); width: 45px; height: 45px; 
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
@@ -125,9 +98,18 @@
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25px;">
 
+<div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25px;">
+    
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; direction: ltr;">
+        <div class="t-brand">T</div>
+        <div class="logo-text" style="color: white; font-size: 26px; font-weight: 900;">REND ADV</div>
+    </div>
+    
     <div style="color: var(--gold); font-size: 11px; font-weight: 700; border: 1px solid rgba(255,204,0,0.4); padding: 6px 15px; border-radius: 20px; background: rgba(0,0,0,0.2);">
         أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS
     </div>
+
+</div>
 
 </div>
 
