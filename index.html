@@ -124,59 +124,65 @@
 </head>
 <body>
 
-<div id="main-header" style="text-align: center; margin: 25px 0; width: 100%;">
+<div id="master-header-system" style="text-align: center; margin: 25px 0; width: 100%;">
     <style>
-        .final-logo-box { 
-            display: flex !important; 
-            align-items: center !important; 
-            justify-content: center !important; 
-            gap: 12px; 
-            direction: ltr !important; /* الـ T شمال والكلمة يمين */
-            margin-bottom: 12px;
+        /* تعريف الألوان والتنسيق في مكان واحد عشان ميتوهش منك */
+        .premium-logo-box {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 15px;
+            direction: ltr !important; /* الـ T على الشمال */
+            margin-bottom: 15px;
         }
-        .final-t { 
-            background: #ffcc00 !important; 
-            color: #000b18 !important; 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 28px; 
-            font-weight: 900; 
-            transform: rotate(-5deg); 
-            flex-shrink: 0; 
-            box-shadow: 0 0 15px rgba(255,204,0,0.4); 
+
+        .t-box-gold {
+            background: #ffcc00 !important; /* اللون الأصفر الذهبي */
+            color: #000b18 !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            transform: rotate(-5deg);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.5); /* توهج حول الحرف */
+            flex-shrink: 0;
         }
-        .final-text { 
-            color: #ffffff !important; 
-            font-size: 26px; 
-            font-weight: 900; 
-            white-space: nowrap; 
-            opacity: 1 !important;
+
+        .main-brand-name {
+            color: #ffffff !important; /* اللون الأبيض الناصع */
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.5); /* ظل يخلي الكلمة واضحة */
         }
-        .final-slogan { 
-            display: inline-block; 
-            color: #ffcc00; 
-            font-size: 11px; 
-            font-weight: 700; 
-            border: 1px solid rgba(255,204,0,0.3); 
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            background: rgba(0,0,0,0.3); 
+
+        .smart-slogan-pill {
+            display: inline-block;
+            color: #ffcc00; /* شعار بلون الذهب */
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 204, 0, 0.4);
+            padding: 8px 22px;
+            border-radius: 50px;
+            background: rgba(0, 11, 24, 0.6); /* خلفية داكنة خفيفة تبرز النص */
+            backdrop-filter: blur(5px);
         }
     </style>
 
-    <div class="final-logo-box">
-        <div class="final-t">T</div>
-        <div class="final-text">REND ADV</div>
+    <div class="premium-logo-box">
+        <div class="t-box-gold">T</div>
+        <div class="main-brand-name">REND ADV</div>
     </div>
     
-    <div class="final-slogan">
+    <div class="smart-slogan-pill">
         أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS
     </div>
 </div>
+
 
 <div class="search-container">
     <input type="text" placeholder="ابحث عن إعلانك في محيطك الجغرافي...">
