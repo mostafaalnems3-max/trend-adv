@@ -124,85 +124,94 @@
 </head>
 <body>
 
-<div id="ai-dynamic-header" style="text-align: center; margin: 30px 0; width: 100%;">
+<div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
     <style>
-        /* أنيميشن الألوان المتغيرة لحرف T */
-        @keyframes rainbow-border {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* أنيميشن لتغيير لون حرف T فقط */
+        @keyframes t-color-cycle {
+            0% { color: #ff0000; }
+            20% { color: #00ff00; }
+            40% { color: #00ffff; }
+            60% { color: #0000ff; }
+            80% { color: #ff00ff; }
+            100% { color: #ff0000; }
         }
 
-        .master-container {
+        .brand-master-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0; /* هنلزقهم في بعض عشان يبقوا كبسولة واحدة */
+            gap: 0;
             direction: ltr !important;
             margin-bottom: 25px;
         }
 
-        /* حرف T بيلون بجميع الألوان */
-        .t-box-rainbow {
-            background: linear-gradient(45deg, #ff0000, #ffcc00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000) !important;
-            background-size: 400% 400% !important;
-            animation: rainbow-border 5s ease infinite;
-            color: #000b18 !important;
+        /* المربع الأصفر الثابت */
+        .yellow-square {
+            background: #ffcc00 !important;
             width: 55px;
             height: 55px;
-            border-radius: 15px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* حرف T اللي بيغير ألوانه */
+        .dynamic-t {
+            font-size: 38px;
             font-weight: 900;
-            z-index: 2;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+            animation: t-color-cycle 4s linear infinite;
         }
 
-        /* الخلفية اللي تحت كلمة TREND */
-        .text-capsule {
-            background: rgba(255, 255, 255, 0.1); /* خلفية زجاجية */
-            padding: 10px 25px 10px 40px;
-            margin-left: -20px; /* تداخل بسيط مع المربع */
+        /* الخلفية العالمية تحت الاسم (Premium Dark) */
+        .name-capsule {
+            background: #0d1117; /* لون براندات عالمي فخم */
+            padding: 10px 30px 10px 45px;
+            margin-left: -25px; /* تداخل احترافي مع المربع */
             border-radius: 0 50px 50px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 204, 0, 0.3); /* إطار ذهبي رفيع */
+            display: flex;
+            align-items: center;
         }
 
-        .main-text {
+        .brand-text-white {
             color: #ffffff !important;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            text-transform: uppercase;
         }
 
-        .gold-span {
-            color: #ffcc00; /* تلوين ADV بالذهبي */
+        .adv-gold {
+            color: #ffcc00 !important;
+            margin-left: 8px;
         }
 
-        .slogan-final-badge {
+        .global-slogan {
             display: inline-block;
-            background: linear-gradient(90deg, #ffcc00, #ff9900);
+            background: #ffcc00;
             color: #000b18;
             padding: 8px 25px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 800;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
         }
     </style>
 
-    <div class="master-container">
-        <div class="t-box-rainbow">T</div>
+    <div class="brand-master-wrapper">
+        <div class="yellow-square">
+            <span class="dynamic-t">T</span>
+        </div>
         
-        <div class="text-capsule">
-            <span class="main-text">REND <span class="gold-span">ADV</span></span>
+        <div class="name-capsule">
+            <span class="brand-text-white">REND <span class="adv-gold">ADV</span></span>
         </div>
     </div>
     
-    <div class="slogan-final-badge">
+    <div class="global-slogan">
         أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS
     </div>
 </div>
