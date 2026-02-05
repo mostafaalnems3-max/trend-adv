@@ -1,70 +1,103 @@
-<div id="app-container" style="direction: rtl; font-family: 'Segoe UI', sans-serif; background: #000b1a; color: white; min-height: 100vh; padding-bottom: 60px;">
+<div id="trend-app" style="direction: rtl; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #00050a; color: white; min-height: 100vh; position: relative;">
 
-    <div style="background: #001a33; padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #6a1b9a; position: sticky; top: 0; z-index: 1000;">
-        <div class="logo-area" style="display: flex; align-items: center;">
-            <div style="background: #6a1b9a; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-left: 10px;">
-                <span style="font-weight: 900; font-size: 25px;">T</span>
+    <header style="background: #001226; padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #6a1b9a; position: sticky; top: 0; z-index: 1000;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="background: #6a1b9a; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px #6a1b9a;">
+                <span style="font-weight: 900; font-size: 30px;">T</span>
             </div>
-            <span style="font-weight: bold; font-size: 20px;">REND ADV</span>
+            <span style="font-weight: bold; font-size: 22px; letter-spacing: 1px;">REND ADV</span>
         </div>
 
-        <div style="flex-grow: 1; margin: 0 20px; position: relative;">
-            <input type="text" placeholder="استكشف الإعلانات المحيطة بك..." style="width: 100%; padding: 10px 40px 10px 10px; border-radius: 25px; border: none; background: #002b4d; color: white;">
-            <span style="position: absolute; left: 15px; top: 8px; color: #aaa;">🔍</span>
+        <div style="flex-grow: 1; margin: 0 30px; position: relative;">
+            <input type="text" placeholder="🔍 استكشف الإعلانات في محيطك الجغرافي..." style="width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid #333; background: #001d3d; color: white; outline: none;">
         </div>
 
-        <div class="lang-toggle">
-            <button style="background: #6a1b9a; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer;">EN</button>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="setLang('en')" style="background: #1a1a1a; border: 1px solid #6a1b9a; color: white; padding: 5px 15px; border-radius: 5px; cursor: pointer;">EN</button>
+            <button onclick="setLang('ar')" style="background: #6a1b9a; border: none; color: white; padding: 5px 15px; border-radius: 5px; cursor: pointer;">AR</button>
         </div>
+    </header>
+
+    <div style="background: #ffcc00; color: #000; padding: 10px; font-weight: bold; font-size: 14px; text-align: center;">
+        <marquee direction="right" scrollamount="8">
+            🔥 عرض خاص للوكالات: سجل الآن واحصل على 3 شهور مجاناً (عرض لفترة محدودة) | نظام الـ GPS يقوم بتحديث الخرائط الآن.. استعد للانطلاق 🚀
+        </marquee>
     </div>
 
-    <div style="background: linear-gradient(90deg, #6a1b9a, #bc4eff); margin: 15px; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
-        <h2 style="margin: 0; font-size: 22px;">🎁 عرض الانطلاق الخاص</h2>
-        <p style="margin: 10px 0; font-size: 16px; font-weight: bold; color: #ffcc00;">3 شهور مجاناً للوكالات الجديدة عند التسجيل الآن!</p>
-        <button style="background: white; color: #6a1b9a; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">احجز مكانك الآن</button>
-    </div>
-
-    <div style="background: #ffcc00; color: #000; padding: 8px; font-weight: bold;">
-        <marquee direction="right">🌍 نظام الـ GPS قيد المعايرة.. استكشف الإعلانات في محيطك.. TREND ADV المنصة رقم 1 للوكالات 🚀</marquee>
-    </div>
+    <section style="background: linear-gradient(135deg, #1a0633 0%, #4a148c 100%); margin: 20px; padding: 30px; border-radius: 20px; border: 1px solid #bc4eff; text-align: center;">
+        <h1 style="color: #ffcc00; margin-bottom: 10px;">🎁 فرصة الشراكة والانطلاق</h1>
+        <p style="font-size: 18px;">انضم لـ TREND ADV اليوم واحصل على **اشتراك كامل لمدة 3 شهور مجاناً**</p>
+        <button onclick="showPortal()" style="margin-top: 15px; background: #ffcc00; color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;">ابدأ تجربتك المجانية الآن</button>
+    </section>
 
     <div style="padding: 20px;">
-        <h3 style="border-right: 4px solid #ffcc00; padding-right: 10px;">النماذج التجريبية (Demo)</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-            <div style="background: #002b4d; padding: 15px; border-radius: 10px; border: 1px dashed #6a1b9a;">
-                <p>📊 نموذج إعلان (مطعم)</p>
-                <small>شاهد كيف يظهر لعملائك المحيطين</small>
+        <h3 style="margin-bottom: 20px; border-right: 5px solid #ffcc00; padding-right: 15px;">النماذج التجريبية (Demo Samples)</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div style="background: #001d3d; padding: 20px; border-radius: 15px; border: 1px solid #333;">
+                <h4 style="color: #bc4eff;">📍 نموذج إعلان جغرافي</h4>
+                <p style="font-size: 14px; color: #ccc;">شاهد كيف يظهر إعلانك للمستخدمين في نطاق 5 كم فقط.</p>
+                <button style="background: transparent; border: 1px solid #bc4eff; color: white; padding: 5px 15px; border-radius: 5px; margin-top: 10px;">معاينة النموذج</button>
             </div>
-            <div style="background: #002b4d; padding: 15px; border-radius: 10px; border: 1px dashed #6a1b9a;">
-                <p>🏬 نموذج إعلان (متجر)</p>
-                <small>تتبع التفاعل الجغرافي الحي</small>
+            <div style="background: #001d3d; padding: 20px; border-radius: 15px; border: 1px solid #333;">
+                <h4 style="color: #bc4eff;">📊 داش بورد الوكالة</h4>
+                <p style="font-size: 14px; color: #ccc;">تحكم كامل في ميزانيتك، حملاتك، وتقارير الوصول الحية.</p>
+                <button style="background: transparent; border: 1px solid #bc4eff; color: white; padding: 5px 15px; border-radius: 5px; margin-top: 10px;">معاينة النظام</button>
             </div>
         </div>
     </div>
 
-    <div style="padding: 20px; background: rgba(106, 27, 154, 0.1); margin: 15px; border-radius: 15px;">
-        <h3 style="margin-top: 0;">نظام إدارة المنصة (Admin)</h3>
-        <ul style="list-style: none; padding: 0;">
-            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📁 الدخول إلى الداش بورد (Dashboard)</li>
-            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📈 إحصائيات الشركاء والمستثمرين</li>
-            <li style="padding: 12px; border-bottom: 1px solid #333; cursor: pointer;">📍 إدارة الخرائط والـ GPS</li>
-        </ul>
+    <div style="margin: 20px; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 25px;">
+        <h3 style="margin-top: 0;">نظام الإدارة المركزي (Partner Dashboard)</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: #001d3d; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                <span>📂 ملفات الشركاء والمستثمرين</span>
+                <span>➜</span>
+            </div>
+            <div style="background: #001d3d; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                <span>🛠️ إعدادات الـ GPS والخرائط المركزية</span>
+                <span>➜</span>
+            </div>
+            <div style="background: #001d3d; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                <span>📈 تقارير الأرباح وتوزيع الحصص</span>
+                <span>➜</span>
+            </div>
+        </div>
     </div>
 
-    <div style="text-align: center; padding: 20px;">
-        <p>تابعنا على:</p>
-        <div style="display: flex; justify-content: center; gap: 20px; font-size: 24px;">
+    <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid #333; margin-top: 40px;">
+        <p style="color: #666; margin-bottom: 20px;">تواصل مع الإدارة التقنية</p>
+        <div style="display: flex; justify-content: center; gap: 25px; font-size: 28px;">
             <span title="Facebook" style="cursor: pointer;">🔵</span>
             <span title="Instagram" style="cursor: pointer;">📸</span>
             <span title="WhatsApp" style="cursor: pointer;">🟢</span>
             <span title="X" style="cursor: pointer;">🐦</span>
         </div>
-    </div>
+        <p style="margin-top: 20px; font-size: 12px; color: #444;">&copy; 2026 TREND ADV - All Rights Reserved</p>
+    </footer>
 
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #001a33; display: flex; justify-content: space-around; padding: 12px; border-top: 2px solid #6a1b9a;">
-        <div style="text-align: center; font-size: 12px;">🏠<br>الرئيسية</div>
-        <div style="text-align: center; font-size: 12px;">📍<br>استكشف</div>
-        <div style="text-align: center; font-size: 12px;">💼<br>بوابة الوكالات</div>
-        <div style="text-align: center; font-size: 12px;">⚙️<br>الإدارة</div>
-    </div>
+    <nav style="position: fixed; bottom: 0; left: 0; right: 0; background: #001226; border-top: 2px solid #6a1b9a; display: flex; justify-content: space-around; padding: 10px; z-index: 2000;">
+        <div style="text-align: center; font-size: 12px; cursor: pointer;">🏠<br>الرئيسية</div>
+        <div style="text-align: center; font-size: 12px; cursor: pointer;">📍<br>استكشف</div>
+        <div style="text-align: center; font-size: 12px; cursor: pointer;">💼<br>بوابتنا</div>
+        <div style="text-align: center; font-size: 12px; cursor: pointer;">⚙️<br>الإدارة</div>
+    </nav>
+
 </div>
+
+<script>
+// تفعيل الـ GPS التلقائي
+window.onload = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(p => console.log("GPS Active"), e => console.log("GPS Error"));
+    }
+};
+
+function setLang(l) {
+    document.getElementById('trend-app').style.direction = (l === 'ar' ? 'rtl' : 'ltr');
+    alert("تحويل اللغة إلى: " + l.toUpperCase());
+}
+
+function showPortal() {
+    alert("يتم الآن تحويلك لبوابة تسجيل الوكالات (نظام الـ 3 شهور مجاناً)");
+}
+</script>
