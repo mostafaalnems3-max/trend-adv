@@ -171,5 +171,31 @@
         </div>
     </section>
 
+<div id="MicrosoftTranslatorWidget" style="display:none;"></div>
+
+<script type="text/javascript">
+    // 1. الدوال المساعدة الضرورية للمحرك
+    function onProgress(v) {} function onError(e) {} function onComplete() {} function onRestoreOriginal() {}
+
+    // 2. تهيئة المحرك عند تحميل الصفحة
+    function MicrosoftTranslatorWidgetOnload() {
+        if (window.Microsoft && window.Microsoft.Translate) {
+            Microsoft.Translate.Widget.Translate('ar', 'en', onProgress, onError, onComplete, onRestoreOriginal, 2000);
+        }
+    }
+
+    // 3. دالة التشغيل التي تربطها بالأزرار
+    function translateAction(langCode) {
+        if (!langCode) return;
+        if (window.Microsoft && Microsoft.Translate && Microsoft.Translate.Widget) {
+            Microsoft.Translate.Widget.translatePage(langCode);
+        } else {
+            console.error("AI Engine is loading...");
+        }
+    }
+</script>
+
+<script src="//www.microsofttranslator.com/ajax/v3/widgetv3.ashx?siteId=trend-global" type="text/javascript"></script>
+
 </body>
 </html>
