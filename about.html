@@ -58,12 +58,23 @@
             </div>
         </div>
         
-        <div class="lang-flex">
-            <div class="lang-pill active">العربية</div>
-            <div class="lang-pill">English</div>
-            <div class="lang-pill">Deutsch</div>
-            <div class="lang-pill">Italiano</div>
-        </div>
+<div class="lang-switcher" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 15px;">
+    <button onclick="translateAction('en')" class="ai-btn">English</button>
+    <button onclick="translateAction('de')" class="ai-btn">Deutsch</button>
+    <button onclick="translateAction('it')" class="ai-btn">Italiano</button>
+    <button onclick="translateAction('ru')" class="ai-btn">Русский</button>
+    <button onclick="translateAction('zh-CHS')" class="ai-btn">简体中文</button>
+    <button onclick="translateAction('ar')" class="ai-btn" style="background:#ffcc00; color:#000;">العربية</button>
+    
+    <select onchange="translateAction(this.value)" style="background:#000; color:#ffcc00; border:1px solid #ffcc00; border-radius:50px; padding:5px 15px; font-size:12px;">
+        <option value="">🌍 لغات إضافية (AI)</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ja">日本語</option>
+        <option value="tr">Türkçe</option>
+    </select>
+</div>
+
     </header>
 
     <section class="about-hero">
