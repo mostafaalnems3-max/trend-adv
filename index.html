@@ -124,37 +124,36 @@
 </head>
 <body>
 
-<div id="ai-container" style="text-align: center; margin-bottom: 15px;">
+<div id="ai-translation-center" style="text-align: center; margin-bottom: 15px;">
     <style>
-        /* 1. منع ظهور شريط جوجل والترجمة الأصلية تماماً */
-        iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; }
-        .goog-te-gadget-icon, .goog-te-gadget-simple img { display: none !important; }
+        /* إخفاء شريط جوجل الإجباري ومنع إزاحة الصفحة */
+        iframe.goog-te-banner-frame { display: none !important; }
         #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
         .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
-        
-        /* 2. تصحيح وضع الصفحة لمنع الإزاحة لأسفل */
-        body { top: 0px !important; position: static !important; min-height: 100% !important; }
-        .goog-te-combo { opacity: 0; position: absolute; z-index: -1; pointer-events: none; }
+        body { top: 0px !important; position: static !important; }
 
-        /* 3. تنسيق زراير اللغات */
-        #language-section::-webkit-scrollbar { display: none; }
+        /* تنسيق الزراير الشيك */
+        #lang-scroller::-webkit-scrollbar { display: none; }
         .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
         .lang-pill {
             background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
             padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 700;
             cursor: pointer; transition: 0.3s;
         }
-        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
+        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
+        
+        /* إخفاء القائمة الأصلية */
+        .goog-te-combo { opacity: 0; position: absolute; z-index: -1; }
     </style>
 
-    <div id="language-section" style="width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none;">
+    <div id="lang-scroller" style="width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none;">
         <div class="lang-flex">
-            <div class="lang-pill active" onclick="triggerAi('ar', this)">العربية</div>
-            <div class="lang-pill" onclick="triggerAi('en', this)">English</div>
-            <div class="lang-pill" onclick="triggerAi('de', this)">Deutsch</div>
-            <div class="lang-pill" onclick="triggerAi('it', this)">Italiano</div>
-            <div class="lang-pill" onclick="triggerAi('zh-CN', this)">中文</div>
-            <div class="lang-pill" onclick="triggerAi('ru', this)">Русский</div>
+            <div class="lang-pill active" onclick="startAiTranslate('ar', this)">العربية</div>
+            <div class="lang-pill" onclick="startAiTranslate('en', this)">English</div>
+            <div class="lang-pill" onclick="startAiTranslate('de', this)">Deutsch</div>
+            <div class="lang-pill" onclick="startAiTranslate('it', this)">Italiano</div>
+            <div class="lang-pill" onclick="startAiTranslate('zh-CN', this)">中文</div>
+            <div class="lang-pill" onclick="startAiTranslate('ru', this)">Русский</div>
         </div>
     </div>
 
@@ -162,27 +161,36 @@
 </div>
 
 <script type="text/javascript">
+    // محرك جوجل بيتم تعريفه هنا بشكل آمن
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ar',
-            includedLanguages: 'ar,en,de,it,zh-CN,ru'
+            includedLanguages: 'ar,en,de,it,zh-CN,ru',
+            autoDisplay: false
         }, 'google_translate_element');
     }
 
-    function triggerAi(lang, btn) {
-        // تحديث الزراير
+    function startAiTranslate(lang, btn) {
+        // تحديث شكل الزراير
         document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
 
-        // تنفيذ الترجمة من خلال القائمة المخفية
-        var select = document.querySelector('.goog-te-combo');
-        if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event('change'));
+        // أهم خطوة: التأكد إن مكتبة جوجل (google) موجودة قبل الاستخدام
+        if (typeof google !== 'undefined' && google.translate) {
+            var select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = lang;
+                select.dispatchEvent(new Event('change'));
+            }
+        } else {
+            console.log("الذكاء الاصطناعي بيحمل.. ثانية واحدة");
+            // لو لسه ما حملش، بنخليه يعيد المحاولة تلقائياً بعد ثانية
+            setTimeout(function() { startAiTranslate(lang, btn); }, 1000);
         }
     }
 </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
     <style>
