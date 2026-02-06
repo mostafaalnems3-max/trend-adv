@@ -7,6 +7,28 @@
     <style>
         body { margin: 0; padding: 0; background: #000b18; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #ffffff; }
 
+/* ستايل الأزرار الذكية - ضيفه هنا */
+.ai-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 204, 0, 0.5);
+    padding: 7px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s all ease;
+}
+
+.ai-btn:hover {
+    background: #ffcc00;
+    color: #000;
+    box-shadow: 0 0 10px #ffcc00;
+}
+
+/* إخفاء أي حشر من جوجل أو مايكروسوفت للحفاظ على نظافة التصميم */
+.skiptranslate, .tr-float-bar, #goog-gt-tt { display: none !important; }
+body { top: 0 !important; }
+
         /* --- 1. قسم اللوجو العالمي (نفس الهوية) --- */
         #global-header-system { text-align: center; padding: 20px 0; background: #000b18; width: 100%; }
         @keyframes t-color-cycle {
