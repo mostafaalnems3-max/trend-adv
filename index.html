@@ -300,41 +300,56 @@ async function translateAI(targetLang, element) {
     </div>
 </div>
 
-<div class="search-container">
-    <input type="text" placeholder="ابحث عن إعلانك في محيطك الجغرافي...">
-    <button class="search-icon-btn"><i class="fa fa-search"></i></button>
+</style>
+
+<div class="search-section-wrapper" style="max-width: 600px; margin: 30px auto; padding: 0 15px;">
+    <div class="search-container" style="position: relative; background: #fff; border-radius: 50px; border: 2px solid #ffcc00; display: flex; align-items: center; padding: 5px 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        
+        <i class="fa fa-map-marker-alt" style="color: #ffcc00; font-size: 20px; margin-right: 10px;"></i>
+        
+        <input type="text" id="smart-search-input" 
+               placeholder="إلى أين تريد الذهاب؟ (أو ابحث عن إعلان)" 
+               style="flex: 1; border: none; padding: 15px; outline: none; font-size: 16px; font-weight: 600; border-radius: 50px;">
+        
+        <button onclick="startSmartNavigation()" 
+                style="background: #000b18; color: #ffcc00; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 900; transition: 0.3s;">
+            انطلق
+        </button>
+    </div>
+    <p style="color: #aaa; font-size: 12px; text-align: center; margin-top: 10px; font-weight: bold;">
+        <i class="fa fa-robot"></i> TREND AI يربط مسارك بلوحاتنا الإعلانية لحظياً
+    </p>
 </div>
 
-<div id="about-trigger-container" style="text-align: center; margin-top: 15px;">
-    <style>
-        .about-link-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 204, 0, 0.1); /* خلفية صفراء شفافة جداً */
-            color: #ffcc00;
-            text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        .about-link-pill:hover {
-            background: #ffcc00;
-            color: #000b18;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
-        }
-        .arrow-icon { font-size: 16px; transition: 0.3s; }
-        .about-link-pill:hover .arrow-icon { transform: translateX(-5px); }
-    </style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf7Gbd_b-doUyEBchwKei2JD4ld3-fz_0&libraries=places"></script>
 
-    <a href="about.html" class="about-link-pill">
-        <span>اكتشف قصتنا ومعايير TREND ADV</span>
-        <span class="arrow-icon">←</span>
-    </a>
+<script>
+function initSearch() {
+    const input = document.getElementById('smart-search-input');
+    if (!input) return;
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    
+    // تسجيل بيانات البحث للداش بورد
+    autocomplete.addListener('place_changed', function() {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) return;
+        console.log("AI Log: تم تسجيل بحث في منطقة: " + place.formatted_address);
+    });
+}
+google.maps.event.addDomListener(window, 'load', initSearch);
+
+function startSmartNavigation() {
+    const destination = document.getElementById('smart-search-input').value;
+    if(destination) {
+        alert("جاري تحليل المسار لـ: " + destination + "\nيتم الآن فحص اللوحات المتاحة عبر TREND AI..");
+    } else {
+        alert("من فضلك أدخل وجهتك يا بطل!");
+    }
+}
+</script>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="about.html" class="about-link-pill">عن المنصة ➔</a>
 </div>
 
 <div class="hero-section">
