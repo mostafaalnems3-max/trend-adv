@@ -305,6 +305,38 @@ async function translateAI(targetLang, element) {
     <button class="search-icon-btn"><i class="fa fa-search"></i></button>
 </div>
 
+<div id="about-trigger-container" style="text-align: center; margin-top: 15px;">
+    <style>
+        .about-link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 204, 0, 0.1); /* خلفية صفراء شفافة جداً */
+            color: #ffcc00;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .about-link-pill:hover {
+            background: #ffcc00;
+            color: #000b18;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
+        }
+        .arrow-icon { font-size: 16px; transition: 0.3s; }
+        .about-link-pill:hover .arrow-icon { transform: translateX(-5px); }
+    </style>
+
+    <a href="about.html" class="about-link-pill">
+        <span>اكتشف قصتنا ومعايير TREND ADV</span>
+        <span class="arrow-icon">←</span>
+    </a>
+</div>
+
 <div class="hero-section">
     <h2 style="margin:0">مرحباً بكم في TREND ADV</h2>
     <p style="font-size:13px; color:#aaa">نظام الإعلان الذكي الذي ينقل سوق الـ Out-door إلى العصر الرقمي.</p>
