@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TREND ADV | نظام الإدارة المتكامل</title>
+    <title>TREND ADV | نظام التوثيق الذكي</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -13,13 +13,14 @@
         :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
         body { font-family: 'Cairo', sans-serif; background: #f0f4f8; margin: 0; padding-bottom: 90px; overflow-x: hidden; }
 
-        /* الهيدر واللوجو */
+        /* الهيدر الاحترافي */
         .premium-header {
             background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%);
             padding: 30px 20px 50px; border-radius: 0 0 45px 45px;
             text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
+        /* اللوجو المتحرك */
         .brand-master-wrapper { display: flex; align-items: center; justify-content: center; gap: 0; direction: ltr !important; margin-bottom: 25px; }
         .yellow-square { background: #ffcc00 !important; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; z-index: 5; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .dynamic-t { font-size: 38px; font-weight: 900; animation: t-color-cycle 4s linear infinite; }
@@ -28,87 +29,99 @@
         .name-capsule { background: #0d1117; padding: 10px 30px 10px 45px; margin-left: -25px; border-radius: 0 50px 50px 0; border: 1px solid rgba(255, 204, 0, 0.3); display: flex; align-items: center; }
         .brand-text-white { color: #ffffff !important; font-size: 26px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
         .adv-gold { color: #ffcc00 !important; margin-left: 8px; }
-        .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
+        .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 11px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
 
-        /* أزرار اللغات */
-        .lang-pill { background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; cursor: pointer; margin: 5px; display: inline-block; }
-        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
+        /* بوابة التوثيق */
+        .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; color: white; }
+        .btn-verify { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; color: #000; transition: 0.3s; }
+        .btn-verify:active { transform: scale(0.95); }
         
-        /* بوابة المندوب */
-        .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; }
-        .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        /* شريط اللغات */
+        .lang-pill { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 20px; font-size: 11px; cursor: pointer; margin: 0 4px; display: inline-block; }
+        .lang-pill.active { background: var(--gold); color: var(--dark); border-color: var(--gold); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="premium-header">
-        <div id="lang-container">
-            <div onclick="alert('جاري الترجمة..')" class="lang-pill active">العربية</div>
-            <div onclick="alert('Translating..')" class="lang-pill">English</div>
+        <div style="margin-bottom: 20px;">
+            <span class="lang-pill active">العربية</span>
+            <span class="lang-pill">English</span>
         </div>
 
         <div class="brand-master-wrapper">
             <div class="yellow-square"><span class="dynamic-t">T</span></div>
             <div class="name-capsule"><span class="brand-text-white">REND <span class="adv-gold">ADV</span></span></div>
         </div>
-        <div class="global-slogan">أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS</div>
+        <div class="global-slogan">أول منصة لربط الإعلانات بالـ GPS والذكاء الاصطناعي</div>
     </div>
 
     <div class="rep-card">
-        <h4 style="color: #00ff00; margin-bottom: 15px;">📸 بوابة التوثيق الذكي</h4>
+        <h4 style="color: #00ff00; margin-top: 0;"><i class="fas fa-shield-alt"></i> بوابة التوثيق الذكي</h4>
+        <p style="font-size: 12px; color: #ccc;">سيتم التحقق من موقعك الحالي ومقارنته ببيانات الداش بورد</p>
         
-        <button onclick="repVerification()" class="btn-main">📍 نشر اللوحة (نطاق 150 متر)</button>
+        <button onclick="repVerification()" class="btn-verify">📍 نشر اللوحة (توثيق الموقع)</button>
         
-        <div style="margin-top: 20px;">
-            <a href="javascript:void(0)" onclick="openAboutPage()" style="color: var(--gold); text-decoration: none; font-weight: bold; font-size: 14px;">
+        <div style="margin-top: 25px;">
+            <a href="about.html" onclick="logAIEvents('Navigate_About', 'Dashboard_Footer')" style="color: var(--gold); text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid var(--gold); padding-bottom: 2px;">
                 📑 من نحن (عن منصة TREND AI) ←
             </a>
         </div>
     </div>
 
     <script>
-        // دالة الأنليتكس
+        // 1. بيانات الربط مع الداش بورد (تعدل من لوحة التحكم)
+        const dashboardConfig = {
+            targetLat: 30.0444, 
+            targetLon: 31.2357,
+            allowedRadius: 150, // النطاق بالمتر
+            billboardId: "TREND-DB-001"
+        };
+
+        // 2. محرك الأنليتكس
         function logAIEvents(action, label) {
-            console.log(`📊 سجل الأنليتكس: ${action} - ${label}`);
-            // هنا يربط مع Google Analytics لاحقاً
+            console.log(`📊 [Analytics] ${action}: ${label}`);
+            // هنا يوضع كود gtag إذا كان مفعلاً
         }
 
-        // فتح صفحة من نحن
-        function openAboutPage() {
-            logAIEvents('Navigate_About', 'Standalone_Link');
-            window.location.href = "about.html"; 
-        }
-
-        // محرك الـ GPS والـ 150 متر
+        // 3. دالة التوثيق والربط بالـ GPS
         function repVerification() {
-            if (!navigator.geolocation) return alert("الـ GPS غير مدعوم");
-            
+            logAIEvents('Verify_Attempt', dashboardConfig.billboardId);
+
+            if (!navigator.geolocation) {
+                return alert("الـ GPS غير مدعوم في متصفحك.");
+            }
+
             navigator.geolocation.getCurrentPosition(pos => {
                 const uLat = pos.coords.latitude;
                 const uLon = pos.coords.longitude;
-                const targetLat = 30.045, targetLon = 31.236; // إحداثيات مثال
                 
-                const dist = calculateDistance(uLat, uLon, targetLat, targetLon);
+                const distance = calculateDistance(uLat, uLon, dashboardConfig.targetLat, dashboardConfig.targetLon);
 
-                if (dist <= 150) {
-                    logAIEvents('AI_Verify_Success', 'Within_150m');
-                    alert(`✅ تم التوثيق! المسافة: ${dist.toFixed(1)} متر.`);
+                if (distance <= dashboardConfig.allowedRadius) {
+                    logAIEvents('Verify_Success', dashboardConfig.billboardId);
+                    alert(`✅ تم التوثيق بنجاح!\nاللوحة: ${dashboardConfig.billboardId}\nالمسافة: ${distance.toFixed(1)} متر.`);
+                    // هنا يمكن إضافة كود لإرسال النجاح للداش بورد فعلياً
                 } else {
-                    alert(`❌ بعيد جداً! المسافة: ${dist.toFixed(1)} متر.`);
+                    logAIEvents('Verify_Failed', `Distance: ${distance.toFixed(1)}m`);
+                    alert(`❌ فشل التوثيق! أنت بعيد جداً.\nالمسافة الحالية: ${distance.toFixed(1)} متر.\nالمسموح به: ${dashboardConfig.allowedRadius} متر.`);
                 }
-            }, err => alert("فعل الـ GPS يا بطل"), { enableHighAccuracy: true });
+            }, err => {
+                alert("يرجى تفعيل الـ GPS والسماح للموقع بالوصول.");
+            }, { enableHighAccuracy: true });
         }
 
+        // 4. محرك حساب المسافات الرياضي
         function calculateDistance(lat1, lon1, lat2, lon2) {
-            var R = 6371e3;
-            var dLat = (lat2 - lat1) * Math.PI / 180;
-            var dLon = (lon2 - lon1) * Math.PI / 180;
-            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                    Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
-                    Math.sin(dLon/2) * Math.sin(dLon/2);
-            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const R = 6371e3; // نصف قطر الأرض بالمتر
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
         }
     </script>
-
 </body>
 </html>
