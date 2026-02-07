@@ -151,24 +151,7 @@
             <div onclick="translateAI('zh', this)" class="lang-pill">中文</div>
             <div onclick="translateAI('ru', this)" class="lang-pill">Русский</div>
         </div>
-        </div> </div> </div> <script>
-// 1. محرك الـ AI والـ Analytics (شغال ونظيف)
-function logAIEvents(action, label, category = 'General') {
-    if(typeof gtag === 'function') {
-        gtag('event', action, { 'event_category': category, 'event_label': label });
-    }
-    console.log(`📊 سجل الأنليتكس: ${action} - ${label}`);
-}
-
-// 2. دالة الـ About لفتح ملف الـ HTML (الربط المباشر)
-function showAboutInfo() {
-    logAIEvents('Navigate_About', 'About_Page_Open', 'UI_Interaction');
-    window.location.href = "about.html"; // هيفتح ملف الـ HTML بتاعك
-}
-
-// باقي الدوال (GPS والمسافات) حطهم هنا بنفس الترتيب...
-</script>
-
+        </div> </div> </div> 
 <div id="google_translate_element" style="display:none !important;"></div>
 
 <div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
@@ -266,21 +249,7 @@ function showAboutInfo() {
 
 <head>
   
-    <div id="rep-section" style="background: #111; padding: 20px; border-radius: 25px; border: 2px dashed #ffcc00;">
-        <h4 style="color: #00ff00;">📸 بوابة المندوب (Live Photo + QR)</h4>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <button onclick="takeLivePhoto()" style="padding: 10px; border-radius: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444;">1. التقاط Live Photo</button>
-            <button onclick="scanAgencyQR()" style="padding: 10px; border-radius: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444;">2. توثيق الـ QR Code</button>
-        </div>
-
-<div style="text-align: center; margin-top: 15px;">
-    <button onclick="repVerification()" style="width: 100%; padding: 12px; background: #ffcc00; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
-        نشر اللوحة في نطاق 150 متر
-    </button>
-<a href="javascript:void(0)" onclick="openAboutPage()" style="color: #ffcc00; text-decoration: none; font-size: 13px; font-weight: bold;">
-    من نحن (عن منصة TREND AI) ←
-</a>
-
+    
 </script>
 </body>
 </html>
