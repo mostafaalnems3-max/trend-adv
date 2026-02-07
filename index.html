@@ -553,20 +553,6 @@ async function repVerification() {
         navigator.geolocation.getCurrentPosition(p => {
             map.setView([p.coords.latitude, p.coords.longitude], 15);
             L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('موقعك الحالي').openPopup();
-        });
-    }
- // نظام النماذج التفاعلية
-    function showDemo(type) {
-        const m = document.getElementById('demoModal');
-        const c = document.getElementById('modalContent');
-        m.style.display = 'block';
-        if(type === 'geo') {
-            c.innerHTML = `<h3 style="color:var(--main)">📍 محاكاة تتبع جغرافي</h3><p style="font-size:13px">إعلانك يظهر الآن لـ <b>2,450</b> شخص في نطاق 3 كم. يتم تحديث البيانات كل ثانية.</p>`;
-        } else {
-            c.innerHTML = `<h3 style="color:var(--main)">📊 الشركاء</h3><p style="font-size:13px">تقرير أداء الوكالة:<br>وصول: <b>15K</b><br>تفاعل: <b>850</b><br>أرباح مقدرة: <b>$320</b></p>`;
-        }
-    }
-    function closeModal() {document.getElementById('demoModal').style.display = 'none'; }
 
 </script>
 </body>
