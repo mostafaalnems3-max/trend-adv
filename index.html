@@ -449,9 +449,7 @@ async function repVerification() {
     // تفعيل GPS
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(p => {
-            map.setView([p.coords.latitude, p.coords.longitude], 15);
-            L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('موقعك الحالي').openPopup();
-
+            
 </script>
 </body>
 </html>
