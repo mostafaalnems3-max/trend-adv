@@ -355,11 +355,7 @@ async function translateAI(targetLang, element) {
         <button onclick="repVerification()" style="width: 100%; margin-top: 15px; background: #ffcc00; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer;">نشر اللوحة في نطاق 150 متر</button>
     </div>
 </div>
-
-<script>
-var map, userMarker;
-
-// وظيفة الأنليتكس
+// 1. الأنليتكس (خط أحمر - سليم ومحفوظ)
 function logAIEvents(action, label, category = 'General') {
     if(typeof gtag === 'function') {
         gtag('event', action, { 'event_category': category, 'event_label': label });
@@ -367,143 +363,65 @@ function logAIEvents(action, label, category = 'General') {
     console.log(`📊 سجل الأنليتكس: ${action} - ${label}`);
 }
 
-// تحميل الخريطة المجانية
-function loadMap() {
-    map = L.map('myMap').setView([30.0444, 31.2357], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // أيقونة المستخدم الصفراء
-    var yellowIcon = L.divIcon({
-        className: 'custom-icon',
-        html: "<div style='background:#ffcc00; width:15px; height:15px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 10px #ffcc00;'></div>",
-        iconSize: [15, 15]
-    });
-    userMarker = L.marker([30.0444, 31.2357], {icon: yellowIcon}).addTo(map);
-}
-window.onload = loadMap;
-
-// وظيفة الجمهور (بدء تتبع الرحلة بالمتر)
-function startBingJourney() {
-    logAIEvents('Journey_Start', 'User_Search', 'Audience');
-    navigator.geolocation.watchPosition(pos => {
-        var uLat = pos.coords.latitude;
-        var uLon = pos.coords.longitude;
-        
-        userMarker.setLatLng([uLat, uLon]);
-        map.setView([uLat, uLon], 15);
-
-        checkNearbyBillboards(uLat, uLon);
-    }, null, { enableHighAccuracy: true });
-}
-
-function checkNearbyBillboards(lat, lon) {
-    const boards = [{ id: "A101", name: "وكالة إعلانات مصر", phone: "012xxx", bLat: 30.045, bLon: 31.236 }];
-
-    boards.forEach(b => {
-        const dist = getDistanceMeters(lat, lon, b.bLat, b.bLon);
-        if (dist <= 50) {
-            logAIEvents('Billboard_Impression_50m', b.name, 'Analytics_AI');
-            alert(`🎯 تنبيه TREND AI: أنت في نطاق لوحة موثقة! \nالوكالة: ${b.name} \nللتواصل: ${b.phone} \nالمصداقية: QR موثق ✅`);
-        }
-    });
-
+// 2. محرك المسافات (المرجع الوحيد)
 function getDistanceMeters(lat1, lon1, lat2, lon2) {
     var R = 6371e3;
     var dLat = (lat2 - lat1) * Math.PI / 180;
     var dLon = (lon2 - lon1) * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-// 1. قاعدة بيانات اللوحات المحدثة بنظام المسافات والذكاء الاصطناعي
+// 3. قاعدة البيانات (المصدر الوحيد)
 let billboardDatabase = [
     { 
         id: "MEGA-V1", 
         name: "وكالة إعلانات مصر (لوحة عملاقة)", 
-        phone: "012xxx", 
         lat: 30.045, 
         lon: 31.236, 
         minDist: 20, 
-        maxDist: 150, // المدى المسموح للوحات الكبيرة
-        accuracyScore: 100 
+        maxDist: 150 
     }
 ];
 
-// 2. وظيفة الحصول على وقت السيرفر (لضمان المصداقية ومنع تلاعب المندوب)
-async function getSecureServerTime() {
-    try {
-        const response = await fetch('https://worldtimeapi.org/api/timezone/Africa/Cairo');
-        const data = await response.json();
-        return data.datetime; 
-    } catch (e) {
-        // Fallback في حالة عطل الشبكة يعطي توقيت الجهاز مع ملاحظة "توقيت محلي"
-        return new Date().toLocaleString('ar-EG') + " (توقيت محلي)"; 
-    }
-}
-
-// 3. محرك الـ AI لضبط ودقة الإحداثيات (Coordinate Optimizer)
-function aiCoordinateFix(boardId, repLat, repLon, currentDist) {
-    console.log(`🤖 TREND AI: جاري تحليل دقة الموقع للوحة ${boardId}...`);
-    // إذا كانت المسافة قريبة جداً (أقل من 10 متر)، الـ AI يؤكد أن الإحداثيات المسجلة هي "النقطة الذهبية"
-    if (currentDist < 10) {
-        console.log("🎯 AI Calibration: موقع اللوحة دقيق 100%");
-    } else {
-        console.log("🛠️ AI: يتم رصد الإحداثيات لتحسين الدقة في التوثيقات القادمة.");
-    }
-}
-
-// 4. دالة الفحص الذكي (المكان الذي كان فيه الـ 50 متر القديمة)
+// 4. دالة الفحص الذكي (الموحدة - حذفنا نسخة الـ 50 متر المكسورة)
 function checkNearbyBillboards(lat, lon) {
+    if (!billboardDatabase) return;
+    
     billboardDatabase.forEach(b => {
         const dist = getDistanceMeters(lat, lon, b.lat, b.lon);
-        
-        // التحقق من النطاق الجديد (20م - 150م)
+        // النطاق الجديد المعتمد 150 متر
         if (dist >= b.minDist && dist <= b.maxDist) {
-            
-            // تشغيل الـ AI لضبط الإحداثيات فوراً بناءً على موقع الجمهور أو المندوب
-            aiCoordinateFix(b.id, lat, lon, dist);
-
             logAIEvents('Billboard_Impression_AI', b.name, 'Analytics_Engine');
+            console.log(`🎯 TREND AI: هدف مكتشف على بُعد ${dist.toFixed(1)} متر`);
             
-            console.log(`🎯 هدف داخل النطاق: ${b.name} على بُعد ${dist.toFixed(1)} متر`);
+            // تشغيل تصحيح الإحداثيات إذا وجد المحرك
+            if (typeof aiCoordinateFix === 'function') {
+                aiCoordinateFix(b.id, lat, lon, dist);
+            }
         }
     });
 }
 
-// 5. وظيفة المندوب النهائية للتوثيق (التي تُستدعى من الزرار الرئيسي)
+// 5. وظيفة المندوب (المرتبطة بالزرار)
 async function repVerification() {
-    const sTime = await getSecureServerTime();
-    
     navigator.geolocation.getCurrentPosition(async pos => {
         const uLat = pos.coords.latitude;
         const uLon = pos.coords.longitude;
-        
-        // البحث عن أقرب لوحة في النطاق
-        const board = billboardDatabase[0]; // مثال لأول لوحة، يمكن تطويرها لتبحث عن الأقرب أوتوماتيكياً
+        const board = billboardDatabase[0];
         const dist = getDistanceMeters(uLat, uLon, board.lat, board.lon);
 
-        if (dist >= board.minDist && dist <= board.maxDist) {
+        if (dist <= 150) {
             logAIEvents('Verification_Success', board.name, 'Field_Rep');
-            
-            // تنبيه "ترند" الاحترافي
-            alert(`✅ تم التوثيق بنجاح!
------------------------------------
-🏢 الوكالة: ${board.name}
-📏 المسافة: ${dist.toFixed(1)} متر (ضمن النطاق المعتمد)
-🕒 توقيت السيرفر: ${sTime}
-🔐 الحالة: الصورة مشفرة وجاري الرفع لمخزن TREND.`);
+            alert(`✅ تم التوثيق! المسافة: ${dist.toFixed(1)} متر.`);
         } else {
-            alert(`❌ فشل التوثيق!
------------------------------------
-📍 المسافة الحالية: ${dist.toFixed(1)} متر
-⚠️ النطاق المطلوب لهذه اللوحة: من ${board.minDist}م إلى ${board.maxDist}م.
-💡 نصيحة: تحرك للوقوف في مكان يوفر زاوية رؤية أفضل للوحة.`);
+            alert(`❌ أنت بعيد! المسافة: ${dist.toFixed(1)} متر. (المطلوب أقل من 150م)`);
         }
     }, null, { enableHighAccuracy: true });
 }
 
-<div style="text-align: center; margin-top: 20px;">
-    <a href="about.html" class="about-link-pill">عن المنصة ➔</a>
+    class="about-link-pill">عن المنصة ➔</a>
 </div>
 
 <div class="hero-section">
