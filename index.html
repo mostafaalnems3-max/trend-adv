@@ -346,6 +346,60 @@ async function translateAI(targetLang, element) {
         <div id="myMap"></div>
     </div>
 
+<div style="text-align: center; margin: 15px 0; padding: 10px; border-top: 1px solid #333;">
+    
+    <button onclick="repVerification()" style="width: 100%; padding: 14px; background: #ffcc00; color: #000; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; font-size: 15px; box-shadow: 0 4px 10px rgba(255,204,0,0.2);">
+        📍 نشر اللوحة في نطاق 150 متر
+    </button>
+
+    <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px;">
+        <a href="javascript:void(0)" onclick="showAboutInfo()" style="color: #ffcc00; text-decoration: none; font-size: 13px; font-weight: bold; border-bottom: 1px solid #ffcc00; padding-bottom: 2px;">
+            من نحن
+        </a>
+        <a href="javascript:void(0)" onclick="showAboutInfo()" style="color: #ffcc00; text-decoration: none; font-size: 13px; font-weight: bold; border-bottom: 1px solid #ffcc00; padding-bottom: 2px;">
+            عن المنصة ←
+        </a>
+    </div>
+</div>
+
+<script>
+    // دالة من نحن الموحدة
+    function showAboutInfo() {
+        alert("🛡️ TREND AI System\nنظام ذكاء اصطناعي لتوثيق الإعلانات الخارجية بنطاق 150 متر، يضمن دقة الموقع ومنع التلاعب.");
+    }
+
+    // دالة الـ GPS (التوثيق)
+    function repVerification() {
+        if (!navigator.geolocation) {
+            alert("متصفحك لا يدعم الـ GPS");
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(pos => {
+            const uLat = pos.coords.latitude;
+            const uLon = pos.coords.longitude;
+            // إحداثيات اللوحة الافتراضية
+            const dist = getDistanceMeters(uLat, uLon, 30.045, 31.236);
+
+            if (dist <= 150) {
+                alert(`✅ تم التوثيق! المسافة: ${dist.toFixed(1)} متر.`);
+            } else {
+                alert(`❌ خارج النطاق! أنت على بُعد ${dist.toFixed(1)} متر. (المطلوب 150م)`);
+            }
+        }, err => alert("يرجى تفعيل الموقع"), { enableHighAccuracy: true });
+    }
+
+    // محرك المسافات (المرجع الوحيد)
+    function getDistanceMeters(lat1, lon1, lat2, lon2) {
+        var R = 6371e3;
+        var dLat = (lat2 - lat1) * Math.PI / 180;
+        var dLon = (lon2 - lon1) * Math.PI / 180;
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+</script>
+
     <div id="rep-section" style="background: #111; padding: 20px; border-radius: 25px; border: 2px dashed #ffcc00;">
         <h4 style="color: #00ff00;">📸 بوابة المندوب (Live Photo + QR)</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
