@@ -155,6 +155,45 @@
 </div>
 
 <script>
+// 1. دالة من نحن (About) - بتشتغل مع زرار TREND AI تحت
+function showAboutInfo() {
+    alert("🛡️ نظام TREND ADV المطور\n\nنظام ذكاء اصطناعي لتوثيق الإعلانات الخارجية بنطاق 150 متر، يضمن دقة الموقع ومنع التلاعب عبر توقيت السيرفر.");
+}
+
+// 2. دالة الـ GPS والتوثيق (150 متر)
+function repVerification() {
+    if (!navigator.geolocation) {
+        return alert("الـ GPS غير مدعوم في متصفحك.");
+    }
+    navigator.geolocation.getCurrentPosition(pos => {
+        const uLat = pos.coords.latitude;
+        const uLon = pos.coords.longitude;
+        
+        // إحداثيات اللوحة (المصدر الوحيد)
+        const targetLat = 30.045, targetLon = 31.236;
+        const dist = getDistanceMeters(uLat, uLon, targetLat, targetLon);
+
+        if (dist <= 150) {
+            alert(`✅ تم التوثيق بنجاح!\nالمسافة الحالية: ${dist.toFixed(1)} متر.`);
+        } else {
+            alert(`❌ خارج النطاق!\nأنت على بُعد ${dist.toFixed(1)} متر.\nالمطلوب: أقل من 150 متر.`);
+        }
+    }, err => alert("يرجى تفعيل الـ GPS بالمتصفح"), { enableHighAccuracy: true });
+}
+
+// 3. محرك المسافات (المرجع العالمي)
+function getDistanceMeters(lat1, lon1, lat2, lon2) {
+    var R = 6371e3; 
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+</script>
+
+<script>
 /**
  * TREND ADV AI ENGINE
  * محرك ترجمة ذكي يعتمد على Cloud Translation دون إظهار أشرطة تحكم
