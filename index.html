@@ -13,243 +13,102 @@
         :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
         body { font-family: 'Cairo', sans-serif; background: #f0f4f8; margin: 0; padding-bottom: 90px; overflow-x: hidden; }
 
-        /* الهيدر واللوجو المدمج (زي الصورة) */
+        /* الهيدر واللوجو */
         .premium-header {
             background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%);
             padding: 30px 20px 50px; border-radius: 0 0 45px 45px;
             text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-.logo-container { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 12px; 
-    margin: 20px 0 10px; 
-    direction: ltr !important; 
-}
 
-.t-brand {
-    background: #ffcc00; 
-    color: #000b18; 
-    width: 45px; 
-    height: 45px; 
-    border-radius: 12px;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-size: 28px; 
-    font-weight: 900;
-    transform: rotate(-5deg);
-    flex-shrink: 0;
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
-}
+        .brand-master-wrapper { display: flex; align-items: center; justify-content: center; gap: 0; direction: ltr !important; margin-bottom: 25px; }
+        .yellow-square { background: #ffcc00 !important; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; z-index: 5; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .dynamic-t { font-size: 38px; font-weight: 900; animation: t-color-cycle 4s linear infinite; }
+        @keyframes t-color-cycle { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #00ffff; } 75% { color: #0000ff; } 100% { color: #ff0000; } }
+        
+        .name-capsule { background: #0d1117; padding: 10px 30px 10px 45px; margin-left: -25px; border-radius: 0 50px 50px 0; border: 1px solid rgba(255, 204, 0, 0.3); display: flex; align-items: center; }
+        .brand-text-white { color: #ffffff !important; font-size: 26px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        .adv-gold { color: #ffcc00 !important; margin-left: 8px; }
+        .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
 
-.logo-text {
-    color: #ffffff !important;
-    font-size: 26px;
-    font-weight: 900;
-    white-space: nowrap;
-    letter-spacing: 1px;
-}
-
-
-            background: var(--gold); color: var(--dark); width: 45px; height: 45px; 
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            font-size: 28px; font-weight: 900; box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            transform: rotate(-5deg);
-        }
-        .logo-text { font-size: 26px; font-weight: 900; color: white; letter-spacing: 2px; }
-
-        .platform-slogan {
-            background: rgba(255, 204, 0, 0.1); color: var(--gold);
-            display: inline-block; padding: 5px 15px; border-radius: 20px;
-            font-size: 11px; font-weight: 700; border: 1px solid rgba(255, 204, 0, 0.3);
-            margin-bottom: 20px;
-        }
-
-        /* شريط اللغات */
-        .lang-pills { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
-        .pill { 
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: white; padding: 5px 15px; border-radius: 20px; font-size: 11px; cursor: pointer;
-        }
-        .pill.active { background: var(--gold); color: var(--dark); font-weight: 900; }
-
-        /* محرك البحث الجغرافي */
-        .search-container {
-            background: white; border-radius: 35px; display: flex; padding: 5px;
-            width: 90%; margin: -25px auto 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative; z-index: 100;
-        }
-        .search-container input { flex: 1; border: none; padding: 12px 20px; outline: none; border-radius: 35px; font-size: 14px; }
-        .search-icon-btn { background: var(--main); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; }
-
-        /* رسالة الترحيب وعرض الـ 3 شهور */
-        .hero-section {
-            margin: 25px 15px; padding: 25px; background: var(--dark);
-            border-radius: 30px; border: 2px solid var(--gold); text-align: center; color: white;
-        }
-        .offer-banner { color: var(--gold); font-weight: 900; font-size: 18px; margin: 10px 0; display: block; }
-
-        /* الشركاء */
-        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 10px 15px; }
-        .action-card {
-            background: white; border-radius: 25px; padding: 20px;
-            text-align: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--main);
-        }
-        .action-card i { font-size: 28px; color: var(--main); margin-bottom: 10px; display: block; }
-        .action-card span { font-weight: 900; font-size: 13px; color: var(--dark); }
-
-        /* الخريطة */
-        #map { height: 350px; width: 92%; margin: 15px auto; border-radius: 30px; border: 4px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-
-        /* الناف السفلي */
-        .tab-bar { 
-            position: fixed; bottom: 0; width: 100%; background: white; 
-            display: flex; justify-content: space-around; padding: 15px 0; 
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 1000; 
-        }
-        .tab-bar a { color: #ccc; font-size: 22px; cursor: pointer; text-decoration: none; }
-        .tab-bar a.active { color: var(--main); }
-
-        /* نافذة المعاينة التفاعلية */
-        .modal {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; width: 85%; max-width: 400px; padding: 25px;
-            border-radius: 30px; box-shadow: 0 0 50px rgba(0,0,0,0.5); z-index: 9999;
-            display: none; border: 3px solid var(--gold);
-        }
+        /* أزرار اللغات */
+        .lang-pill { background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; cursor: pointer; margin: 5px; display: inline-block; }
+        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
+        
+        /* بوابة المندوب */
+        .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; }
+        .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div id="ai-translate-system" style="text-align: center; margin-bottom: 15px;">
-    <style>
-        /* تنسيق الزراير الشيك بنفس روح البراند */
-        #lang-container::-webkit-scrollbar { display: none; }
-        .lang-flex { display: inline-flex; gap: 8px; padding: 0 15px; }
-        .lang-pill {
-            background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700;
-            cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .lang-pill:hover { border-color: #ffcc00; }
-        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; border-color: #ffcc00 !important; }
-
-        /* منع أي إزاحة أو تغيير في شكل اللوجو */
-        body { top: 0px !important; position: static !important; }
-    </style>
-
-    <div id="lang-container" style="width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none;">
-        <div class="lang-flex">
-            <div onclick="translateAI('ar', this)" class="lang-pill active">العربية</div>
-            <div onclick="translateAI('en', this)" class="lang-pill">English</div>
-            <div onclick="translateAI('de', this)" class="lang-pill">Deutsch</div>
-            <div onclick="translateAI('it', this)" class="lang-pill">Italiano</div>
-            <div onclick="translateAI('zh', this)" class="lang-pill">中文</div>
-            <div onclick="translateAI('ru', this)" class="lang-pill">Русский</div>
+    <div class="premium-header">
+        <div id="lang-container">
+            <div onclick="alert('جاري الترجمة..')" class="lang-pill active">العربية</div>
+            <div onclick="alert('Translating..')" class="lang-pill">English</div>
         </div>
-        </div> </div> </div> 
-<div id="google_translate_element" style="display:none !important;"></div>
 
-<div id="global-header-system" style="text-align: center; margin: 30px 0; width: 100%;">
-    <style>
-        /* أنيميشن لتغيير لون حرف T فقط */
-        @keyframes t-color-cycle {
-            0% { color: #ff0000; }
-            20% { color: #00ff00; }
-            40% { color: #00ffff; }
-            60% { color: #0000ff; }
-            80% { color: #ff00ff; }
-            100% { color: #ff0000; }
-        }
-
-        .brand-master-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            direction: ltr !important;
-            margin-bottom: 25px;
-        }
-
-        /* المربع الأصفر الثابت */
-        .yellow-square {
-            background: #ffcc00 !important;
-            width: 55px;
-            height: 55px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        /* حرف T اللي بيغير ألوانه */
-        .dynamic-t {
-            font-size: 38px;
-            font-weight: 900;
-            animation: t-color-cycle 4s linear infinite;
-        }
-
-        /* الخلفية العالمية تحت الاسم (Premium Dark) */
-        .name-capsule {
-            background: #0d1117; /* لون براندات عالمي فخم */
-            padding: 10px 30px 10px 45px;
-            margin-left: -25px; /* تداخل احترافي مع المربع */
-            border-radius: 0 50px 50px 0;
-            border: 1px solid rgba(255, 204, 0, 0.3); /* إطار ذهبي رفيع */
-            display: flex;
-            align-items: center;
-        }
-
-        .brand-text-white {
-            color: #ffffff !important;
-            font-size: 26px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .adv-gold {
-            color: #ffcc00 !important;
-            margin-left: 8px;
-        }
-
-        .global-slogan {
-            display: inline-block;
-            background: #ffcc00;
-            color: #000b18;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 800;
-            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
-        }
-    </style>
-
-    <div class="brand-master-wrapper">
-        <div class="yellow-square">
-            <span class="dynamic-t">T</span>
+        <div class="brand-master-wrapper">
+            <div class="yellow-square"><span class="dynamic-t">T</span></div>
+            <div class="name-capsule"><span class="brand-text-white">REND <span class="adv-gold">ADV</span></span></div>
         </div>
+        <div class="global-slogan">أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS</div>
+    </div>
+
+    <div class="rep-card">
+        <h4 style="color: #00ff00; margin-bottom: 15px;">📸 بوابة التوثيق الذكي</h4>
         
-        <div class="name-capsule">
-            <span class="brand-text-white">REND <span class="adv-gold">ADV</span></span>
+        <button onclick="repVerification()" class="btn-main">📍 نشر اللوحة (نطاق 150 متر)</button>
+        
+        <div style="margin-top: 20px;">
+            <a href="javascript:void(0)" onclick="openAboutPage()" style="color: var(--gold); text-decoration: none; font-weight: bold; font-size: 14px;">
+                📑 من نحن (عن منصة TREND AI) ←
+            </a>
         </div>
     </div>
-    
-</script>
-    <div class="global-slogan">
-        أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS
-   </div>
-</div>
 
-<head>
-  
-    
-</script>
+    <script>
+        // دالة الأنليتكس
+        function logAIEvents(action, label) {
+            console.log(`📊 سجل الأنليتكس: ${action} - ${label}`);
+            // هنا يربط مع Google Analytics لاحقاً
+        }
+
+        // فتح صفحة من نحن
+        function openAboutPage() {
+            logAIEvents('Navigate_About', 'Standalone_Link');
+            window.location.href = "about.html"; 
+        }
+
+        // محرك الـ GPS والـ 150 متر
+        function repVerification() {
+            if (!navigator.geolocation) return alert("الـ GPS غير مدعوم");
+            
+            navigator.geolocation.getCurrentPosition(pos => {
+                const uLat = pos.coords.latitude;
+                const uLon = pos.coords.longitude;
+                const targetLat = 30.045, targetLon = 31.236; // إحداثيات مثال
+                
+                const dist = calculateDistance(uLat, uLon, targetLat, targetLon);
+
+                if (dist <= 150) {
+                    logAIEvents('AI_Verify_Success', 'Within_150m');
+                    alert(`✅ تم التوثيق! المسافة: ${dist.toFixed(1)} متر.`);
+                } else {
+                    alert(`❌ بعيد جداً! المسافة: ${dist.toFixed(1)} متر.`);
+                }
+            }, err => alert("فعل الـ GPS يا بطل"), { enableHighAccuracy: true });
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            var R = 6371e3;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+    </script>
+
 </body>
 </html>
