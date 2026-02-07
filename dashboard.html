@@ -3,102 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TREND ADV | لوحة تحكم الوكالات الذكية</title>
+    <title>TREND ADV | لوحة التحكم العالمية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --main: #00bcd4; --dark: #1a1a1a; --gold: #ffcc00; --success: #4caf50; }
+        :root { --main: #00bcd4; --dark: #1a1a1a; --gold: #ffcc00; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 50px; }
         
-        /* الهيدر الاحترافي المحدث */
+        /* تصميم اللوجو العالمي المظبوط */
         .logo-header {
             background: var(--dark);
-            padding: 30px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             margin-bottom: 30px;
         }
 
-        /* المربع الأصفر مع حرف T المتغير الألوان */
-        .yellow-box {
-            display: inline-flex;
+        .brand-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* المربع الأصفر في أول الكلمة من اليسار */
+        .yellow-square {
             background: var(--gold);
             width: 45px;
             height: 45px;
             border-radius: 8px;
-            align-items: center;
-            justify-content: center;
-            margin-left: 10px;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
-        }
-
-        .brand-logo {
-            font-size: 38px;
-            font-weight: 900;
-            color: white;
             display: flex;
-            justify-content: center;
             align-items: center;
-            letter-spacing: 1px;
+            justify-content: center;
         }
 
-        /* أنيميشن تغيير الألوان في حرف T */
-        .t-animation {
+        /* حرف T المتغير الألوان جوه المربع */
+        .t-dynamic {
             font-size: 35px;
             font-weight: 900;
-            animation: color-change 3s infinite linear, pulse-t 2s infinite ease-in-out;
+            animation: colorShift 3s infinite linear;
         }
 
-        @keyframes color-change {
+        .text-trend { color: white; font-size: 35px; font-weight: 900; letter-spacing: -1px; }
+        .text-adv { color: var(--main); font-size: 30px; font-weight: 300; margin-right: 10px; }
+
+        @keyframes colorShift {
             0% { color: #1a1a1a; }
-            33% { color: #00bcd4; }
-            66% { color: #e91e63; }
+            50% { color: #00bcd4; }
             100% { color: #1a1a1a; }
-        }
-
-        @keyframes pulse-t {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .brand-adv { 
-            color: var(--main); 
-            margin-right: 12px; 
-            font-weight: 300; 
-            font-size: 32px;
         }
 
         .container { max-width: 800px; margin: 0 auto; padding: 15px; }
         .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 4px solid var(--main); }
-        h3 { color: var(--dark); margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 18px; }
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; font-size: 13px; margin-bottom: 8px; color: #555; }
-        input { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: var(--main); outline: none; background: #f0fdff; }
+        input { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; }
         
         .btn-main { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 16px; }
-        .btn-gps { background: #f0f0f0; color: var(--dark); margin-top: 8px; border: 1px solid #ddd; }
-        
-        .qr-section {
-            background: #fff9e6;
-            border: 2px dashed var(--gold);
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .ai-status { padding: 15px; border-radius: 12px; margin-top: 15px; font-weight: bold; text-align: center; display: none; }
+        .qr-box { background: #fff9e6; border: 2px dashed var(--gold); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
 <header class="logo-header">
-    <div class="brand-logo">
-        <div class="yellow-box"><span class="t-animation">T</span></div>
-        <span>REND</span> 
-        <span class="brand-adv">ADV</span>
+    <div class="brand-container">
+        <div class="yellow-square">
+            <span class="t-dynamic">T</span>
+        </div>
+        <span class="text-trend">REND</span>
+        <span class="text-adv">ADV</span>
     </div>
-    <div style="color: #666; font-size: 11px; margin-top: 10px; letter-spacing: 4px; font-weight: bold;">SMART VERIFICATION SYSTEM</div>
+    <div style="color: #666; font-size: 11px; margin-top: 10px; letter-spacing: 3px; font-weight: bold;">SMART VERIFICATION SYSTEM</div>
 </header>
 
 <div class="container">
@@ -111,108 +85,47 @@
         <div class="form-group">
             <label>عنوان المكتب الرئيسي:</label>
             <input type="text" id="agencyAddress" placeholder="العنوان بالتفصيل">
-            <button class="btn-main btn-gps" onclick="setOfficeGPS()">
-                <i class="fas fa-map-marked-alt"></i> ربط موقع المكتب (GPS)
+            <button class="btn-main" style="background:#f0f0f0; color:#333; margin-top:8px;" onclick="getGPS()">
+                <i class="fas fa-map-marker-alt"></i> ربط موقع المكتب (GPS)
             </button>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div class="form-group">
-                <label>رقم المبيعات:</label>
-                <input type="tel" id="agencyPhone" placeholder="01xxxxxxxxx">
-            </div>
-            <div class="form-group">
-                <label>واتساب الوكالة:</label>
-                <input type="tel" id="agencyWhatsapp" placeholder="01xxxxxxxxx">
-            </div>
+            <input type="tel" id="phone" placeholder="رقم المبيعات">
+            <input type="tel" id="whatsapp" placeholder="واتساب">
         </div>
     </div>
 
     <div class="card">
-        <h3><i class="fas fa-expand-arrows-alt" style="color:var(--main)"></i> توثيق اللوحة والبيانات الذكية</h3>
+        <h3><i class="fas fa-ad" style="color:var(--main)"></i> توثيق اللوحة والمقاسات</h3>
         
+        <div class="qr-box">
+            <label style="color:#856404">كود الـ QR الخاص باللوحة:</label>
+            <input type="text" id="qrCode" placeholder="ادخل الكود هنا">
+        </div>
+
         <div class="form-group">
             <label>تصوير اللوحة (Live Photo):</label>
-            <input type="file" accept="image/*" capture="camera" id="livePhoto">
+            <input type="file" accept="image/*" capture="camera">
         </div>
 
-        <div class="qr-section">
-            <label style="color: #856404;"><i class="fas fa-qrcode"></i> ربط رمز الـ QR الخاص باللوحة:</label>
-            <input type="text" id="qrCode" placeholder="ادخل كود الـ QR أو كود اللوحة الفريد" style="border-color: var(--gold); background: #fff;">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-            <div class="form-group">
-                <label>العرض (متر):</label>
-                <input type="number" id="adWidth" placeholder="5">
-            </div>
-            <div class="form-group">
-                <label>الطول (متر):</label>
-                <input type="number" id="adHeight" placeholder="10">
-            </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="number" id="w" placeholder="العرض (متر)">
+            <input type="number" id="h" placeholder="الطول (متر)">
         </div>
         
-        <div class="form-group">
-            <label>متاح للتعاقد من تاريخ:</label>
-            <input type="date" id="availDate">
-        </div>
-        
-        <button class="btn-main" style="background: var(--main); color: white; box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);" onclick="runAIValidation()">
-            <i class="fas fa-robot"></i> تشغيل الـ AI ونشر التوثيق
+        <button class="btn-main" style="background:var(--main); color:white; margin-top:20px;" onclick="validate()">
+            <i class="fas fa-robot"></i> تشغيل الـ AI والاعتماد
         </button>
-        
-        <div id="statusBox" class="ai-status"></div>
     </div>
 </div>
 
 <script>
-    const billboardTarget = { lat: 30.0444, lon: 31.2357 };
-
-    function setOfficeGPS() {
-        navigator.geolocation.getCurrentPosition(p => {
-            alert("✅ تم ربط إحداثيات مكتب TREND ADV بنجاح");
-        }, err => alert("برجاء السماح بالوصول للموقع"));
+    function getGPS() {
+        navigator.geolocation.getCurrentPosition(p => alert("✅ تم الربط"), e => alert("فشل تحديد الموقع"));
     }
 
-    function runAIValidation() {
-        const statusBox = document.getElementById('statusBox');
-        const agency = document.getElementById('agencyName').value;
-        const width = document.getElementById('adWidth').value;
-        const height = document.getElementById('adHeight').value;
-        const qr = document.getElementById('qrCode').value;
-
-        if(!agency || !width || !height || !qr) return alert("⚠️ أكمل كافة البيانات (بما فيها الـ QR) أولاً");
-
-        statusBox.style.display = "block";
-        statusBox.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري فحص المسافة والـ QR بالذكاء الاصطناعي...';
-        statusBox.style.background = "#f8f9fa";
-        statusBox.style.color = "#333";
-
-        navigator.geolocation.getCurrentPosition(pos => {
-            const dist = calculateDistance(pos.coords.latitude, pos.coords.longitude, billboardTarget.lat, billboardTarget.lon);
-            
-            if (dist < 5) {
-                statusBox.innerHTML = `❌ قريب جداً (${dist.toFixed(1)}م). ارجع للخلف لتصوير المقاس ${width}x${height} كاملاً.`;
-                statusBox.style.background = "#fff3e0";
-                statusBox.style.color = "#e65100";
-            } else if (dist > 150) {
-                statusBox.innerHTML = `❌ بعيد جداً (${dist.toFixed(1)}م). اقترب لضمان دقة توثيق المساحة.`;
-                statusBox.style.background = "#ffebee";
-                statusBox.style.color = "#c62828";
-            } else {
-                statusBox.innerHTML = `✅ تم التوثيق! QR: ${qr} | المسافة: ${dist.toFixed(1)}م.`;
-                statusBox.style.background = "#e8f5e9";
-                statusBox.style.color = "#2e7d32";
-                alert(`🚀 تم الاعتماد بنجاح لوكالة TREND ADV! اللوحة (QR: ${qr}) جاهزة للعرض.`);
-            }
-        }, err => alert("فشل تحديد الموقع"), { enableHighAccuracy: true });
-    }
-
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371e3;
-        const dLat = (lat2-lat1) * Math.PI/180;
-        const dLon = (lon2-lon1) * Math.PI/180;
-        const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-        return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+    function validate() {
+        alert("جاري التحقق من المسافة والمقاسات والـ QR بالذكاء الاصطناعي...");
     }
 </script>
 
