@@ -502,6 +502,7 @@ async function repVerification() {
     }, null, { enableHighAccuracy: true });
 }
 
+</script>
 // 6. دالة حساب المسافة بالمتر (المحرك الرياضي)
 function getDistanceMeters(lat1, lon1, lat2, lon2) {
     var R = 6371e3;
@@ -510,6 +511,7 @@ function getDistanceMeters(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
+</script>
 
 <div style="text-align: center; margin-top: 20px;">
     <a href="about.html" class="about-link-pill">عن المنصة ➔</a>
