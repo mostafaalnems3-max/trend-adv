@@ -542,7 +542,7 @@ async function repVerification() {
     <a href="#"><i class="fa fa-user-gear"></i></a>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script> src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     // تفعيل الخريطة
     var map = L.map('map', {zoomControl: false}).setView([30.0444, 31.2357], 12);
@@ -556,7 +556,9 @@ async function repVerification() {
         });
     }
 
-    // نظام النماذج التفاعلية
+</script>
+
+  // نظام النماذج التفاعلية
     function showDemo(type) {
         const m = document.getElementById('demoModal');
         const c = document.getElementById('modalContent');
@@ -568,6 +570,5 @@ async function repVerification() {
         }
     }
     function closeModal() {document.getElementById('demoModal').style.display = 'none'; }
-</script>
 </body>
 </html>
