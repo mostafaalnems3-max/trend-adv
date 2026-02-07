@@ -352,18 +352,64 @@ async function translateAI(targetLang, element) {
             <button onclick="takeLivePhoto()" style="padding: 10px; border-radius: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444;">1. التقاط Live Photo</button>
             <button onclick="scanAgencyQR()" style="padding: 10px; border-radius: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444;">2. توثيق الـ QR Code</button>
         </div>
-        <button onclick="repVerification()" style="width: 100%; margin-top: 15px; background: #ffcc00; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer;">نشر اللوحة في نطاق 150 متر</button>
-    </div>
 
-</div>
-    class="about-link-pill">عن المنصة ➔</a>
+<div style="text-align: center; margin-top: 15px;">
+    <button onclick="repVerification()" style="width: 100%; padding: 12px; background: #ffcc00; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
+        نشر اللوحة في نطاق 150 متر
+    </button>
 </div>
 
-<div class="hero-section">
-    <h2 style="margin:0">مرحباً بكم في TREND ADV</h2>
-    <p style="font-size:13px; color:#aaa">نظام الإعلان الذكي الذي ينقل سوق الـ Out-door إلى العصر الرقمي.</p>
-    <span class="offer-banner">🎁 سجل الآن واحصل على 3 شهور مجاناً!</span>
- </script>
+<div style="text-align: center; margin-top: 10px;">
+    <a href="javascript:void(0)" onclick="showAboutInfo()" class="about-link-pill" style="color: #ffcc00; text-decoration: none; font-size: 13px;">
+        عن المنصة TREND AI ←
+    </a>
+</div>
+
+<script>
+// دالة "عن المنصة" اللي طلبتها
+function showAboutInfo() {
+    alert("🛡️ نظام TREND ADV المطور\n\nنظام ذكاء اصطناعي لتوثيق الإعلانات الخارجية بنطاق 150 متر، يضمن دقة الموقع ومنع التلاعب عبر توقيت السيرفر.");
+}
+
+// دالة الأنليتكس (سليمة ومحفوظة)
+function logAIEvents(action, label, category = 'General') {
+    if(typeof gtag === 'function') {
+        gtag('event', action, { 'event_category': category, 'event_label': label });
+    }
+    console.log(`📊 سجل الأنليتكس: ${action} - ${label}`);
+}
+
+// محرك المسافات (المرجع الوحيد)
+function getDistanceMeters(lat1, lon1, lat2, lon2) {
+    var R = 6371e3;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// قاعدة بيانات اللوحات (150 متر)
+let billboardDatabase = [
+    { id: "MEGA-V1", name: "وكالة إعلانات مصر", lat: 30.045, lon: 31.236, minDist: 20, maxDist: 150 }
+];
+
+// وظيفة المندوب النهائية
+async function repVerification() {
+    navigator.geolocation.getCurrentPosition(pos => {
+        const uLat = pos.coords.latitude;
+        const uLon = pos.coords.longitude;
+        const board = billboardDatabase[0];
+        const dist = getDistanceMeters(uLat, uLon, board.lat, board.lon);
+
+        if (dist <= 150) {
+            logAIEvents('Verification_Success', board.name, 'Field_Rep');
+            alert(`✅ تم التوثيق بنجاح!\nالمسافة: ${dist.toFixed(1)} متر.`);
+        } else {
+            alert(`❌ أنت بعيد! المسافة الحالية: ${dist.toFixed(1)} متر.\nالمطلوب: أقل من 150 متر.`);
+        }
+    }, err => alert("يرجى تفعيل الـ GPS"), { enableHighAccuracy: true });
+}
 </script>
 
 <button onclick="showDemo('partner')" style="background:var(--gold); border:none; padding:15px; width:100%; border-radius:20px; font-weight:900; cursor:pointer; font-family:'Cairo'">ابدأ تجربتك المجانية</button>
