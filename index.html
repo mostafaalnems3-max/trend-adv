@@ -76,6 +76,29 @@
         .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
     </style>
 </head>
+
+<div class="ai-lang-switcher">
+    <i class="fas fa-globe"></i>
+    <select id="languageSelector" onchange="translatePage(this.value)">
+        <option value="ar">العربية (الأساسية)</option>
+        <option value="en">English (AI)</option>
+        <option value="fr">Français (AI)</option>
+        <option value="de">Deutsch (AI)</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+    function translatePage(lang) {
+        // نداء لمحرك مايكروسوفت للترجمة الفورية
+        if (lang === 'ar') {
+            window.location.reload(); // للرجوع للأصل
+        } else {
+            const translateUrl = `https://www.microsofttranslator.com/bv.aspx?from=ar&to=${lang}&a=${window.location.href}`;
+            window.location.href = translateUrl;
+        }
+    }
+</script>
+
 <body>
 
     <div class="premium-header">
