@@ -46,13 +46,29 @@
     </style>
 </head>
 <body>
+<header class="logo-header" style="background: #1a1a1a; padding: 25px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+    <div class="brand-container" style="display: flex; justify-content: center; align-items: center; gap: 8px; direction: ltr !important;">
+        <div class="yellow-square" style="background: #ffcc00; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span class="t-dynamic" style="font-size: 38px; font-weight: 900; color: #1a1a1a; animation: colorShift 3s infinite linear;">T</span>
+        </div>
 
-<header class="logo-header">
-    <div class="brand-container">
-        <div class="yellow-square"><span class="t-dynamic">T</span></div>
-        <span class="text-trend">TREND</span><span class="text-adv">ADV</span>
+        <span class="text-trend" style="color: white; font-size: 38px; font-weight: 900; letter-spacing: -1px;">REND</span>
+        <span class="text-adv" style="color: #00bcd4; font-size: 32px; font-weight: 300; margin-left: 10px;">ADV</span>
+    </div>
+
+    <div class="sub-brand-text" style="color: #666; font-size: 12px; margin-top: 8px; letter-spacing: 4px; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">
+        SMART VERIFICATION SYSTEM
     </div>
 </header>
+
+<style>
+/* تأكد إن الأنيميشن ده موجود عندك في الـ CSS */
+@keyframes colorShift {
+    0%, 100% { color: #1a1a1a; }
+    50% { color: #00bcd4; }
+}
+</style>
+
 
 <div class="container">
     
