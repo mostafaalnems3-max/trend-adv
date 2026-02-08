@@ -5,46 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TREND ADV | نظام الإدارة المتكامل</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-    /* قائمة اللغات العائمة - برستيج عالي */
-    .ai-lang-switcher {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 9999;
-        background: #1a1a1a;
-        border: 1px solid #00bcd4;
-        border-radius: 50px;
-        padding: 5px 15px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .ai-lang-switcher:hover {
-        transform: scale(1.05);
-        background: #00bcd4;
-    }
-
-    .ai-lang-switcher select {
-        background: transparent;
-        color: #00bcd4;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        outline: none;
-        font-size: 14px;
-    }
-
-    .ai-lang-switcher:hover select {
-        color: #1a1a1a;
-    }
-</style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
@@ -67,31 +30,15 @@
         .adv-gold { color: #ffcc00 !important; margin-left: 8px; }
         .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
 
+        /* أزرار اللغات */
+        .lang-pill { background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; cursor: pointer; margin: 5px; display: inline-block; }
+        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
+
         /* بوابة المندوب */
         .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; }
         .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
     </style>
 </head>
-<div class="ai-lang-switcher">
-    <i class="fas fa-robot" style="color:#00bcd4"></i>
-    <select id="microsoftAI" style="background:none; border:none; color:#00bcd4; font-weight:bold; cursor:pointer;">
-        <option value="">AI Translation</option>
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="es">Spanish</option>
-    </select>
-</div>
-
-<script>
-    document.getElementById('microsoftAI').addEventListener('change', function() {
-        var targetLang = this.value;
-        if (!targetLang) return;
-
-        // استدعاء محرك مايكروسوفت الداخلي للترجمة بدون إعادة تحميل الصفحة
-        window.location.href = "javascript:void((function(){var%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('src','https://www.microsofttranslator.com/ajax/v3/WidgetV3.ashx?siteid=ue&settings=Manual&from=ar&to=" + targetLang + "');document.body.appendChild(e)})());";
-    });
-</script>
-
 <body>
 
     <div class="premium-header">
@@ -106,11 +53,13 @@
         </div>
         <div class="global-slogan">أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS</div>
     </div>
-<button onclick="location.href='dashboard.html'" style="width:100%; padding:15px; background:#1a1a1a; color:#00bcd4; border:2px solid #00bcd4; border-radius:12px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
-    <i class="fas fa-fingerprint"></i>
-    <span>دخول بوابة التوثيق الذكي</span>
-</button>
-
+<div class="rep-card">
+    <h4 style="color: #00ff00;"><i class="fas fa-shield-alt"></i> بوابة التوثيق الذكي</h4>
+    <button onclick="window.location.href='dashboard.html'" class="btn-verify">
+        📍 دخول لتسجيل الوكالة ونشر اللوحة
+    </button>
+    <a href="about.html" style="color: #ffcc00; display: block; margin-top: 15px; text-decoration: none;">📑 من نحن (عن منصة TREND AI) ←</a>
+</div>
 <style>
     .main-gate-container { 
         display: flex; 
@@ -148,6 +97,12 @@
 
 <div class="main-gate-container">
     <button class="trend-premium-btn" onclick="location.href='dashboard.html'">
+        <div class="btn-content">
+            <i class="fas fa-fingerprint"></i>
+            <span>دخول بوابة التوثيق الذكي</span>
+        </div>
+    </button>
+</div>
 
     <script>
         // دالة الأنليتكس
@@ -165,12 +120,12 @@
         // محرك الـ GPS والـ 150 متر
         function repVerification() {
             if (!navigator.geolocation) return alert("الـ GPS غير مدعوم");
-            
+
             navigator.geolocation.getCurrentPosition(pos => {
                 const uLat = pos.coords.latitude;
                 const uLon = pos.coords.longitude;
                 const targetLat = 30.045, targetLon = 31.236; // إحداثيات مثال
-                
+
                 const dist = calculateDistance(uLat, uLon, targetLat, targetLon);
 
                 if (dist <= 150) {
