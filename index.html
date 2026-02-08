@@ -9,64 +9,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-<style>
-    .premium-gate-box {
-        background: #000;
-        border: 2px dashed #ffcc00;
-        border-radius: 20px;
-        padding: 20px;
-        text-align: center;
-        margin-top: 20px;
-    }
+:root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
+        body { font-family: 'Cairo', sans-serif; background: #f0f4f8; margin: 0; padding-bottom: 90px; overflow-x: hidden; }
 
-    .btn-verify-luxury {
-        background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-        border: 1px solid #00bcd4;
-        border-radius: 12px;
-        color: #00bcd4;
-        padding: 15px 25px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: 0.3s;
-        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2);
-    }
+        /* الهيدر واللوجو */
+        .premium-header {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--main) 100%);
+            padding: 30px 20px 50px; border-radius: 0 0 45px 45px;
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
 
-    .btn-verify-luxury:hover {
-        background: #00bcd4;
-        color: #000;
-        transform: scale(1.02);
-    }
+        .brand-master-wrapper { display: flex; align-items: center; justify-content: center; gap: 0; direction: ltr !important; margin-bottom: 25px; }
+        .yellow-square { background: #ffcc00 !important; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; z-index: 5; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .dynamic-t { font-size: 38px; font-weight: 900; animation: t-color-cycle 4s linear infinite; }
+        @keyframes t-color-cycle { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #00ffff; } 75% { color: #0000ff; } 100% { color: #ff0000; } }
 
-    .about-link-modern {
-        color: #ffcc00;
-        text-decoration: none;
-        display: block;
-        margin-top: 15px;
-        font-size: 14px;
-    }
-</style>
+        .name-capsule { background: #0d1117; padding: 10px 30px 10px 45px; margin-left: -25px; border-radius: 0 50px 50px 0; border: 1px solid rgba(255, 204, 0, 0.3); display: flex; align-items: center; }
+        .brand-text-white { color: #ffffff !important; font-size: 26px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        .adv-gold { color: #ffcc00 !important; margin-left: 8px; }
+        .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
 
-<div class="premium-gate-box">
-    <h4 style="color: #00ff00; margin-bottom: 15px;">
-        <i class="fas fa-shield-alt"></i> بوابة التوثيق الذكي
-    </h4>
-    
-    <button onclick="window.location.href='dashboard.html'" class="btn-verify-luxury">
-        <i class="fas fa-fingerprint"></i>
-        <span>دخول لتسجيل الوكالة ونشر اللوحة</span>
-    </button>
+        /* أزرار اللغات */
+        .lang-pill { background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; cursor: pointer; margin: 5px; display: inline-block; }
+        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
 
-    <a href="about.html" class="about-link-modern">
-         من نحن (عن منصة TREND AI) ←
-    </a>
-</div>
-
+        /* بوابة المندوب */
+        .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; }
+        .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
+    </style>
 </head>
 <body>
 
