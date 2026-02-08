@@ -5,9 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TREND ADV | نظام الإدارة المتكامل</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* قائمة اللغات العائمة - برستيج عالي */
+    .ai-lang-switcher {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        background: #1a1a1a;
+        border: 1px solid #00bcd4;
+        border-radius: 50px;
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .ai-lang-switcher:hover {
+        transform: scale(1.05);
+        background: #00bcd4;
+    }
+
+    .ai-lang-switcher select {
+        background: transparent;
+        color: #00bcd4;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .ai-lang-switcher:hover select {
+        color: #1a1a1a;
+    }
+</style>
 
 <style>
 :root { --main: #004e92; --gold: #ffcc00; --dark: #000b18; --white: #ffffff; }
