@@ -67,36 +67,29 @@
         .adv-gold { color: #ffcc00 !important; margin-left: 8px; }
         .global-slogan { display: inline-block; background: #ffcc00; color: #000b18; padding: 8px 25px; border-radius: 50px; font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2); }
 
-        /* أزرار اللغات */
-        .lang-pill { background: #0d1117; color: #ffffff; border: 1px solid rgba(255, 204, 0, 0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; font-weight: 700; cursor: pointer; margin: 5px; display: inline-block; }
-        .lang-pill.active { background: #ffcc00 !important; color: #000b18 !important; }
-
         /* بوابة المندوب */
         .rep-card { background: #111; padding: 25px; border-radius: 30px; border: 2px dashed var(--gold); margin: 20px 15px; text-align: center; }
         .btn-main { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 16px; margin-top: 15px; }
     </style>
 </head>
-
 <div class="ai-lang-switcher">
-    <i class="fas fa-globe"></i>
-    <select id="languageSelector" onchange="translatePage(this.value)">
-        <option value="ar">العربية (الأساسية)</option>
-        <option value="en">English (AI)</option>
-        <option value="fr">Français (AI)</option>
-        <option value="de">Deutsch (AI)</option>
+    <i class="fas fa-robot" style="color:#00bcd4"></i>
+    <select id="microsoftAI" style="background:none; border:none; color:#00bcd4; font-weight:bold; cursor:pointer;">
+        <option value="">AI Translation</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
     </select>
 </div>
 
-<script type="text/javascript">
-    function translatePage(lang) {
-        // نداء لمحرك مايكروسوفت للترجمة الفورية
-        if (lang === 'ar') {
-            window.location.reload(); // للرجوع للأصل
-        } else {
-            const translateUrl = `https://www.microsofttranslator.com/bv.aspx?from=ar&to=${lang}&a=${window.location.href}`;
-            window.location.href = translateUrl;
-        }
-    }
+<script>
+    document.getElementById('microsoftAI').addEventListener('change', function() {
+        var targetLang = this.value;
+        if (!targetLang) return;
+
+        // استدعاء محرك مايكروسوفت الداخلي للترجمة بدون إعادة تحميل الصفحة
+        window.location.href = "javascript:void((function(){var%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('src','https://www.microsofttranslator.com/ajax/v3/WidgetV3.ashx?siteid=ue&settings=Manual&from=ar&to=" + targetLang + "');document.body.appendChild(e)})());";
+    });
 </script>
 
 <body>
@@ -113,13 +106,11 @@
         </div>
         <div class="global-slogan">أول منصة رقمية في مصر والوطن العربي لربط الإعلانات بالـ GPS</div>
     </div>
-<div class="rep-card">
-    <h4 style="color: #00ff00;"><i class="fas fa-shield-alt"></i> بوابة التوثيق الذكي</h4>
-    <button onclick="window.location.href='dashboard.html'" class="btn-verify">
-        📍 دخول لتسجيل الوكالة ونشر اللوحة
-    </button>
-    <a href="about.html" style="color: #ffcc00; display: block; margin-top: 15px; text-decoration: none;">📑 من نحن (عن منصة TREND AI) ←</a>
-</div>
+<button onclick="location.href='dashboard.html'" style="width:100%; padding:15px; background:#1a1a1a; color:#00bcd4; border:2px solid #00bcd4; border-radius:12px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
+    <i class="fas fa-fingerprint"></i>
+    <span>دخول بوابة التوثيق الذكي</span>
+</button>
+
 <style>
     .main-gate-container { 
         display: flex; 
@@ -157,12 +148,6 @@
 
 <div class="main-gate-container">
     <button class="trend-premium-btn" onclick="location.href='dashboard.html'">
-        <div class="btn-content">
-            <i class="fas fa-fingerprint"></i>
-            <span>دخول بوابة التوثيق الذكي</span>
-        </div>
-    </button>
-</div>
 
     <script>
         // دالة الأنليتكس
